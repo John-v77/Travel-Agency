@@ -18,24 +18,14 @@ mongoose
     console.error("Error connectiong to mongoDB*********************", err)
   );
 
-// const express = require("express");
-// const router = express.Router();
-
-const Destination = require("./models/destination");
-
-const italyTest = new Destination({
-  name: "Italy",
-  price: "1000",
-  description: "A wonderful place",
+app.get("/", (req, res) => {
+  res.status(200).send("test 1 - get");
 });
 
-italyTest
-  .save()
-  .then((doc) => {
-    console.log(doc);
-  })
-  .catch((err) => ("error ^^^^^^^^^^", err));
+app.post("/a", (req, res) => {
+  res.status(200).send("test 2 - post");
+});
 
 app.listen(PORT, () => {
-  console.log("listening to port 5000");
+  console.log(`listening to port ${PORT}`);
 });
