@@ -1,6 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
+const vacantionRouter = require("./routes/vacantionRoutes");
 const PORT = process.env.PORT || 5000;
 const app = express();
 
@@ -18,13 +19,8 @@ mongoose
     console.error("Error connectiong to mongoDB*********************", err)
   );
 
-app.get("/", (req, res) => {
-  res.status(200).send("test 1 - get");
-});
-
-app.post("/a", (req, res) => {
-  res.status(200).send("test 2 - post");
-});
+// Routers
+app.use("/api/v1/vacantions", vacantionRouter);
 
 app.listen(PORT, () => {
   console.log(`listening to port ${PORT}`);
