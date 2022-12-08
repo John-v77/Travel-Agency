@@ -34,7 +34,24 @@ const getVacantionPackage = async (req, res) => {
   }
 };
 
+// Create vacation package
+const createVacantionPackage = async (req, res) => {
+  try {
+    const newDestination = await Destination.create(req.body);
+    res.status(201).json({
+      status: "success",
+      data: { destination: newDestination },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err,
+    });
+  }
+};
+
 module.exports = {
   getAllVacantionPackages,
   getVacantionPackage,
+  createVacantionPackage,
 };
