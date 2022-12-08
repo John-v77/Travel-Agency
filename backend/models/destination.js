@@ -1,8 +1,8 @@
-const { Mongoose, model } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const DestinationSchema = model(
   "Destination",
-  new Mongoose.Schema({
+  new Schema({
     name: {
       type: String,
       required: [true, "Add a name for Trip Destination"],
