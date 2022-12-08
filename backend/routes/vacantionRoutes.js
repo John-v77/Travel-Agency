@@ -11,6 +11,9 @@ router
   .get(vacantionControler.getAllVacantionPackages)
   .post(vacantionControler.createVacantionPackage);
 
-router.route("/:id").get(vacantionControler.getVacantionPackage);
+router
+  .route("/:id")
+  .get(vacantionControler.getVacantionPackage)
+  .delete(vacantionControler.deleteVacantionPackage);
 
 module.exports = router;

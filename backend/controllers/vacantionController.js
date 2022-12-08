@@ -50,8 +50,25 @@ const createVacantionPackage = async (req, res) => {
   }
 };
 
+// Delete vacation package
+const deleteVacantionPackage = async (req, res) => {
+  try {
+    await Destination.findByIdAndDelete(req.params.id);
+    res.status(204).json({
+      status: "success",
+      data: null,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err,
+    });
+  }
+};
+
 module.exports = {
   getAllVacantionPackages,
   getVacantionPackage,
   createVacantionPackage,
+  deleteVacantionPackage,
 };
