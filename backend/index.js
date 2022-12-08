@@ -5,6 +5,9 @@ const vacantionRouter = require("./routes/vacantionRoutes");
 const PORT = process.env.PORT || 5000;
 const app = express();
 
+app.use(express.json()); // for application/json
+// app.use(express.urlencoded());
+
 const MONGODB_URI =
   process.env.MONGODB_URI || `mongodb://localhost/localTravelDB`;
 
