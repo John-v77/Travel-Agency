@@ -50,6 +50,30 @@ const createVacantionPackage = async (req, res) => {
   }
 };
 
+// Create vacation package
+const updateVacationPackage = async (req, res) => {
+  try {
+    const destinationPackage = await Destination.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    res.status(200).json({
+      status: "success",
+      data: { destination: destinationPackage },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err,
+    });
+  }
+};
+
 // Delete vacation package
 const deleteVacantionPackage = async (req, res) => {
   try {
@@ -71,4 +95,5 @@ module.exports = {
   getVacantionPackage,
   createVacantionPackage,
   deleteVacantionPackage,
+  updateVacationPackage,
 };
