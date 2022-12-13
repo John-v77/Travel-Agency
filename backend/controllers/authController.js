@@ -9,7 +9,10 @@ const signup = async (req, res, next) => {
       },
     });
   } catch (error) {
-    console.log(error);
+    res.status(404).json({
+      status: "fail",
+      message: err,
+    });
   }
 };
 
