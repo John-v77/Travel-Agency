@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const validator = require("validator");
+const bcrypt = require("bcryptjs");
 const userSchema = new Schema({
   name: {
     type: String,
@@ -10,7 +11,7 @@ const userSchema = new Schema({
     required: [true, "Email is required"],
     unique: true,
     lowercase: true,
-    validate: [validator.isEmail, "Please provide a valid email"],
+    // validate: [validator.isEmail, "Please provide a valid email"],
   },
   photo: {
     type: String,
@@ -31,6 +32,17 @@ const userSchema = new Schema({
       message: "Password doesn't match",
     },
   },
+});
+
+userSchema.pre("save", async function (next) {
+  // only run if password was modified
+  if (!this.isModified("password")) return next();
+
+  // hash password
+  this.password = await bcrypt.hash(this.password, 12);
+  // delete password confirm field
+  this.passwordConfirm = null;
+  next();
 });
 
 const userModel = model("User", userSchema);
