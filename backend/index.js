@@ -2,6 +2,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
 const vacantionRouter = require("./routes/vacantionRoutes");
+const userRouter = require("./routes/userRoutes");
 const PORT = process.env.PORT || 5000;
 const app = express();
 
@@ -24,6 +25,7 @@ mongoose
 
 // Routers
 app.use("/api/v1/vacantions", vacantionRouter);
+app.use("/api/v1/user", userRouter);
 
 app.listen(PORT, () => {
   console.log(`listening to port ${PORT}`);
