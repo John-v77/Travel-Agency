@@ -20,6 +20,7 @@ const userSchema = new Schema({
     type: String,
     required: [true, "Password is required"],
     minlength: 8,
+    select: false,
   },
   passwordConfirm: {
     type: String,
@@ -44,6 +45,14 @@ userSchema.pre("save", async function (next) {
   this.passwordConfirm = null;
   next();
 });
+
+//Check if the password match when hashed
+userSchema.methods.correctPassword = async function (
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
 
 const userModel = model("User", userSchema);
 
