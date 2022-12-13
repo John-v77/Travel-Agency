@@ -1,4 +1,4 @@
-const Destination = require("../models/destination");
+const Destination = require("../models/destinationModel");
 
 // Get all
 const getAllVacantionPackages = async (req, res) => {
