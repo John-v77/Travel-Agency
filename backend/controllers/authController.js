@@ -1,3 +1,4 @@
+const { promisify } = require("util");
 const User = require("../models/usersModel");
 const jwt = require("jsonwebtoken");
 
@@ -70,7 +71,46 @@ const login = async (req, res, next) => {
   }
 };
 
+// #3 Protect Routes
+
+const protect = async (req, res, next) => {
+  let token;
+  try {
+    // get token check if exists
+    const { authorization } = req.headers;
+    if (authorization && authorization.startsWith("Bearer")) {
+      token = authorization.split(" ")[1];
+    }
+    if (!token) {
+      res.status(401).json({
+        status: "fail",
+        message: "Unauthorized",
+      });
+      return;
+    }
+
+    // validate token
+    const decodedPayload = await promisify(jwt.verify)(
+      token,
+      process.env.JWT_SECRET
+    );
+
+    console.log(decodedPayload, "xxxx11xxx");
+    // check user still exists
+    const freshUser = await User.findById(decodedPayload.id);
+
+    if (!freshUser) {
+      res.status(401).json({
+        status: "fail",
+        message: "The user no longer exists",
+      });
+      return;
+    }
+  } catch (err) {}
+};
+
 module.exports = {
   signup,
   login,
+  protect,
 };
