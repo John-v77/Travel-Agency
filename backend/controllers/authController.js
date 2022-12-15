@@ -86,7 +86,7 @@ const protect = async (req, res, next) => {
         status: "fail",
         message: "Unauthorized",
       });
-      return next();
+      next();
     }
 
     // validate token
@@ -107,8 +107,21 @@ const protect = async (req, res, next) => {
       return next();
     }
     // check if user changed pass after token was issued
-    freshUser.changedPasswordAfter(decoded.iat);
-  } catch (err) {}
+    if (freshUser.changedPasswordAfter(decoded.iat)) {
+      res.status(401).json({
+        status: "fail",
+        message: "Password change recently, login again",
+      });
+      next();
+    }
+    //  grant access to protected route
+    req.user = freshUser;
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err,
+    });
+  }
 };
 
 module.exports = {
