@@ -33,6 +33,7 @@ const userSchema = new Schema({
       message: "Password doesn't match",
     },
   },
+  passwordChangedAt: Date,
 });
 
 userSchema.pre("save", async function (next) {
@@ -46,12 +47,24 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-//Check if the password match when hashed
+//Check if the password match when hashed - using Instance Method
 userSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
+};
+
+userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10
+    );
+    console.log(changedTimestamp, JWTTimestamp);
+    return JWTTimestamp < changedTimestamp;
+  }
+  return false;
 };
 
 const userModel = model("User", userSchema);

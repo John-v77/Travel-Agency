@@ -86,7 +86,7 @@ const protect = async (req, res, next) => {
         status: "fail",
         message: "Unauthorized",
       });
-      return;
+      return next();
     }
 
     // validate token
@@ -104,8 +104,10 @@ const protect = async (req, res, next) => {
         status: "fail",
         message: "The user no longer exists",
       });
-      return;
+      return next();
     }
+    // check if user changed pass after token was issued
+    freshUser.changedPasswordAfter(decoded.iat);
   } catch (err) {}
 };
 
