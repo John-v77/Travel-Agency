@@ -6,7 +6,8 @@ const userRouter = require("./routes/userRoutes");
 const PORT = process.env.PORT || 5000;
 const app = express();
 
-app.use(express.json()); // for application/json
+// Body parser, reads data from body into req.body - need json requests
+app.use(express.json({ limit: "10kb" })); // for application/json
 // app.use(express.urlencoded());
 
 const MONGODB_URI =
@@ -22,6 +23,13 @@ mongoose
   .catch((err) =>
     console.error("Error connectiong to mongoDB*********************", err)
   );
+
+// Testing middleware
+// app.use((req, res, next) => {
+//   req.requstTime = new Date().toISOString();
+//   console.log(req.headers);
+//   next();
+// });
 
 // Routers
 app.use("/api/v1/vacantions", vacantionRouter);
