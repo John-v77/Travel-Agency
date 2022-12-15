@@ -86,7 +86,7 @@ const protect = async (req, res, next) => {
         status: "fail",
         message: "Unauthorized",
       });
-      next();
+      return next();
     }
 
     // validate token
@@ -95,7 +95,6 @@ const protect = async (req, res, next) => {
       process.env.JWT_SECRET
     );
 
-    console.log(decodedPayload, "xxxx11xxx");
     // check user still exists
     const freshUser = await User.findById(decodedPayload.id);
 
@@ -107,7 +106,7 @@ const protect = async (req, res, next) => {
       return next();
     }
     // check if user changed pass after token was issued
-    if (freshUser.changedPasswordAfter(decoded.iat)) {
+    if (freshUser.changedPasswordAfter(decodedPayload.iat)) {
       res.status(401).json({
         status: "fail",
         message: "Password change recently, login again",
@@ -116,6 +115,7 @@ const protect = async (req, res, next) => {
     }
     //  grant access to protected route
     req.user = freshUser;
+    return next();
   } catch (err) {
     res.status(404).json({
       status: "fail",
