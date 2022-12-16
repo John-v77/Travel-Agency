@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \" Error: not test specified\" && exit 1",
-    "preinstall": "echo --- preinstall --- && cd backend && npm install && cd ../client && npm install && npm run build && cd ..",
+    "preinstall": "echo --- preinstall --- && cd backend && npm install && cd ../client && npm install && CI=False && npm run build && cd ..",
     "start": "echo --- start --- && cd backend && npm start"
   },
   "repository": "https://github.com/John-v77/Travel-Agency.git",
