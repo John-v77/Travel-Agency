@@ -4,8 +4,7 @@
   "description": "server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "John Vasile",
   "license": "MIT",
@@ -17,8 +16,5 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.0",
     "validator": "^13.7.0"
-  },
-  "engines": {
-    "node": "14.x"
   }
 }
