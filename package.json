@@ -16,5 +16,8 @@
   ],
   "license": "MIT",
   "private": false,
+  "engines": {
+    "node": "14.x"
+  },
   "dependencies": {}
 }
