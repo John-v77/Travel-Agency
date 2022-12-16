@@ -20,9 +20,13 @@ mongoose
     serverSelectionTimeoutMS: 5000,
   })
   .then((x) => console.log(`connected to MongoDB!: "${x.connections[0].name}"`))
-  .catch((err) =>
-    console.error("Error connectiong to mongoDB*********************", err)
-  );
+  .catch((err) => console.error("Error connectiong to mongoDB", err));
+
+// serve static files
+app.use(express, static(path.join(__dirname, "../client/build")));
+app.get("*", (req, res, next) => {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
 
 // Testing middleware
 // app.use((req, res, next) => {
