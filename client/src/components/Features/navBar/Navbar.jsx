@@ -51,7 +51,7 @@ function Navbar(props) {
       <div
         className={
           mobNav
-            ? 'mobile-menu w-full absolute left-0 top-0 bg-gray-200 p-4 px-4 md:hidden'
+            ? 'mobile-menu w-full absolute left-0 top-0 bg-gray-100/90 p-4 px-4 md:hidden'
             : 'hidden'
         }
       >

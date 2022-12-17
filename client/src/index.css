@@ -33,12 +33,11 @@ p {
   h1 {@apply text-3xl md:text-4xl font-bold}
   h2 {@apply text-3xl font-bold}
   h3 {@apply text-xl font-bold}
-
   li {@apply px-4}
-  .mobileLi {@apply mt-2 py-4 border-b border-slate-100}
 
   button {@apply p-3 border-none bg-[#5651e5] text-white rounded-md}
 
+  .mobileLi {@apply mt-2 py-4 border-b border-slate-300}
   .icon {@apply text-[#5651e5] text-2xl cursor-pointer}
 
 }
