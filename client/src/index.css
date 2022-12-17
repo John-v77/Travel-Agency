@@ -34,6 +34,8 @@ p {
   h2 {@apply text-3xl font-bold}
   h3 {@apply text-xl font-bold}
 
+  li {@apply px-4}
+
 }
 
 /* code {
