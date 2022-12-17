@@ -37,6 +37,10 @@ p {
   li {@apply px-4}
   .mobileLi {@apply mt-2 py-4 border-b border-slate-100}
 
+  button {@apply p-3 border-none bg-[#5651e5] text-white rounded-md}
+
+  .icon {@apply text-[#5651e5] text-2xl cursor-pointer}
+
 }
 
 /* code {

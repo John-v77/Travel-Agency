@@ -6,6 +6,14 @@ import { BiSearch } from 'react-icons/bi';
 import { AiOutlineClose } from 'react-icons/ai';
 import { HiOutlineMenuAlt4 } from 'react-icons/hi';
 
+import {
+  FaFacebook,
+  FaTwitter,
+  FaInstagram,
+  FaPinterest,
+  FaYoutube,
+} from 'react-icons/fa';
+
 function Navbar(props) {
   const [mobNav, setMobNav] = useState(false);
 
@@ -43,7 +51,7 @@ function Navbar(props) {
       <div
         className={
           mobNav
-            ? 'mobile-menu w-full absolute left-0 top-0 bg-gray-200 p-4 px-6 md:hidden'
+            ? 'mobile-menu w-full absolute left-0 top-0 bg-gray-200 p-4 px-4 md:hidden'
             : 'hidden'
         }
       >
@@ -59,6 +67,19 @@ function Navbar(props) {
             <Link to='/page2'>Page2</Link>
           </li>
         </ul>
+
+        <div className='flex flex-col'>
+          <button className='my-6'>Search</button>
+          <button className=''>Account</button>
+        </div>
+
+        {/* <div className='flex justify-between mt-8 px-0.5'>
+          <FaFacebook className='icon' />
+          <FaTwitter className='icon' />
+          <FaInstagram className='icon' />
+          <FaPinterest className='icon' />
+          <FaYoutube className='icon' />
+        </div> */}
       </div>
     </div>
   );
