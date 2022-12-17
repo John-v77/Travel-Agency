@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+
+
+/*
+ is recomended << min >> media queries instead of max 
+ avoid hard sizes, eg: width 200px
+ avoid setting specific heights, text overflows
+ better to use min-height, max-height
+*/
+
+*,
+*::before,
+*::after{
+  box-sizing: border-box;
+}
+
+
+
+:root{
+  --clr--primary-200: #000000
+  --clr--secondary-200: #000000
+  --clr--neutral-200: #000000
+
+  --ff--primary: "Roboto", sans-serif;
+  --ff--accent: "Playfair Display", sans-serif; 
+  }
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Normalize fonts
+  font family: var(--ff-primary);
+  font weight: 400;
+  font-size: 1.3125rem;
+  line-height: 1.6;
+  */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin: 0;
+
+}
+
+/* Normalize Headers */
+h1,
+h2,
+h3 {
+  font-family: var(--ff--accent);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 1em;
+} 
+
+
+/* normalize paragraphs */
+p{
+  margin-bottom: 1em;
+} 
+
+
+/* normalize images */
+img{
+  display: block;   /* this is optional */
+  max-width: 100%;
+} 
+
+
+/* Set up custom background */
+.bg-light {background-color: var(--clr--neutral-200);}
+.bg-primary {background-color: var(--clr--primary);}
+.bg-dark {background-color: var(--clr--secondary-200);}
+
+
+/* normalize section and containers */
+header,
+section{
+  padding: 4rem 0;
+}
+
+@media (min-width: 40em) {
+  header,
+  section{
+    padding: 7rem 0;
+  }
+}
+
+
+
+.container{
+  margin-inline: auto;
+  width: min(90%, 70.5rem);
+}
+
+.test-center{
+  text-align: center;
+}
+
+
+
+
+
+
+/* media queries for resposive layout */
+
+@media(min-width: 40em){
+  .split {
+    flex-direction: row;
+  }
+
+  .split > * {
+    flex-basis: 100%;
+  }
+
+  .split > * + * {
+    margin-left: 2em;
+  }
+}
+
+
+
+/* modern styling commands */
+container{
+margin-inline: auto;
+padding: max(10vh, 1rem);
+padding: max(10vh, 1rem), 0, 0, 0;
+}
+
+h2{
+font-size: clam(3rem, 10vw + 1rem, 5rem);
+line-height: 1;
+/* https://utopia.fyi/  type calc */
+}
