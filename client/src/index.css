@@ -12,10 +12,27 @@
 }
 
 
+/* 
+:root{
+  --clr--primary-200: #000000
+  --clr--secondary-200: #000000
+  --clr--neutral-200: #000000
+
+  --ff--primary: "Roboto", sans-serif;
+  --ff--accent: "Playfair Display", sans-serif;
+  
+*/
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Normalize fonts
+  font family: var(--ff-primary);
+  font weight: 400;
+  font-size: 1.3125rem;
+  line-height: 1.6;
+  */
 }
 
 h1,
@@ -25,7 +42,9 @@ h4,
 h5,
 p {
   margin: 0;
+
 }
+
 
 /* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
