@@ -21,7 +21,7 @@ function Navbar(props) {
     setMobNav(!mobNav);
   };
   return (
-    <div className='bg-gray-100 w-full p-4 flex justify-between'>
+    <div className=' w-full p-4 flex justify-between absolute z-10 text-white'>
       <h1 className=''>Travel.</h1>
       <ul className='hidden md:flex'>
         <li>
@@ -40,9 +40,9 @@ function Navbar(props) {
         <BsPerson size={20} />
       </div>
 
-      <div onClick={handleNav} className='md:hidden  z-10 mobile-menu-btn'>
+      <div onClick={handleNav} className='md:hidden  z-20 mobile-menu-btn '>
         {mobNav ? (
-          <AiOutlineClose size={20} />
+          <AiOutlineClose size={20} className='text-black' />
         ) : (
           <HiOutlineMenuAlt4 size={20} />
         )}
@@ -51,7 +51,7 @@ function Navbar(props) {
       <div
         className={
           mobNav
-            ? 'mobile-menu w-full absolute left-0 top-0 bg-gray-100/90 p-4 px-4 md:hidden'
+            ? 'mobile-menu w-full absolute left-0 top-0 z-10 bg-gray-100/95 p-4 px-4  text-black md:hidden'
             : 'hidden'
         }
       >
