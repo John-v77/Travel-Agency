@@ -34,22 +34,28 @@ function Navbar(props) {
 
       <div onClick={handleNav} className='md:hidden  z-10 mobile-menu-btn'>
         {mobNav ? (
-          <HiOutlineMenuAlt4 size={20} />
-        ) : (
           <AiOutlineClose size={20} />
+        ) : (
+          <HiOutlineMenuAlt4 size={20} />
         )}
       </div>
 
-      <div className='mobile-menu w-full absolute left-0 top-0 bg-gray-200 p-4 px-6 md:hidden'>
+      <div
+        className={
+          mobNav
+            ? 'mobile-menu w-full absolute left-0 top-0 bg-gray-200 p-4 px-6 md:hidden'
+            : 'hidden'
+        }
+      >
         <h1 className=''>Travel.</h1>
         <ul className='flex flex-col md:hidden '>
-          <li className='mt-2 py-4 border-b border-slate-100'>
+          <li className='mobileLi'>
             <Link to='/'>Home</Link>
           </li>
-          <li className='mt-2 py-4 border-b border-slate-100'>
+          <li className='mobileLi'>
             <Link to='/page1'>Page1</Link>
           </li>
-          <li className='mt-2 py-4 border-b border-slate-100'>
+          <li className='mobileLi'>
             <Link to='/page2'>Page2</Link>
           </li>
         </ul>

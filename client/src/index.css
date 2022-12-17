@@ -35,6 +35,7 @@ p {
   h3 {@apply text-xl font-bold}
 
   li {@apply px-4}
+  .mobileLi {@apply mt-2 py-4 border-b border-slate-100}
 
 }
 
