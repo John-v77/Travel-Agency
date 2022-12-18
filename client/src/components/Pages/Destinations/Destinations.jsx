@@ -1,4 +1,5 @@
 import React from 'react';
+import FeaturedDes from '../../Features/featuredDestinations/FeaturedDes';
 
 function Destinations(props) {
   return (
@@ -16,6 +17,8 @@ function Destinations(props) {
           alt='/'
         />
       </div>
+
+      <FeaturedDes />
     </div>
   );
 }
