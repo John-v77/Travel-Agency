@@ -28,7 +28,7 @@ function Navbar(props) {
           <Link to='/'>Home</Link>
         </li>
         <li>
-          <Link to='/page1'>Page1</Link>
+          <Link to='/destinations'>Destinations</Link>
         </li>
         <li>
           <Link to='/page2'>Page2</Link>
@@ -61,7 +61,7 @@ function Navbar(props) {
             <Link to='/'>Home</Link>
           </li>
           <li className='mobileLi'>
-            <Link to='/page1'>Page1</Link>
+            <Link to='/destinations'>Destinations</Link>
           </li>
           <li className='mobileLi'>
             <Link to='/page2'>Page2</Link>
