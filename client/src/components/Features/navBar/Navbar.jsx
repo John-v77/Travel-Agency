@@ -56,7 +56,7 @@ function Navbar(props) {
         }
       >
         <h1 className=''>Travel.</h1>
-        <ul className='flex flex-col md:hidden '>
+        <ul onClick={handleNav} className='flex flex-col md:hidden '>
           <li className='mobileLi'>
             <Link to='/'>Home</Link>
           </li>
