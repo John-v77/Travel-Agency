@@ -14,7 +14,6 @@ function App() {
         <Route path="packages" element={<Packages />} />
         <Route path="cart" element={<Cart />} />
       </Routes>
-      <h1 className="text-xl font-bold text-red-400 underline">Home Page</h1>
     </div>
   );
 }
