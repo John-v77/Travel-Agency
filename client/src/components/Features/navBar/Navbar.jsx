@@ -21,8 +21,10 @@ function Navbar(props) {
     setMobNav(!mobNav);
   };
   return (
-    <div className='w-full max-w-[1600px] p-4 flex justify-between absolute z-10 text-white'>
-      <h1 className=''>Travel.</h1>
+    <div className='w-full max-w-[1600px] p-4 flex justify-between absolute top-0  z-10 text-white '>
+      <Link to='/'>
+        <h1 className=''>Travel.</h1>
+      </Link>
       <ul className='hidden md:flex'>
         <li>
           <Link to='/'>Home</Link>
@@ -37,7 +39,9 @@ function Navbar(props) {
 
       <div className='hidden md:flex'>
         <BiSearch size={20} />
-        <BsPerson size={20} />
+        <Link to='/account'>
+          <BsPerson size={20} />
+        </Link>
       </div>
 
       <div onClick={handleNav} className='md:hidden  z-20 mobile-menu-btn '>
@@ -51,7 +55,7 @@ function Navbar(props) {
       <div
         className={
           mobNav
-            ? 'mobile-menu w-full absolute left-0 top-0 z-10 bg-gray-100/95 p-4 px-4  text-black md:hidden'
+            ? 'md:hidden w-full absolute left-0 top-0 z-10 bg-gray-100/95 p-4 px-4  text-black'
             : 'hidden'
         }
       >
@@ -70,7 +74,9 @@ function Navbar(props) {
 
         <div className='flex flex-col'>
           <button className='my-6'>Search</button>
-          <button className=''>Account</button>
+          <button className='login'>
+            <Link to='/account'>Account</Link>
+          </button>
         </div>
 
         {/* <div className='flex justify-between mt-8 px-0.5'>

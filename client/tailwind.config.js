@@ -21,6 +21,7 @@ module.exports = {
         back3: '#c0c0c0',
         back4: '#ebebeb',
         acce5: '#ff6700',
+        btn1: '#012FD1',
       },
     },
   },
