@@ -21,7 +21,7 @@ function Navbar(props) {
     setMobNav(!mobNav);
   };
   return (
-    <div className=' w-full p-4 flex justify-between absolute z-10 text-white'>
+    <div className='w-full max-w-[1600px] p-4 flex justify-between absolute z-10 text-white'>
       <h1 className=''>Travel.</h1>
       <ul className='hidden md:flex'>
         <li>
