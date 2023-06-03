@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 function Footer(props) {
   return (
-    <div className='w-full   py-6 bg-gray-100 px-4'>
+    <div className='w-full py-6 bg-gray-100 px-4'>
       <div className='max-w-[1600px] flex flex-col md:flex-row justify-between items-center text-center'>
         <h1>Travel.</h1>
         <div className='w-full py-4 flex justify-between sm:max-w-[280px] '>
@@ -27,7 +27,7 @@ function Footer(props) {
             <Link to='/'>Home</Link>
           </li>
           <li>
-            <Link to='/page1'>Page1</Link>
+            <Link to='/destinations'>Destinations</Link>
           </li>
           <li>
             <Link to='/page2'>Page2</Link>
