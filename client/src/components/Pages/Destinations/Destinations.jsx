@@ -1,7 +1,15 @@
 import React from 'react';
 import FeaturedDes from '../../Features/featuredDestinations/FeaturedDes';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { increment } from '../../../store/counterSlice';
 function Destinations(props) {
+  const { coin } = useSelector((state) => {
+    return state.counter;
+  });
+
+  // console.log(counter, 'hello1');
+  const dispatch = useDispatch();
+
   return (
     <div className='max-w-[1600px] mx-auto md:p-0'>
       <div className='max-h-[500px] relative'>
@@ -19,6 +27,9 @@ function Destinations(props) {
       </div>
 
       <FeaturedDes />
+      <h1>{coin}</h1>
+      <button onClick={() => dispatch(increment())}>++</button>
+      <h1>Hellos zzzzzzzz</h1>
     </div>
   );
 }
