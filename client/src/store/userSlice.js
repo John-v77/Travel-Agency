@@ -16,9 +16,19 @@ const authSlice = createSlice({
   reducers: {
     login: (state) => {
       actions.loginUser().then((res) => {
-        console.log(res, 'this is the responseXXXXXXXX');
         // history.pushState('/');
       });
+    },
+
+    logOut: (state) => {
+      return {
+        ...state.initialState,
+        isLoading: false,
+        userInfo: null,
+        userToken: null,
+        error: null,
+        success: false,
+      };
     },
   },
   extraReducers: {
@@ -31,7 +41,7 @@ const authSlice = createSlice({
     [loginUser.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       state.userInfo = payload;
-      state.userToken = payload.userToken;
+      state.userToken = payload.token;
     },
 
     [loginUser.rejected]: (state, { payload }) => {
@@ -41,6 +51,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { login } = authSlice.actions;
+export const { logOut } = authSlice.actions;
 
 export default authSlice.reducer;
