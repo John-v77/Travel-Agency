@@ -16,7 +16,7 @@ function Ameneties(props) {
 
       <div className='grid grid-cols-2 gap-3 lg:grid-cols-3 xl:gap4'>
         {data.map((item, index) => {
-          return <AmenetiesCard bg={item.image} text={item.name} />;
+          return <AmenetiesCard bg={item.image} text={item.name} key={index} />;
         })}
       </div>
     </div>
