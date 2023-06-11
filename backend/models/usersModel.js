@@ -1,14 +1,14 @@
-const { Schema, model } = require("mongoose");
-const validator = require("validator");
-const bcrypt = require("bcryptjs");
+const { Schema, model } = require('mongoose');
+const validator = require('validator');
+const bcrypt = require('bcryptjs');
 const userSchema = new Schema({
   name: {
     type: String,
-    required: [true, "Name is required"],
+    required: [true, 'Name is required'],
   },
   email: {
     type: String,
-    required: [true, "Email is required"],
+    required: [true, 'Email is required'],
     unique: true,
     lowercase: true,
     // validate: [validator.isEmail, "Please provide a valid email"],
@@ -18,13 +18,13 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required: [true, "Password is required"],
+    required: [true, 'Password is required'],
     minlength: 8,
     select: false,
   },
   passwordConfirm: {
     type: String,
-    required: [true, "Please confirm password"],
+    required: [true, 'Please confirm password'],
     validate: {
       // this validator only works on CREATE or SAVE!!
       validator: function (el) {
@@ -36,9 +36,9 @@ const userSchema = new Schema({
   passwordChangedAt: Date,
 });
 
-userSchema.pre("save", async function (next) {
+userSchema.pre('save', async function (next) {
   // only run if password was modified
-  if (!this.isModified("password")) return next();
+  if (!this.isModified('password')) return next();
 
   // hash password
   this.password = await bcrypt.hash(this.password, 12);
@@ -52,7 +52,9 @@ userSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword
 ) {
-  return await bcrypt.compare(candidatePassword, userPassword);
+  const res = await bcrypt.compare(candidatePassword, userPassword);
+  console.log(res, 'is the key working &&&&&&&&&&&&');
+  return res;
 };
 
 userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
@@ -67,6 +69,6 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   return false;
 };
 
-const userModel = model("User", userSchema);
+const userModel = model('User', userSchema);
 
 module.exports = userModel;
