@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import actions from '../api';
-import { loginUser } from './actions/authActions';
+import { loginUser, registerUser } from './actions/authActions';
 
 const initialValue = {
   isLoading: false,
@@ -15,7 +14,7 @@ const authSlice = createSlice({
   initialState: initialValue,
   reducers: {
     login: (state) => {
-      actions.loginUser().then((res) => {
+      loginUser().then((res) => {
         // history.pushState('/');
       });
     },
@@ -30,9 +29,14 @@ const authSlice = createSlice({
         success: false,
       };
     },
+    signUp: (state) => {
+      registerUser().then((res) => {
+        // history.pushState('/');
+      });
+    },
   },
   extraReducers: {
-    // login user
+    // 1 login user
     [loginUser.pending]: (state) => {
       state.isLoading = true;
       state.error = null;
@@ -40,11 +44,31 @@ const authSlice = createSlice({
 
     [loginUser.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
+      state.success = true;
       state.userInfo = payload;
       state.userToken = payload.token;
     },
 
     [loginUser.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+
+    // 2 register user
+
+    [registerUser.pending]: (state) => {
+      state.isLoading = true;
+      state.error = null;
+    },
+
+    [registerUser.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+      state.success = true;
+      state.userInfo = payload;
+      state.userToken = payload.token;
+    },
+
+    [registerUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
     },

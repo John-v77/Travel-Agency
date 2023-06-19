@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialValue = { coin: 0 };
+const initialValue = { coin: 10 };
 
 const counterSlice = createSlice({
   name: 'counter',
