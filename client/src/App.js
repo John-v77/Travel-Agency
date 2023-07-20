@@ -5,6 +5,8 @@ import Home from './components/Pages/Home/Home';
 import Footer from './components/Features/footer/Footer';
 import Destinations from './components/Pages/Destinations/Destinations';
 import Login from './components/Pages/login/Login';
+import Register from './components/Pages/login/Register';
+import UserAccount from './components/Pages/userAccount/UserAccount';
 
 function App() {
   return (
@@ -15,7 +17,9 @@ function App() {
         <Route path='destinations' element={<Destinations />} />
         <Route path='page2' element={<Home />} />
         <Route path='page3' element={<Home />} />
-        <Route path='account' element={<Login />} />
+        <Route path='login' element={<Login />} />
+        <Route path='account' element={<UserAccount />} />
+        <Route path='register' element={<Register />} />
       </Routes>
       <Footer />
     </div>

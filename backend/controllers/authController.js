@@ -90,6 +90,7 @@ const login = async (req, res, next) => {
     res.status(200).json({
       status: 'success',
       token: token,
+      userName: user.name,
     });
   } catch (err) {
     res.status(404).json({
@@ -108,8 +109,64 @@ const getAllUsers = async (req, res) => {
 
     res.status(200).json({
       status: 'success',
-      results: destinations.length,
+      results: users.length,
       data: { users },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err,
+    });
+  }
+};
+
+// get all favorites
+const getAllFavorites = async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    // 2 Check if user exists
+    const user = await User.findById(id);
+
+    const favorites = user.favorites > 0 ? user.favorites : ['mikey'];
+    res.status(200).json({
+      status: 'success',
+      // results: users.length,
+      data: { favorites },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err,
+    });
+  }
+};
+
+// add to favorites
+const addToFavorites = async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    // Check if user exists
+    const user = await User.findById(id);
+
+    const favorite = {
+      name: 'maria',
+      // price: 500,
+      description: 'testing favorites 1st try',
+      // destination: '6484c615a9bce1d597b984e7',
+    };
+
+    let favorites = user.favorites;
+    // console.log(favorites, typeof favorites, 'steap 2');
+
+    favorites.push(favorite);
+    // console.log(favorites, typeof favorites, 'steap 3');
+
+    res.status(200).json({
+      status: 'success',
+      // results: users.length,
+      data: { user },
     });
   } catch (err) {
     res.status(404).json({
@@ -177,4 +234,6 @@ module.exports = {
   login,
   protect,
   getAllUsers,
+  getAllFavorites,
+  addToFavorites,
 };

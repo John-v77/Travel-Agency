@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const vacantionRouter = require('./routes/vacantionRoutes');
 const userRouter = require('./routes/userRoutes');
+const favoritesRouter = require('./routes/favoritesRoutes');
 const PORT = process.env.PORT || 5000;
 const app = express();
 const path = require('path');

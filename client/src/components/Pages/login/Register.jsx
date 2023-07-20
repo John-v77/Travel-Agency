@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { registerUser } from '../../../store/actions/authActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { logOut } from '../../../store/userSlice';
+import { logOut } from '../../../store/slices/userSlice';
 function Register(props) {
   const { isloading, error, userInfo, userToken } = useSelector(
     (state) => state.user

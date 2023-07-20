@@ -13,6 +13,8 @@ import {
   FaPinterest,
   FaYoutube,
 } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+import userSlice from '../../../store/slices/userSlice';
 
 function Navbar(props) {
   const [mobNav, setMobNav] = useState(false);
@@ -20,6 +22,11 @@ function Navbar(props) {
   const handleNav = () => {
     setMobNav(!mobNav);
   };
+
+  const { userInfo } = useSelector((state) => state.user);
+  const userName = userInfo ? userInfo.userName : null;
+  const LinkToUserAcc = userName ? '/account' : '/login';
+  console.log(LinkToUserAcc, 'what is the user name?');
   return (
     <div className='w-full max-w-[1600px] p-4 flex justify-between absolute top-0  z-10 text-white '>
       <Link to='/'>
@@ -38,8 +45,9 @@ function Navbar(props) {
       </ul>
 
       <div className='hidden md:flex'>
+        {/* <p>{userInfo.userName === null ? userInfo.userName : null}</p> */}
         <BiSearch size={20} />
-        <Link to='/account'>
+        <Link to={{ LinkToUserAcc }}>
           <BsPerson size={20} />
         </Link>
       </div>
@@ -75,7 +83,7 @@ function Navbar(props) {
         <div className='flex flex-col'>
           <button className='my-6'>Search</button>
           <button className='login'>
-            <Link to='/account'>Account</Link>
+            <Link to={{ LinkToUserAcc }}>Account</Link>
           </button>
         </div>
 

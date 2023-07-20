@@ -2,17 +2,20 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { increment } from '../../../store/counterSlice';
+import { increment } from '../../../store/slices/counterSlice';
 import { loginUser } from '../../../store/actions/authActions';
 import actions from '../../../api';
-import { logOut } from '../../../store/userSlice';
+import { logOut } from '../../../store/slices/userSlice';
 // ('https://www.wallpaperup.com/uploads/wallpapers/2013/09/29/153361/44e5a3fd8a183ce3ab4d2130ba1b66bb.jpg');
 function Login(props) {
   const { isloading, error, userInfo, userToken } = useSelector(
     (state) => state.user
   );
   const dispatch = useDispatch();
-  const user = { email: 'eu321@tti.com', password: 'Maria12234' };
+  const user = {
+    email: 'euM2231G@hailamare.com',
+    password: 'Maria137234',
+  };
   const [userZ, setUser] = useState(user);
 
   const recordInput = (e) => {
@@ -27,6 +30,8 @@ function Login(props) {
     dispatch(loginUser(user));
   };
 
+  // console.log('userInfo111', userInfo.data.user);
+
   return (
     <div className=''>
       <img
@@ -36,6 +41,7 @@ function Login(props) {
 
       <div className='test11 '>
         {userToken ? 'logged in' : 'not auth'}
+        {userInfo === undefined ? userInfo.data.user : null}
         <button onClick={() => dispatch(logOut())}>log out</button>
       </div>
       <div className='my-20'>
@@ -69,7 +75,7 @@ function Login(props) {
           <div className='text-right mx-3'>
             <p>
               Don't have an account?
-              <Link to='/account'>
+              <Link to='/register'>
                 <b> Register </b>
               </Link>
             </p>

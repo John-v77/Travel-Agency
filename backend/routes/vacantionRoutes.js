@@ -8,7 +8,7 @@ const { protect } = require('../controllers/authController');
 
 router
   .route('/')
-  .get(protect, vacantionControler.getAllVacantionPackages)
+  .get(vacantionControler.getAllVacantionPackages)
   .post(vacantionControler.createVacantionPackage);
 
 router

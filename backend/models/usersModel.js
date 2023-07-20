@@ -1,40 +1,90 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, default: mongoose } = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
-const userSchema = new Schema({
-  name: {
-    type: String,
-    required: [true, 'Name is required'],
+
+const favoritesSchema = mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    // price: { type: Number, required: true },
+    description: { type: String, required: true },
+    // destination: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   required: true,
+    //   ref: 'Destination',
+    // },
   },
-  email: {
-    type: String,
-    required: [true, 'Email is required'],
-    unique: true,
-    lowercase: true,
-    // validate: [validator.isEmail, "Please provide a valid email"],
-  },
-  photo: {
-    type: String,
-  },
-  password: {
-    type: String,
-    required: [true, 'Password is required'],
-    minlength: 8,
-    select: false,
-  },
-  passwordConfirm: {
-    type: String,
-    required: [true, 'Please confirm password'],
-    validate: {
-      // this validator only works on CREATE or SAVE!!
-      validator: function (el) {
-        return el == this.password;
-      },
-      message: "Password doesn't match",
+  {
+    timestamps: true,
+  }
+);
+
+const shoppingCartSchema = mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    price: { type: Number, required: true },
+    description: { type: String, required: true },
+    destination: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Destination',
     },
   },
-  passwordChangedAt: Date,
-});
+  {
+    timestamps: true,
+  }
+);
+
+const userSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'Name is required'],
+    },
+    email: {
+      type: String,
+      required: [true, 'Email is required'],
+      unique: true,
+      lowercase: true,
+      validate: [validator.isEmail, 'Please provide a valid email'],
+    },
+    isAdmin: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    photo: {
+      type: String,
+    },
+    password: {
+      type: String,
+      required: [true, 'Password is required'],
+      minlength: 8,
+      select: false,
+    },
+    passwordConfirm: {
+      type: String,
+      required: [true, 'Please confirm password'],
+      validate: {
+        // this validator only works on CREATE or SAVE!!
+        validator: function (el) {
+          return el == this.password;
+        },
+        message: "Password doesn't match",
+      },
+    },
+    favorites: [
+      { type: mongoose.Schema.Types.ObjectId, ref: 'favoritesSchema' },
+    ],
+    shoppingCart: [
+      { type: mongoose.Schema.Types.ObjectId, ref: 'shoppingCartSchema' },
+    ],
+
+    passwordChangedAt: Date,
+  },
+  {
+    timestamps: true,
+  }
+);
 
 userSchema.pre('save', async function (next) {
   // only run if password was modified
@@ -53,7 +103,7 @@ userSchema.methods.correctPassword = async function (
   userPassword
 ) {
   const res = await bcrypt.compare(candidatePassword, userPassword);
-  console.log(res, 'is the key working &&&&&&&&&&&&');
+  // console.log(res, 'is the key working &&&&&&&&&&&&');
   return res;
 };
 

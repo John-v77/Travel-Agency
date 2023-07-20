@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import FeaturedDes from '../../Features/featuredDestinations/FeaturedDes';
 import { useDispatch, useSelector } from 'react-redux';
-import { increment } from '../../../store/counterSlice';
+import { increment } from '../../../store/slices/counterSlice';
+import actions from '../../../api';
 function Destinations(props) {
   const { coin } = useSelector((state) => {
     return state.counter;
   });
 
+  const [destination, setDestinations] = useState([]);
+
   // console.log(counter, 'hello1');
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    actions.getDestinations().then((res) => {
+      console.log('do we have res', res);
+      setDestinations(res);
+    });
+  }, []);
+
+  console.log(destination, 'are destinations set?');
   return (
     <div className='max-w-[1600px] mx-auto md:p-0'>
       <div className='max-h-[500px] relative'>
@@ -27,6 +38,20 @@ function Destinations(props) {
       </div>
 
       <FeaturedDes />
+      <div>
+        {destination.map((el, key) => {
+          return (
+            <div key={key}>
+              <h1>{el.name}</h1>
+
+              <h2>{el.price}</h2>
+
+              <p>{el.description}</p>
+            </div>
+          );
+        })}
+      </div>
+
       <h1>{coin}</h1>
       <button onClick={() => dispatch(increment())}>++</button>
       <h1>Hellos zzzzzzzz</h1>
