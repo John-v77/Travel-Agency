@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import FeaturedDes from '../../Features/featuredDestinations/FeaturedDes';
 import { useDispatch, useSelector } from 'react-redux';
 import { increment } from '../../../store/slices/counterSlice';
+import { addUserFavorites } from '../../../store/actions/authActions';
 import actions from '../../../api';
 function Destinations(props) {
   const { coin } = useSelector((state) => {
@@ -55,6 +56,7 @@ function Destinations(props) {
       <h1>{coin}</h1>
       <button onClick={() => dispatch(increment())}>++</button>
       <h1>Hellos zzzzzzzz</h1>
+      <button onClick={() => dispatch(addUserFavorites())}>++Fav++</button>
     </div>
   );
 }

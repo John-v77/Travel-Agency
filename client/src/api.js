@@ -50,6 +50,12 @@ const actions = {
     return res.data.data.destinations;
   },
 
+  addFavDest: async () => {
+    const res = await axios.get(`${baseURL}/v1/user/addfav`);
+    console.log(res.data.data, 'are fav destination fetched?');
+    return res.data.data;
+  },
+
   // http://localhost:5000/api/v1/vacantions
 };
 

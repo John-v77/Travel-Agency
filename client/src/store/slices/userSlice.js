@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginUser, registerUser } from '../actions/authActions';
+import {
+  addUserFavorites,
+  loginUser,
+  registerUser,
+} from '../actions/authActions';
 
 const initialValue = {
   isLoading: false,
@@ -31,6 +35,12 @@ const authSlice = createSlice({
     },
     signUp: (state) => {
       registerUser().then((res) => {
+        // history.pushState('/');
+      });
+    },
+
+    addtoFav: (state) => {
+      addUserFavorites().then((res) => {
         // history.pushState('/');
       });
     },
@@ -69,6 +79,24 @@ const authSlice = createSlice({
     },
 
     [registerUser.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+
+    // 3 add to favorites
+    [addUserFavorites.pending]: (state) => {
+      state.isLoading = true;
+      state.error = null;
+    },
+
+    [addUserFavorites.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+      state.success = true;
+      state.userInfo = payload;
+      // state.favorites = payload.favorites
+    },
+
+    [addUserFavorites.rejected]: (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
     },

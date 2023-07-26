@@ -72,9 +72,7 @@ const userSchema = new Schema(
         message: "Password doesn't match",
       },
     },
-    favorites: [
-      { type: mongoose.Schema.Types.ObjectId, ref: 'favoritesSchema' },
-    ],
+    favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'destination' }],
     shoppingCart: [
       { type: mongoose.Schema.Types.ObjectId, ref: 'shoppingCartSchema' },
     ],

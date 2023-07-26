@@ -22,7 +22,7 @@ export const loginUser = createAsyncThunk(
 );
 
 export const registerUser = createAsyncThunk(
-  'auth/register22',
+  'auth/register',
   async ({ name, email, password }, { rejectWithValue }) => {
     console.log('thunk - register', name, email, password);
     try {
@@ -37,6 +37,21 @@ export const registerUser = createAsyncThunk(
       } else {
         return rejectWithValue(error.message);
       }
+    }
+  }
+);
+
+export const addUserFavorites = createAsyncThunk(
+  'auth/addfav',
+  async ({ userId, token, favDest }, { rejectWithValue }) => {
+    console.log('thunk -add', userId, token, favDest);
+
+    try {
+      const data = await actions.addFavDest(userId, token, favDest);
+
+      localStorage.set('fav', data.favorites);
+    } catch (err) {
+      return rejectWithValue(err.message);
     }
   }
 );

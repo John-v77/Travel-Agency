@@ -150,17 +150,10 @@ const addToFavorites = async (req, res) => {
     // Check if user exists
     const user = await User.findById(id);
 
-    const favorite = {
-      name: 'maria',
-      // price: 500,
-      description: 'testing favorites 1st try',
-      // destination: '6484c615a9bce1d597b984e7',
-    };
-
     let favorites = user.favorites;
     // console.log(favorites, typeof favorites, 'steap 2');
 
-    favorites.push(favorite);
+    favorites.push('6484c615a9bce1d597b984e7');
     // console.log(favorites, typeof favorites, 'steap 3');
 
     res.status(200).json({

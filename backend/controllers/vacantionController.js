@@ -22,7 +22,9 @@ const getAllVacantionPackages = async (req, res) => {
 // Get one by id
 const getVacantionPackage = async (req, res) => {
   try {
-    const destination = await Destination.findById(req.params.id);
+    const destination = await Destination.findById(req.params.id).populate(
+      'reviews'
+    );
     res.status(200).json({
       status: 'success',
       data: { destination },

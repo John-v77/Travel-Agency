@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, default: mongoose } = require('mongoose');
 
 const DestinationSchema = new Schema({
   name: {
@@ -41,6 +41,30 @@ const DestinationSchema = new Schema({
       day: Number,
     },
   ],
+  guides: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+});
+
+// imbeded Users
+
+// DestinationSchema.pre('save', async function (next) {
+//   const guidesPromises = this.guides.map(async (id) => await User.findById(id));
+//   this.guides = await Promise.all(guidesPromises);
+//   next();
+// });
+
+DestinationSchema.pre(/^find/, function (next) {
+  console.log('we hit the pre quiery');
+  this.populate({
+    path: 'guides',
+    select: '-__v -passwordConfirm -favorites -shoppingCart -isAdmin',
+  });
+  next();
+});
+
+DestinationSchema.virtual('reviews', {
+  ref: 'Review',
+  foreignField: 'destination',
+  localField: '_id',
 });
 
 const destinationModel = model('Destination', DestinationSchema);
