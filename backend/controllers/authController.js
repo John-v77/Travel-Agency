@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 
 // # signToken
 const signToken = (id) => {
-  console.log("dot. env", process.env.JWT_SECRET);
   return jwt.sign({ id: id }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });
@@ -13,14 +12,18 @@ const signToken = (id) => {
 // #1 Sign Up
 const signup = async (req, res, next) => {
   try {
+    const { name, email, password, passwordConfirm } = req.body;
+    console.log("signup TT", email, password, passwordConfirm, name);
     const newUser = await User.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-      passwordConfirm: req.body.passwordConfirm,
+      name: name,
+      email: email,
+      password: password,
+      passwordConfirm: passwordConfirm,
     });
 
     const token = signToken(newUser._id);
+
+    console.log(token, "what is the token", newUser);
     res.status(201).json({
       status: "success",
       token,
@@ -85,7 +88,7 @@ const getAllUsers = async (req, res) => {
 
     res.status(200).json({
       status: "success",
-      results: destinations.length,
+      results: users.length,
       data: { users },
     });
   } catch (err) {
