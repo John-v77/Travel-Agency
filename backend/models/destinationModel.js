@@ -9,10 +9,10 @@ const DestinationSchema = new Schema({
     type: Number,
     required: [true, "Add a price for the vacantion package"],
   },
-  // image_url: {
-  //   type: String,
-  //   required: [true, "Add a image link"],
-  // },
+  image_url: {
+    type: String,
+    required: [true, "Add a image link"],
+  },
   description: {
     type: String,
     required: [true, "Add description to destination package"],
