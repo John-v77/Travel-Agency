@@ -7,6 +7,8 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 const path = require("path");
 const cors = require("cors");
+const AppError = require("./utils/appError");
+const globalErrorHandler = require("./controllers/errorController");
 
 // Body parser, reads data from body into req.body - need json requests
 app.use(express.json({ limit: "10kb" })); // for application/json
@@ -15,6 +17,7 @@ app.use(express.json({ limit: "10kb" })); // for application/json
 const MONGODB_URI =
   process.env.MONGODB_URI || `mongodb://localhost/localTravelDB`;
 
+// connect to DB
 mongoose
   .connect(MONGODB_URI, {
     useNewUrlParser: true,
@@ -49,6 +52,17 @@ app.use((req, res, next) => {
 // Routers
 app.use("/api/v1/vacantions", vacantionRouter);
 app.use("/api/v1/user", userRouter);
+
+app.all("*", (req, res, next) => {
+  // const err = new Error(`Cannot find ${req.originalUrl} on this server!`);
+  // err.status = "fail";
+  // err.statusCode = 404;
+  // next(err);
+
+  next(new AppError(`Cannot find ${req.originalUrl} on this server!`, 404));
+});
+
+app.use(globalErrorHandler);
 
 app.listen(PORT, () => {
   console.log(`listening to port ${PORT}`);
