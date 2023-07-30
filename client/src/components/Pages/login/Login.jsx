@@ -13,8 +13,8 @@ function Login(props) {
   );
   const dispatch = useDispatch();
   const user = {
-    email: "",
-    password: "",
+    email: "j21@test.com",
+    password: "pass1345",
   };
   const [userZ, setUser] = useState(user);
 
@@ -46,12 +46,12 @@ function Login(props) {
         <div className="form  p-2 md:p3 rounded-md  max-w-xl mx-auto my-4">
           <form className="w-full border border-black rounded-md p-3 md:p-4">
             <div className="flex flex-col my-2">
-              <label className="mx-1">Username</label>
+              <label className="mx-1">Email</label>
               <input
                 onChange={recordInput}
                 className="border rounded-md p-2"
                 type="text"
-                name="userName"
+                name="email"
               />
             </div>
             <div className="flex flex-col my-4">
