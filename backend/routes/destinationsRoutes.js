@@ -17,5 +17,4 @@ router
   .delete(destinationsController.deleteVacantionPackage)
   .patch(destinationsController.updateVacationPackage);
 
-router.route("/review").post(destinationsController.createReview);
 module.exports = router;

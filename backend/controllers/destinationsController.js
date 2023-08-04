@@ -1,17 +1,7 @@
 const Destination = require("../models/destinationModel");
-const Review = require("../models/reviewModel");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const colors = require("colors");
-
-// test for uniques
-const createReview = catchAsync(async (req, res, next) => {
-  const newDestination = await Review.create(req.body);
-  res.status(201).json({
-    status: "success",
-    data: { destination: newDestination },
-  });
-});
 
 // Get all
 const getAllVacantionPackages = catchAsync(async (req, res, next) => {
@@ -79,5 +69,4 @@ module.exports = {
   createVacantionPackage,
   deleteVacantionPackage,
   updateVacationPackage,
-  createReview,
 };
