@@ -15,7 +15,8 @@ app.use(express.json({ limit: "10kb" })); // for application/json
 // app.use(express.urlencoded());
 
 const MONGODB_URI =
-  process.env.MONGODB_URI || `mongodb://localhost/localTravelDB`;
+  process.env.MONGODB_URI.replace("<PSW>", process.env.BD_PASSFAKE) ||
+  `mongodb://localhost/localTravelDB`;
 
 // connect to DB
 mongoose
@@ -24,8 +25,12 @@ mongoose
     useUnifiedTopology: true,
     serverSelectionTimeoutMS: 5000,
   })
-  .then((x) => console.log(`connected to MongoDB!: "${x.connections[0].name}"`))
-  .catch((err) => console.error("Error connectiong to mongoDB", err));
+  .then((x) =>
+    console.log(`connected to MongoDB!: "${x.connections[0].name}"`)
+  );
+// .catch((err) =>
+//   console.error("Error connectiong to mongoDB ==>", err.name, err.message)
+// );
 
 //fix cors error
 app.use(
@@ -54,16 +59,23 @@ app.use("/api/v1/vacantions", destinationsRouter);
 app.use("/api/v1/user", userRouter);
 
 app.all("*", (req, res, next) => {
-  // const err = new Error(`Cannot find ${req.originalUrl} on this server!`);
-  // err.status = "fail";
-  // err.statusCode = 404;
-  // next(err);
-
   next(new AppError(`Cannot find ${req.originalUrl} on this server!`, 404));
 });
 
 app.use(globalErrorHandler);
 
-app.listen(PORT, () => {
+server = app.listen(PORT, () => {
   console.log(`listening to port ${PORT}`);
 });
+
+process.on("unhandledRejection", (err) => {
+  console.log(err.name, err.message);
+  console.log("UnhandledRejection! 🧨 Shutting down");
+  server.close(() => {
+    process.exit(1);
+  });
+});
+
+// in production must have a tool in place to restart the aplication,\
+//  hosting providers can provide such service
+//  but care if using cloud aws, azure
