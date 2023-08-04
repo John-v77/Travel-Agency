@@ -1,5 +1,7 @@
 const Destination = require("../models/destinationModel");
 const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/appError");
+const colors = require("colors");
 
 // Get all
 const getAllVacantionPackages = catchAsync(async (req, res, next) => {
@@ -13,8 +15,13 @@ const getAllVacantionPackages = catchAsync(async (req, res, next) => {
 });
 
 // Get one by id
-const getVacantionPackage = catchAsync(async (req, res) => {
+const getVacantionPackage = catchAsync(async (req, res, next) => {
   const destination = await Destination.findById(req.params.id);
+
+  if (!destination) {
+    console.log("vac conroler".cyan);
+    return next(new AppError("No destination found with that ID", 404));
+  }
   res.status(200).json({
     status: "success",
     data: { destination },
