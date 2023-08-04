@@ -1,11 +1,18 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
+
+process.on("uncaughtException", (err) => {
+  console.log(err.name, err.message);
+  console.log("uncaught Exception! 🛑 Shutting down");
+  process.exit(1);
+});
+
 const express = require("express");
 const destinationsRouter = require("./routes/destinationsRoutes");
 const userRouter = require("./routes/userRoutes");
 const PORT = process.env.PORT || 5000;
 const app = express();
-const path = require("path");
+// const path = require("path");
 const cors = require("cors");
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
@@ -15,7 +22,7 @@ app.use(express.json({ limit: "10kb" })); // for application/json
 // app.use(express.urlencoded());
 
 const MONGODB_URI =
-  process.env.MONGODB_URI.replace("<PSW>", process.env.BD_PASSFAKE) ||
+  process.env.MONGODB_URI.replace("<PSW>", process.env.BD_PASS) ||
   `mongodb://localhost/localTravelDB`;
 
 // connect to DB
@@ -70,7 +77,7 @@ server = app.listen(PORT, () => {
 
 process.on("unhandledRejection", (err) => {
   console.log(err.name, err.message);
-  console.log("UnhandledRejection! 🧨 Shutting down");
+  console.log("UnhandledRejection! 💥 Shutting down");
   server.close(() => {
     process.exit(1);
   });
