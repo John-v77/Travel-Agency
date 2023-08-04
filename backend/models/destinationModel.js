@@ -4,6 +4,8 @@ const DestinationSchema = new Schema({
   name: {
     type: String,
     required: [true, "Add a name for Trip Destination"],
+    maxlength: [40, "Destinations name has to be less then 40 characters"],
+    minlength: [4, "Destinations name has to be less then 4 characters"],
   },
   price: {
     type: Number,
@@ -16,6 +18,8 @@ const DestinationSchema = new Schema({
   description: {
     type: String,
     required: [true, "Add description to destination package"],
+    maxlength: [40, "Destinations name has to be less then 40 characters"],
+    minlength: [10, "Destinations name has to be less then 10 characters"],
   },
 });
 

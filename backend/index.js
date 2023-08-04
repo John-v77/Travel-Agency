@@ -1,7 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
-const vacantionRouter = require("./routes/vacantionRoutes");
+const destinationsRouter = require("./routes/destinationsRoutes");
 const userRouter = require("./routes/userRoutes");
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -45,12 +45,12 @@ app.use(
 // Testing middleware
 app.use((req, res, next) => {
   req.requstTime = new Date().toISOString();
-  console.log("what are the headers", req.headers);
+  // console.log("what are the headers", req.headers);
   next();
 });
 
 // Routers
-app.use("/api/v1/vacantions", vacantionRouter);
+app.use("/api/v1/vacantions", destinationsRouter);
 app.use("/api/v1/user", userRouter);
 
 app.all("*", (req, res, next) => {
