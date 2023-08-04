@@ -8,13 +8,13 @@ const { protect } = require("../controllers/authController");
 
 router
   .route("/")
-  .get(protect, destinationsController.getAllVacantionPackages)
-  .post(destinationsController.createVacantionPackage);
+  .get(protect, destinationsController.getAllDestinationPackages)
+  .post(destinationsController.createDestinationPackage);
 
 router
   .route("/:id")
-  .get(destinationsController.getVacantionPackage)
-  .delete(destinationsController.deleteVacantionPackage)
-  .patch(destinationsController.updateVacationPackage);
+  .get(destinationsController.getDestinationPackage)
+  .delete(destinationsController.deleteDestinationPackage)
+  .patch(destinationsController.updateDestinationPackage);
 
 module.exports = router;
