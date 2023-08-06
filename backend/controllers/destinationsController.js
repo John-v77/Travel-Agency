@@ -9,6 +9,7 @@ const colors = require("colors");
 // route GET /api/vacantions || api/v1/vacantions?price[gte]=700
 // access Public
 const getAllDestinationPackages = catchAsync(async (req, res, next) => {
+  // 1 # filtering
   // get query obj
   const queryObj = { ...req.query };
   const excludedFields = ["page", "sort", "limit", "fields"];
@@ -22,7 +23,7 @@ const getAllDestinationPackages = catchAsync(async (req, res, next) => {
 
   let query = Destination.find(JSON.parse(queryStr));
 
-  // sorting res
+  // 2 # sorting res
   if (req.query.sort) query = query.sort();
 
   if (req.query.sort) {
@@ -32,12 +33,24 @@ const getAllDestinationPackages = catchAsync(async (req, res, next) => {
     query = query.sort("createdAt");
   }
 
-  // custom fiels query
+  // 3 # custom fiels query
   if (req.query.fields) {
     const fields = req.query.fields.split(",").join(" ");
     query = query.select(fields);
   } else {
     query.select("-__id");
+  }
+
+  // 4 # paginations
+
+  const page = req.query.page * 1 || 1;
+  const limit = req.query.limit * 1 || 20;
+  const skip = (page - 1) * limit;
+  query = query.skip(10).limit(10);
+
+  if (req.query.page) {
+    const numDestinations = await Destination.countDocuments();
+    if (skip >= numDestinations) throw new Error("This page does not exists");
   }
 
   // execute query
