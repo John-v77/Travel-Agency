@@ -5,7 +5,18 @@ const colors = require("colors");
 
 // Get all
 const getAllDestinationPackages = catchAsync(async (req, res, next) => {
-  const destinations = await Destination.find();
+  // get query obj
+  const queryObj = { ...req.query };
+  const excludedFields = ["page", "sort", "limit", "fields"];
+  excludedFields.forEach((el) => delete queryObj[el]);
+
+  // adjust query for <less then> <more then> lte, gte, gt, lt
+  let queryStr = JSON.stringify(queryObj);
+
+  // uses regex to patern match and add '$'
+  queryStr = queryStr.replace(/\b(gte|lte|gt|lt)\b/g, (match) => `$${match}`);
+
+  const destinations = await Destination.find(JSON.parse(queryStr));
 
   res.status(200).json({
     status: "success",
