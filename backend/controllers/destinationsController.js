@@ -16,8 +16,17 @@ const getAllDestinationPackages = catchAsync(async (req, res, next) => {
   // uses regex to patern match and add '$'
   queryStr = queryStr.replace(/\b(gte|lte|gt|lt)\b/g, (match) => `$${match}`);
 
-  const destinations = await Destination.find(JSON.parse(queryStr));
+  let query = Destination.find(JSON.parse(queryStr));
 
+  if (req.query.fields) {
+    const fields = req.query.fields.split(",").join(" ");
+    query = query.select(fields);
+  } else {
+    query.select("-__id");
+  }
+
+  // execute query
+  const destinations = await query;
   res.status(200).json({
     status: "success",
     results: destinations.length,
