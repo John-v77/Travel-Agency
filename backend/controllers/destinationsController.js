@@ -4,6 +4,10 @@ const AppError = require("../utils/appError");
 const colors = require("colors");
 
 // Get all
+
+// Fetch all destinations
+// route GET /api/vacantions || api/v1/vacantions?price[gte]=700
+// access Public
 const getAllDestinationPackages = catchAsync(async (req, res, next) => {
   // get query obj
   const queryObj = { ...req.query };
@@ -18,6 +22,17 @@ const getAllDestinationPackages = catchAsync(async (req, res, next) => {
 
   let query = Destination.find(JSON.parse(queryStr));
 
+  // sorting res
+  if (req.query.sort) query = query.sort();
+
+  if (req.query.sort) {
+    const sortBy = req.query.sort.split(",").join(" ");
+    query = query.sort(sortBy);
+  } else {
+    query = query.sort("createdAt");
+  }
+
+  // custom fiels query
   if (req.query.fields) {
     const fields = req.query.fields.split(",").join(" ");
     query = query.select(fields);
@@ -39,7 +54,6 @@ const getDestinationPackage = catchAsync(async (req, res, next) => {
   const destination = await Destination.findById(req.params.id);
 
   if (!destination) {
-    console.log("vac conroler".cyan);
     return next(new AppError("No destination found with that ID", 404));
   }
   res.status(200).json({
