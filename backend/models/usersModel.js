@@ -5,13 +5,14 @@ const userSchema = new Schema({
   name: {
     type: String,
     required: [true, "Name is required"],
+    validate: [validator.isAlphanumeric, "Name can only be alpha numeric"],
   },
   email: {
     type: String,
     required: [true, "Email is required"],
     unique: true,
     lowercase: true,
-    // validate: [validator.isEmail, "Please provide a valid email"],
+    validate: [validator.isEmail, "Please provide a valid email"],
   },
   photo: {
     type: String,
@@ -54,7 +55,6 @@ userSchema.methods.correctPassword = async function (
   userPassword
 ) {
   const res = await bcrypt.compare(candidatePassword, userPassword);
-  console.log(res, "is the key working &&&&&&&&&&&&");
   return res;
 };
 
@@ -64,7 +64,6 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
       this.passwordChangedAt.getTime() / 1000,
       10
     );
-    console.log(changedTimestamp, JWTTimestamp);
     return JWTTimestamp < changedTimestamp;
   }
   return false;
