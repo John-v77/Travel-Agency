@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const slugify = require("slugify");
+const validator = require("validator");
 
 const DestinationSchema = new Schema({
   name: {
@@ -7,6 +8,10 @@ const DestinationSchema = new Schema({
     required: [true, "Add a name for Trip Destination"],
     maxlength: [40, "Destinations name has to be less then 40 characters"],
     minlength: [4, "Destinations name has to be less then 4 characters"],
+    validate: [
+      validator.isAlpha,
+      "Destinations name must only contain characters",
+    ],
   },
   slug: {
     type: String,
@@ -14,10 +19,23 @@ const DestinationSchema = new Schema({
   price: {
     type: Number,
     required: [true, "Add a price for the vacantion package"],
+    min: [100, "Price must be at least $100"],
+    max: [10000, "Price must be at less then $10,000"],
+  },
+  priceDiscount: {
+    type: Number,
+    validate: {
+      // THIS VALIDATOR WILL NOT WORK ON UPDATE() this only point on NEW document creation
+      validator: function (val) {
+        return val < this.price;
+      },
+      message: "Discount Price ({VALUE}) cannot be greater then regular price",
+    },
   },
   durationInDays: {
     type: Number,
     required: [true, "Add a duration for the vacantion package"],
+    max: [90, "Duration must be at less then 90 days"],
   },
   image_url: {
     type: String,
