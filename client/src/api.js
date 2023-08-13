@@ -1,18 +1,18 @@
-import axios from 'axios';
+import axios from "axios";
 
-const baseURL = 'http://localhost:5000/api';
+const baseURL = "http://localhost:5000/api";
 
 let resetHead = () => {
   return {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('userToken')}`,
+      Authorization: `Bearer ${localStorage.getItem("userToken")}`,
     },
   };
 };
 
 const actions = {
   loginUser: async (user, password) => {
-    console.log('step 3 user login', user, '::', password);
+    console.log("step 3 user login", user, "::", password);
     const res = await axios.post(
       `${baseURL}/v1/user/login`,
       {
@@ -27,7 +27,7 @@ const actions = {
   },
 
   registerUser: async (name, email, password) => {
-    console.log('step 3 user login', name, '::', email, '::', password);
+    console.log("step 3 user login", name, "::", email, "::", password);
     const res = await axios.post(
       `${baseURL}/v1/user/signup`,
       {
@@ -46,7 +46,7 @@ const actions = {
   getDestinations: async () => {
     const res = await axios.get(`${baseURL}/v1/vacantions`);
 
-    console.log(res.data.data.destinations, 'are destination fetched?');
+    console.log(res.data.data.destinations, "are destination fetched?");
     return res.data.data.destinations;
   },
 

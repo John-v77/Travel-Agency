@@ -6,7 +6,7 @@ import Footer from "./components/Features/footer/Footer";
 import Destinations from "./components/Pages/Destinations/Destinations";
 import Login from "./components/Pages/login/Login";
 import Register from "./components/Pages/login/Register";
-import Sandbox from "./pages/Sandbox";
+import Sandbox from "./components/Pages/TestPage/Sandbox";
 
 function App() {
   return (

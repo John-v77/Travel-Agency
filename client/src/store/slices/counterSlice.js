@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialValue = { coin: 10 };
 
 const counterSlice = createSlice({
-  name: 'counter',
+  name: "counter",
   initialState: initialValue,
   reducers: {
     increment: (state) => {

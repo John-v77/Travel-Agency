@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { loginUser, registerUser } from './actions/authActions';
+import { createSlice } from "@reduxjs/toolkit";
+import { loginUser, registerUser } from "../actions/authActions";
 
 const initialValue = {
   isLoading: false,
@@ -10,7 +10,7 @@ const initialValue = {
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: initialValue,
   reducers: {
     login: (state) => {
