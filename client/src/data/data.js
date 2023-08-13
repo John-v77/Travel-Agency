@@ -1,3 +1,27 @@
+export const productOBj = [
+  {
+    vipDestinations: false,
+    _id: "64d7c935e4ff661b0d0f109b",
+    name: "Delud",
+    price: 500,
+    durationInDays: 4,
+    image_url: "https://media.nomadicmatt.com/2022/vietnamcheap1.jpeg",
+    description: "Hello for Jamaica",
+    slug: "delud",
+    __v: 0,
+  },
+  {
+    vipDestinations: false,
+    _id: "64d7c6f5bb810ad92d8ce7ee",
+    name: "Delud",
+    price: 500,
+    durationInDays: 4,
+    image_url: "https://media.nomadicmatt.com/2022/vietnamcheap1.jpeg",
+    description: "Hello for Jamaica",
+    __v: 0,
+  },
+];
+
 export const data = [
   {
     id: 1,
