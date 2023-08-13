@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { increment } from "../../../store/slices/counterSlice";
 import { loginUser } from "../../../store/actions/authActions";
-import actions from "../../../api";
 import { logOut } from "../../../store/slices/userSlice";
 // ('https://www.wallpaperup.com/uploads/wallpapers/2013/09/29/153361/44e5a3fd8a183ce3ab4d2130ba1b66bb.jpg');
 function Login(props) {
@@ -18,12 +16,14 @@ function Login(props) {
   };
   const [userZ, setUser] = useState(user);
 
+  // record input
   const recordInput = (e) => {
     const { name, value } = e.target;
 
     setUser({ ...userZ, [name]: e.target.value });
   };
 
+  // submit form
   const submitForm = (e) => {
     e.preventDefault();
     console.log("submitting", e);
@@ -35,6 +35,7 @@ function Login(props) {
       <img
         src="https://www.wallpaperup.com/uploads/wallpapers/2013/09/29/153361/44e5a3fd8a183ce3ab4d2130ba1b66bb.jpg"
         className="w-full h-20 object-cover object-top "
+        alt="navbar background"
       />
 
       <div className="test11 ">

@@ -10,9 +10,9 @@ let resetHead = () => {
   };
 };
 
-const actions = {
+const apiActions = {
   loginUser: async (user, password) => {
-    console.log("step 3 user login", user, "::", password);
+    console.log("step 3 user login", user, ":AAA:", password);
     const res = await axios.post(
       `${baseURL}/v1/user/login`,
       {
@@ -53,4 +53,4 @@ const actions = {
   // http://localhost:5000/api/v1/vacantions
 };
 
-export default actions;
+export default apiActions;
