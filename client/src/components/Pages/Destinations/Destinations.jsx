@@ -9,6 +9,10 @@ function Destinations(props) {
     return state.counter;
   });
 
+  // const { favorites } = useSelector((state) => {
+  //   console.log(state.user.favorites, "what is state new23");
+  //   return state.user;
+  // });
   const { products } = useSelector((state) => state.products);
 
   // const [destination, setDestinations] = useState([]);
@@ -25,9 +29,7 @@ function Destinations(props) {
     <div className="max-w-[1600px] mx-auto md:p-0">
       <div className="max-h-[500px] relative">
         <div className="absolute w-full h-full max-h-[500px] bg-black/40 flex flex-col justify-center text-gray-200 text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
-            The Best Travel Experience
-          </h1>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">The Best Travel Experience</h1>
         </div>
         <img
           className="w-full max-h-[500px] object-cover"
@@ -40,6 +42,8 @@ function Destinations(props) {
       <FeaturedDes />
       <DestinationsDisplay destPackages={products} />
       <h1>{coin}</h1>
+
+      {/* <p>{JSON.stringify(favorites)}</p> */}
       <button onClick={() => dispatch(increment())}>++</button>
       <h1>Hellos zzzzzzzz</h1>
     </div>

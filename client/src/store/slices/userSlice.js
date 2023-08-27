@@ -1,5 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
 import { loginUser, registerUser } from "../actions/authActions";
+
+export const addFavoritesError = createAction("addFavoritesError");
 
 const initialValue = {
   isLoading: false,
@@ -7,6 +9,7 @@ const initialValue = {
   userToken: null,
   error: null,
   success: false,
+  favorites: [],
 };
 
 const authSlice = createSlice({
@@ -33,6 +36,10 @@ const authSlice = createSlice({
       registerUser().then((res) => {
         // history.pushState('/');
       });
+    },
+
+    addFavorites: (state, action) => {
+      return { ...state, favorites: [...action.payload] };
     },
   },
   extraReducers: {
@@ -75,6 +82,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { logOut } = authSlice.actions;
+export const { logOut, addFavorites } = authSlice.actions;
 
 export default authSlice.reducer;
