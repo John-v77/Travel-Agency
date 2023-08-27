@@ -2,7 +2,7 @@ const { promisify } = require("util");
 const User = require("../models/usersModel");
 const jwt = require("jsonwebtoken");
 const catchAsync = require("../utils/catchAsync");
-
+const colors = require("colors");
 // # signToken
 const signToken = (id) => {
   return jwt.sign({ id: id }, process.env.JWT_SECRET, {
@@ -13,7 +13,6 @@ const signToken = (id) => {
 // #1 Sign Up
 const signup = catchAsync(async (req, res, next) => {
   const { name, email, password, passwordConfirm } = req.body;
-  console.log("signup TT", email, password, passwordConfirm, name);
   const newUser = await User.create({
     name: name,
     email: email,
@@ -22,8 +21,6 @@ const signup = catchAsync(async (req, res, next) => {
   });
 
   const token = signToken(newUser._id);
-
-  console.log(token, "what is the token", newUser);
   res.status(201).json({
     status: "success",
     token,
@@ -56,21 +53,18 @@ const login = catchAsync(async (req, res, next) => {
   }
   // 3 if everything is ok, send token to client
   const token = signToken(user._id);
-  console.log("is token working", token, "\n");
 
   res.status(200).json({
     status: "success",
     token: token,
     userName: user.name,
+    _id: user._id,
   });
 });
 
 // Get all
 const getAllUsers = catchAsync(async (req, res) => {
   const users = await User.find();
-
-  console.log("users!!!111", users);
-
   res.status(200).json({
     status: "success",
     results: users.length,
@@ -79,7 +73,6 @@ const getAllUsers = catchAsync(async (req, res) => {
 });
 
 // #3 Protect Routes
-
 const protect = catchAsync(async (req, res, next) => {
   let token;
 
@@ -97,10 +90,7 @@ const protect = catchAsync(async (req, res, next) => {
   }
 
   // validate token
-  const decodedPayload = await promisify(jwt.verify)(
-    token,
-    process.env.JWT_SECRET
-  );
+  const decodedPayload = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
   // check user still exists
   const freshUser = await User.findById(decodedPayload.id);
@@ -125,9 +115,68 @@ const protect = catchAsync(async (req, res, next) => {
   return next();
 });
 
+// add to favorites
+const addFavorite = catchAsync(async (req, res, next) => {
+  const { userId, prodId } = req.body;
+  // console.log(userId, prodId, ".TY.".red);
+  const user = await User.findById(userId);
+
+  if (user) {
+    const alreadyFavorite = user.favorites.find((favorite) => favorite.toString() === prodId.toString());
+    console.log(alreadyFavorite, "mg".blue);
+    if (alreadyFavorite) {
+      res.status(200).json({
+        status: "success",
+        results: user.favorites.length,
+        message: "favorite already added",
+        data: { user },
+      });
+    }
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  console.log(user.favorites, "name".red);
+  user.favorites.push(prodId);
+
+  // fav = [];
+  // user.favorites = fav;
+
+  await user.save();
+
+  res.status(200).json({
+    status: "success",
+    results: user.favorites.length,
+    message: "favorite added",
+    data: { user },
+  });
+});
+
+// remove favorite
+const remoreFavorite = catchAsync(async (req, res, next) => {
+  const { userId, prodId } = req.body;
+  console.log(userId, prodId, ".TY.".red);
+  const user = await User.findById(userId);
+
+  updatedFav = user.favorites.filter((favorite) => favorite.toString() != prodId.toString());
+
+  user.favorites = updatedFav;
+  await user.save();
+
+  res.status(200).json({
+    status: "success",
+    results: user.favorites.length,
+    message: "favorite removed",
+    data: { user },
+  });
+});
+
 module.exports = {
   signup,
   login,
   protect,
   getAllUsers,
+  addFavorite,
+  remoreFavorite,
 };

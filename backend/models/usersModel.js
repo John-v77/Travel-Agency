@@ -35,6 +35,12 @@ const userSchema = new Schema({
     },
     select: false,
   },
+  favorites: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Destination",
+    },
+  ],
   passwordChangedAt: Date,
 });
 
@@ -50,20 +56,14 @@ userSchema.pre("save", async function (next) {
 });
 
 //Check if the password match when hashed - using Instance Method
-userSchema.methods.correctPassword = async function (
-  candidatePassword,
-  userPassword
-) {
+userSchema.methods.correctPassword = async function (candidatePassword, userPassword) {
   const res = await bcrypt.compare(candidatePassword, userPassword);
   return res;
 };
 
 userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
-    const changedTimestamp = parseInt(
-      this.passwordChangedAt.getTime() / 1000,
-      10
-    );
+    const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
     return JWTTimestamp < changedTimestamp;
   }
   return false;
