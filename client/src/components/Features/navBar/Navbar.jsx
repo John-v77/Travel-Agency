@@ -55,37 +55,39 @@ function Navbar(props) {
       <div
         className={
           mobNav
-            ? "md:hidden w-full absolute left-0 top-0 z-10 bg-gray-100/95 p-4 px-4  text-black"
+            ? "md:hidden w-full h-[100vh] bg-gray-800/95 absolute left-0 top-0 z-10"
             : "hidden"
         }
       >
-        <h1 className="">Travel.</h1>
-        <ul onClick={handleNav} className="flex flex-col md:hidden ">
-          <li className="mobileLi">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="mobileLi">
-            <Link to="/destinations">Destinations</Link>
-          </li>
-          <li className="mobileLi">
-            <Link to="/test">test</Link>
-          </li>
-        </ul>
+        <div className="bg-gray-100/95 p-4 px-4  text-black">
+          <h1 className="">Travel.</h1>
+          <ul onClick={handleNav} className="flex flex-col md:hidden ">
+            <li className="mobileLi">
+              <Link to="/">Home</Link>
+            </li>
+            <li className="mobileLi">
+              <Link to="/destinations">Destinations</Link>
+            </li>
+            <li className="mobileLi">
+              <Link to="/test">test</Link>
+            </li>
+          </ul>
 
-        <div className="flex flex-col">
-          <button className="my-6">Search</button>
-          <button className="login">
-            <Link to="/account">Account</Link>
-          </button>
+          <div className="flex flex-col">
+            <button className="my-6">Search</button>
+            <button className="login">
+              <Link to="/account">Account</Link>
+            </button>
+          </div>
+
+          <div className="flex justify-between mt-8 px-0.5">
+            <FaFacebook className="icon" />
+            <FaTwitter className="icon" />
+            <FaInstagram className="icon" />
+            <FaPinterest className="icon" />
+            <FaYoutube className="icon" />
+          </div>
         </div>
-
-        {/* <div className='flex justify-between mt-8 px-0.5'>
-          <FaFacebook className='icon' />
-          <FaTwitter className='icon' />
-          <FaInstagram className='icon' />
-          <FaPinterest className='icon' />
-          <FaYoutube className='icon' />
-        </div> */}
       </div>
     </div>
   );
