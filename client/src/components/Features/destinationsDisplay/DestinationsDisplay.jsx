@@ -35,6 +35,7 @@ function DestinationsDisplay(props) {
       </h1>
       <div className="flex flex-col lg:flex-row justify-between">
         <div>
+          {/* Filter Region */}
           <p className="font-bold text-gray-700">
             Filter by Continent
           </p>
@@ -76,7 +77,7 @@ function DestinationsDisplay(props) {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
+      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-4">
         {destPackages.length == 0 ? (
           <div className="bg bg-red-500 text-white">
             Destinations could not be fetched
