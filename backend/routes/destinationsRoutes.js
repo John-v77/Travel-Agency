@@ -8,7 +8,10 @@ const { protect } = require("../controllers/authController");
 
 router
   .route("/")
-  .get(protect, destinationsController.getAllDestinationPackages)
+  .get(
+    // protect,
+    destinationsController.getAllDestinationPackages
+  )
   .post(destinationsController.createDestinationPackage);
 
 router

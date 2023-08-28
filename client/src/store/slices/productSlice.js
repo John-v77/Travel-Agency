@@ -17,12 +17,6 @@ const productSlice = createSlice({
       state.coi += 1;
     },
     setProducts: (state, action) => {
-      console.log(
-        "new Action:",
-        action
-        //  action.payload
-      );
-
       return { ...state, products: [...action.payload] };
     },
   },
