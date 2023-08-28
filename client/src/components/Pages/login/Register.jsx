@@ -83,7 +83,7 @@ function Register(props) {
               />
             </div>
 
-            <button onClick={submitForm} className="w-full my-4">
+            <button onClick={submitForm} className="w-full my-4 border-none">
               Register
             </button>
           </form>

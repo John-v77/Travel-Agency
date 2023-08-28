@@ -74,8 +74,8 @@ function Navbar(props) {
           </ul>
 
           <div className="flex flex-col">
-            <button className="my-6">Search</button>
-            <button className="login">
+            <button className="my-6 border-none">Search</button>
+            <button className="login border-none">
               <Link to="/account">Account</Link>
             </button>
           </div>

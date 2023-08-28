@@ -6,7 +6,9 @@ import { loginUser } from "../../../store/actions/authActions";
 import { logOut } from "../../../store/slices/userSlice";
 // ('https://www.wallpaperup.com/uploads/wallpapers/2013/09/29/153361/44e5a3fd8a183ce3ab4d2130ba1b66bb.jpg');
 function Login(props) {
-  const { isloading, error, userInfo, userToken } = useSelector((state) => state.user);
+  const { isloading, error, userInfo, userToken } = useSelector(
+    (state) => state.user
+  );
   const dispatch = useDispatch();
   const user = {
     email: "john21@test.com",
@@ -46,16 +48,26 @@ function Login(props) {
           <form className="w-full border border-black rounded-md p-3 md:p-4">
             <div className="flex flex-col my-2">
               <label className="mx-1">Email</label>
-              <input onChange={recordInput} className="border rounded-md p-2" type="text" name="email" />
+              <input
+                onChange={recordInput}
+                className="border rounded-md p-2"
+                type="text"
+                name="email"
+              />
             </div>
             <div className="flex flex-col my-4">
               <label className="mx-1">Password</label>
 
-              <input className="border rounded-md p-2" onChange={recordInput} type="password" name="pswd" />
+              <input
+                className="border rounded-md p-2"
+                onChange={recordInput}
+                type="password"
+                name="pswd"
+              />
             </div>
 
-            <button onClick={submitForm} className="w-full my-4">
-              Login In
+            <button onClick={submitForm} className="w-full my-4 border-none">
+              Login
             </button>
           </form>
           <div className="text-right mx-3">
