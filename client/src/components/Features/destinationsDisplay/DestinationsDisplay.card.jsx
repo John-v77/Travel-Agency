@@ -10,20 +10,29 @@ function DestinationsDisplayCard(props) {
   const { prodId, userId, name, bg } = props;
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
+  console.log(userId, "is it woking user ID?");
 
-  const addItemtoFav = useCallback(() => dispatch(AddProdToFavorites(dispatch, userId, prodId)), []);
+  const addItemtoFav = useCallback(
+    () => dispatch(AddProdToFavorites(dispatch, userId, prodId)),
+    []
+  );
   return (
     <div className="relative">
       <img className="w-full h-full object-cover" src={bg} alt="/" />
       <div className="bg-gray-900/30 absolute top-0 left-0 w-full h-full">
-        <p className="left-4 bottom-4 text-2xl font-bold text-white absolute">{name}</p>
-        <button onClick={addItemtoFav}>
-          {token ? (
-            <MdOutlineFavorite size={20} className="text-white" />
-          ) : (
-            <MdOutlineFavoriteBorder size={20} className="text-white" />
-          )}
-        </button>
+        <p className="left-4 bottom-4 text-2xl font-bold text-white absolute">
+          {name}
+        </p>
+        {/* show add to favorite only if user is logged in */}
+        {userId ? (
+          <button onClick={addItemtoFav}>
+            {token ? (
+              <MdOutlineFavorite size={20} className="text-white" />
+            ) : (
+              <MdOutlineFavoriteBorder size={20} className="text-white" />
+            )}
+          </button>
+        ) : null}
       </div>
     </div>
   );
