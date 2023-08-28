@@ -12,7 +12,6 @@ export const GetProducts = async (dispatch) => {
 
     const data = await apiActions.getDestinations2();
 
-    // const data = await apiActions.getDestinations();
     console.log(data, "what id the cumulative data");
 
     dispatch(setProducts(data));
