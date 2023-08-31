@@ -1,4 +1,4 @@
-import apiActions from "../../api";
+import apiActions from "../../utils/api";
 import { addFavorites, addFavoritesError } from "../slices/userSlice";
 
 export const AddProdToFavorites = async (dispatch, user_id, prod_id) => {
