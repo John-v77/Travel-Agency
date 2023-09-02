@@ -31,7 +31,7 @@ const initialValue = {
   userToken: savedUserToken,
   error: null,
   success: false,
-  favorites: savedUserFavorites,
+  favorites: [],
 };
 
 const authSlice = createSlice({

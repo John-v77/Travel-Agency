@@ -59,6 +59,7 @@ const login = catchAsync(async (req, res, next) => {
     token: token,
     userName: user.name,
     _id: user._id,
+    favorites: user.favorites,
   });
 });
 

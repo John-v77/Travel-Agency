@@ -3,10 +3,9 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../store/actions/authActions";
-import { logOut } from "../../../store/slices/userSlice";
+
 // ('https://www.wallpaperup.com/uploads/wallpapers/2013/09/29/153361/44e5a3fd8a183ce3ab4d2130ba1b66bb.jpg');
 function Login(props) {
-  const { userToken } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const user = {
     email: "john21@test.com",
@@ -36,10 +35,6 @@ function Login(props) {
         alt="navbar background"
       />
 
-      <div className="test11 ">
-        {userToken ? "logged in" : "not auth"}
-        <button onClick={() => dispatch(logOut())}>log out</button>
-      </div>
       <div className="my-20">
         <h2 className="text-2xl text-center my-4 md:my-6">Login</h2>
         <div className="form  p-2 md:p3 rounded-md  max-w-xl mx-auto my-4">
