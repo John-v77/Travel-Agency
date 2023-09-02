@@ -1,17 +1,26 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { AddProdToFavorites } from "../../../store/services/userService";
+import { AddProdToFavorites, RemoveProdFromFavorites } from "../../../store/services/userService";
 
 function DestinationsDisplayCard(props) {
   // we might have to pass functions as props to prevent infinite loop
 
-  const { prodId, userToken, name, bg, price } = props;
+  const { prodId, userToken, name, bg, price, favD } = props;
+  const [favored, setFavored] = useState(favD);
   const dispatch = useDispatch();
-  const token = sessionStorage.getItem("token");
+  // const token = sessionStorage.getItem("token");
 
-  const addItemtoFav = useCallback(() => dispatch(AddProdToFavorites(dispatch, userToken, prodId)), []);
+  const addItemtoFav = useCallback(() => {
+    setFavored((currrent) => !currrent);
+    dispatch(AddProdToFavorites(dispatch, userToken, prodId));
+  }, [favored]);
+
+  const removeItemFromFav = useCallback(() => {
+    setFavored((currrent) => !currrent);
+    dispatch(RemoveProdFromFavorites(dispatch, userToken, prodId));
+  }, [favored]);
   return (
     <div className="relative">
       <img className="w-full h-full object-cover" src={bg} alt="/" />
@@ -21,8 +30,11 @@ function DestinationsDisplayCard(props) {
 
         {/* show add to favorite only if user is logged in */}
         {userToken ? (
-          <button onClick={addItemtoFav} className="bg-transparent  hover:bg-orange-600 p-1 m-1">
-            {token ? (
+          <button
+            onClick={favored ? removeItemFromFav : addItemtoFav}
+            className="bg-transparent  hover:bg-orange-600 p-1 m-1"
+          >
+            {favored ? (
               <MdOutlineFavorite size={20} className="text-white" />
             ) : (
               <MdOutlineFavoriteBorder size={20} className="text-white" />

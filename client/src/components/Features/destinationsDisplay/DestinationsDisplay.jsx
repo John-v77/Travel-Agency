@@ -82,6 +82,7 @@ function DestinationsDisplay(props) {
                 price={el.price}
                 userToken={usertoken}
                 prodId={el._id}
+                favD={false}
               />
             );
           })

@@ -7,6 +7,7 @@ router.post("/signup", authControler.signup);
 router.post("/login", authControler.login);
 router.get("/users", authControler.getAllUsers);
 router.post("/addFavorite", authControler.addFavorite);
+router.post("/removeFavorite", authControler.remoreFavorite);
 
 // router.route("addFav/:id").patch(protect, authControler.addFavorite);
 

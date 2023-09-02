@@ -54,6 +54,21 @@ const apiActions = {
     return res.data.data.user.favorites;
   },
 
+  removeProdFromUserFav: async (user_id, prod_id) => {
+    console.log("do we have the data for fav", user_id, prod_id);
+    const res = await axios.post(
+      `${baseURL}/v1/user/addFavorite`,
+      {
+        userId: user_id,
+        prodId: prod_id,
+      }
+      //   resetHead()
+    );
+
+    console.log(res.data.data.user.favorites, "is data coming?");
+    return res.data.data.user.favorites;
+  },
+
   getDestinations: async () => {
     const res = await axios.get(`${baseURL}/v1/vacantions`);
 
