@@ -1,15 +1,37 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
 import { loginUser, registerUser } from "../actions/authActions";
+import { getWithExpiry } from "../../utils/setStorage";
 
 export const addFavoritesError = createAction("addFavoritesError");
+
+// const items = sessionStorage.getItem("cartItems") !== null ? JSON.parse(sessionStorage.getItem("cartItems")) : [];
+// const totalAmount = sessionStorage.getItem("totalAmount") !== null ? JSON.parse(sessionStorage.getItem("totalAmount")) : 0;
+// const totalQty = sessionStorage.getItem("totalQty") !== null ? JSON.parse(sessionStorage.getItem("totalQty")) : 0;
+
+// sessionStorage.setItem("cartItems", JSON.stringify(state.cartItems.map((item) => item)));
+// sessionStorage.setItem("totalAmount", JSON.stringify(state.totalAmount));
+// sessionStorage.setItem("totalqty", JSON.stringify(state.totalqty));
+
+// setItemFunc = (item, totalAmount, totalQty){
+
+// }
+//
+//
+
+const savedUserToken = getWithExpiry("userToken") ?? getWithExpiry("userToken");
+const savedUserName = getWithExpiry("userName") ?? getWithExpiry("userName");
+const savedUserFavorites = getWithExpiry("userFavorites") ? getWithExpiry("userFavorites") : [];
+
+console.log(savedUserToken, "userToken user slice");
 
 const initialValue = {
   isLoading: false,
   userInfo: null,
-  userToken: null,
+  userName: savedUserName,
+  userToken: savedUserToken,
   error: null,
   success: false,
-  favorites: [],
+  favorites: savedUserFavorites,
 };
 
 const authSlice = createSlice({
@@ -53,7 +75,9 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.success = true;
       state.userInfo = payload;
+      state.userName = payload.userName;
       state.userToken = payload.token;
+      state.favorites = payload.favorites;
     },
 
     [loginUser.rejected]: (state, { payload }) => {

@@ -1,9 +1,5 @@
-import apiActions from "../../api";
-import {
-  incrementZ,
-  setProducts,
-  setProductsError,
-} from "../slices/productSlice";
+import apiActions from "../../utils/api";
+import { incrementZ, setProducts, setProductsError } from "../slices/productSlice";
 
 export const GetProducts = async (dispatch) => {
   try {

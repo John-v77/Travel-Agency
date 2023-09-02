@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logOut } from "../../../store/slices/userSlice";
 function Register(props) {
-  const { isloading, error, userInfo, userToken } = useSelector(
-    (state) => state.user
-  );
+  const { userToken } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const user = {
@@ -46,41 +44,21 @@ function Register(props) {
           <form className="w-full border border-black rounded-md p-3 md:p-4">
             <div className="flex flex-col my-2">
               <label className="mx-1">Username</label>
-              <input
-                onChange={recordInput}
-                className="border rounded-md p-2"
-                type="text"
-                name="userName"
-              />
+              <input onChange={recordInput} className="border rounded-md p-2" type="text" name="userName" />
             </div>
             <div className="flex flex-col my-2">
               <label className="mx-1">Email</label>
-              <input
-                onChange={recordInput}
-                className="border rounded-md p-2"
-                type="text"
-                name="email"
-              />
+              <input onChange={recordInput} className="border rounded-md p-2" type="text" name="email" />
             </div>
             <div className="flex flex-col my-4">
               <label className="mx-1">Password</label>
 
-              <input
-                className="border rounded-md p-2"
-                onChange={recordInput}
-                type="password"
-                name="password"
-              />
+              <input className="border rounded-md p-2" onChange={recordInput} type="password" name="password" />
             </div>
             <div className="flex flex-col my-4">
               <label className="mx-1">Password Confirm</label>
 
-              <input
-                className="border rounded-md p-2"
-                onChange={recordInput}
-                type="password"
-                name="confirmPassword"
-              />
+              <input className="border rounded-md p-2" onChange={recordInput} type="password" name="confirmPassword" />
             </div>
 
             <button onClick={submitForm} className="w-full my-4 border-none">
