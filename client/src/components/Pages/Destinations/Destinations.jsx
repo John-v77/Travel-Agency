@@ -5,17 +5,12 @@ import { increment } from "../../../store/slices/counterSlice";
 import DestinationsDisplay from "../../Features/destinationsDisplay/DestinationsDisplay";
 import { GetProducts } from "../../../store/services/productsService";
 function Destinations(props) {
-  const { coin } = useSelector((state) => {
-    return state.counter;
-  });
-
   // const { favorites } = useSelector((state) => {
   //   console.log(state.user.favorites, "what is state new23");
   //   return state.user;
   // });
-  const { products } = useSelector((state) => state.products);
 
-  // const [destination, setDestinations] = useState([]);
+  const { products } = useSelector((state) => state.products);
 
   // console.log(counter, 'hello1');
   const dispatch = useDispatch();
@@ -29,9 +24,7 @@ function Destinations(props) {
     <div className="max-w-[1600px] mx-auto md:p-0">
       <div className="max-h-[500px] relative">
         <div className="absolute w-full h-full max-h-[500px] bg-black/40 flex flex-col justify-center text-gray-200 text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
-            The Best Travel Experience
-          </h1>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">The Best Travel Experience</h1>
         </div>
         <img
           className="w-full max-h-[500px] object-cover"
@@ -42,12 +35,7 @@ function Destinations(props) {
       </div>
 
       <FeaturedDes />
-      <DestinationsDisplay destPackages={products} />
-      <h1>{coin}</h1>
-
-      {/* <p>{JSON.stringify(favorites)}</p> */}
-      <button onClick={() => dispatch(increment())}>++</button>
-      <h1>Hellos zzzzzzzz</h1>
+      <DestinationsDisplay destPacks={products} />
     </div>
   );
 }
