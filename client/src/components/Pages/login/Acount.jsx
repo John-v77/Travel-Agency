@@ -10,7 +10,7 @@ function Acount(props) {
   });
   const dispatch = useDispatch();
   return (
-    <div className="h-screen">
+    <div className="min-h-screen">
       <img
         src="https://www.wallpaperup.com/uploads/wallpapers/2013/09/29/153361/44e5a3fd8a183ce3ab4d2130ba1b66bb.jpg"
         className="w-full h-20 object-cover object-top "
@@ -29,7 +29,7 @@ function Acount(props) {
       {/* favorites container */}
       <div className="max-w-[1640px] m-auto px-8 py-12">
         <h2 className="mb-10">Favorites</h2>
-        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
           {favorites.length === 0 ? (
             <div className="bg bg-red-500 text-white">Destinations could not be fetched</div>
           ) : (
@@ -38,11 +38,13 @@ function Acount(props) {
               return (
                 <DestinationsDisplayCard
                   key={el._id}
-                  name={el.name}
+                  name={el}
                   description={el.dcescription}
-                  bg={el.image_url}
-                  price={el.price}
+                  bg={"https://portugaltravelguide.com/wp-content/uploads/2020/07/Visiting-Portugal.jpeg"}
+                  price={200}
                   prodId={el._id}
+                  userToken={userToken}
+                  favD={true}
                 />
               );
             })
