@@ -3,6 +3,7 @@ const User = require("../models/usersModel");
 const jwt = require("jsonwebtoken");
 const catchAsync = require("../utils/catchAsync");
 const colors = require("colors");
+const AppError = require("../utils/appError");
 // # signToken
 const signToken = (id) => {
   return jwt.sign({ id: id }, process.env.JWT_SECRET, {
@@ -127,10 +128,27 @@ const restrictedTo = (...roles) => {
   };
 };
 
+// # Forgot password
+const forgotPassword = catchAsync(async (req, res, next) => {
+  // Get user by email
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    return next(new AppError("There is no user with email address."), 404);
+  }
+  // Generate random password
+  const resetToken = user.createPasswordResetToken();
+  await user.save({ validateBeforeSave: false });
+  // send it to user email
+});
+
+const resetPassword = catchAsync(async (req, res, next) => {});
+
 module.exports = {
   signup,
   login,
   protect,
   getAllUsers,
   restrictedTo,
+  forgotPassword,
+  resetPassword,
 };

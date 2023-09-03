@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const destinationsController = require("../controllers/destinationsController");
-const { protect } = require("../controllers/authController");
+const { protect, restrictedTo } = require("../controllers/authController");
 // router.param("id", (req, res, next, val) => {
 //   next();
 // });
@@ -17,7 +17,7 @@ router
 router
   .route("/:id")
   .get(destinationsController.getDestinationPackage)
-  .delete(destinationsController.deleteDestinationPackage)
-  .patch(destinationsController.updateDestinationPackage);
+  .patch(destinationsController.updateDestinationPackage)
+  .delete(protect, restrictedTo("admin", "user"), destinationsController.deleteDestinationPackage);
 
 module.exports = router;
