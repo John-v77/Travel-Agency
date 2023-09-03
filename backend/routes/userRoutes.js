@@ -1,13 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const authControler = require("../controllers/authController");
+const authController = require("../controllers/authController");
+const userController = require("../controllers/userController");
 const { protect } = require("../controllers/authController");
 
-router.post("/signup", authControler.signup);
-router.post("/login", authControler.login);
-router.get("/users", authControler.getAllUsers);
-router.post("/addFavorite", authControler.addFavorite);
-router.post("/removeFavorite", authControler.remoreFavorite);
+router.post("/signup", authController.signup);
+router.get("/users", authController.getAllUsers);
+router.post("/login", authController.login);
+router.post("/forgotPassword", authController.login);
+router.post("/resetPassword", authController.login);
+router.post("/addFavorite", userController.addFavorite);
+router.post("/removeFavorite", userController.remoreFavorite);
 
 // router.route("addFav/:id").patch(protect, authControler.addFavorite);
 

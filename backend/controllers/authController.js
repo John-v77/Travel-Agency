@@ -116,68 +116,21 @@ const protect = catchAsync(async (req, res, next) => {
   return next();
 });
 
-// add to favorites
-const addFavorite = catchAsync(async (req, res, next) => {
-  const { userId, prodId } = req.body;
-  // console.log(userId, prodId, ".TY.".red);
-  const user = await User.findById(userId);
-
-  if (user) {
-    const alreadyFavorite = user.favorites.find((favorite) => favorite.toString() === prodId.toString());
-    console.log(alreadyFavorite, "mg".blue);
-    if (alreadyFavorite) {
-      res.status(200).json({
-        status: "success",
-        results: user.favorites.length,
-        message: "favorite already added",
-        data: { user },
-      });
+// #4 Restricted to
+const restrictedTo = (...roles) => {
+  return (req, res, next) => {
+    // roles =['user', 'admin']
+    if (!roles.includes(req.user.role)) {
+      return next(new AppError("You do not have permission to perform this action", 403));
     }
-  } else {
-    res.status(404);
-    throw new Error("User not found");
-  }
-
-  console.log(user.favorites, "name".red);
-  user.favorites.push(prodId);
-
-  // fav = [];
-  // user.favorites = fav;
-
-  await user.save();
-
-  res.status(200).json({
-    status: "success",
-    results: user.favorites.length,
-    message: "favorite added",
-    data: { user },
-  });
-});
-
-// remove favorite
-const remoreFavorite = catchAsync(async (req, res, next) => {
-  const { userId, prodId } = req.body;
-  console.log(userId, prodId, ".TY.".red);
-  const user = await User.findById(userId);
-
-  updatedFav = user.favorites.filter((favorite) => favorite.toString() != prodId.toString());
-
-  user.favorites = updatedFav;
-  await user.save();
-
-  res.status(200).json({
-    status: "success",
-    results: user.favorites.length,
-    message: "favorite removed",
-    data: { user },
-  });
-});
+    next();
+  };
+};
 
 module.exports = {
   signup,
   login,
   protect,
   getAllUsers,
-  addFavorite,
-  remoreFavorite,
+  restrictedTo,
 };
