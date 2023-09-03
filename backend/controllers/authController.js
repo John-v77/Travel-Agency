@@ -2,6 +2,7 @@ const { promisify } = require("util");
 const User = require("../models/usersModel");
 const jwt = require("jsonwebtoken");
 const catchAsync = require("../utils/catchAsync");
+const sendEmail = require("../utils/mailer");
 const colors = require("colors");
 const AppError = require("../utils/appError");
 // # signToken
@@ -128,20 +129,44 @@ const restrictedTo = (...roles) => {
   };
 };
 
-// # Forgot password
-const forgotPassword = catchAsync(async (req, res, next) => {
-  // Get user by email
-  const user = await User.findOne({ email: req.body.email });
-  if (!user) {
-    return next(new AppError("There is no user with email address."), 404);
-  }
-  // Generate random password
-  const resetToken = user.createPasswordResetToken();
-  await user.save({ validateBeforeSave: false });
-  // send it to user email
-});
+// // # Forgot password
+// const forgotPassword = catchAsync(async (req, res, next) => {
+//   // Get user by email
+//   const user = await User.findOne({ email: req.body.email });
+//   if (!user) {
+//     return next(new AppError("There is no user with email address."), 404);
+//   }
+//   // Generate random password
+//   const resetToken = user.createPasswordResetToken();
+//   await user.save({ validateBeforeSave: false });
 
-const resetPassword = catchAsync(async (req, res, next) => {});
+//   // send it to user email
+//   const resetURL = `${req.protocol}://${req.get("host")}/api/v1/users/resetPassword/${resetToken}`;
+//   const message = `Forgot password? Submit a PATCH req with your new password and passwordConfirm to:
+//                    ${resetURL}.\n
+//                    If you didn't forget the password, please igmore this email`;
+
+//   try {
+//     await sendEmail({
+//       email: user.email,
+//       subject: "Your password reset token (valid for 10 min)",
+//       message: message,
+//     });
+
+//     res.status(200).json({
+//       status: "success",
+//       message: "Token sent to email!",
+//     });
+//   } catch (err) {
+//     user.passwordResetToken = undefined;
+//     user.passwordResetExpires = undefined;
+//     await user.save({ validateBeforeSave: false });
+
+//     return next(new AppError(`There was an error sending the email, try again later! ${err}`), 500);
+//   }
+// });
+
+// const resetPassword = catchAsync(async (req, res, next) => {});
 
 module.exports = {
   signup,
@@ -149,6 +174,4 @@ module.exports = {
   protect,
   getAllUsers,
   restrictedTo,
-  forgotPassword,
-  resetPassword,
 };
