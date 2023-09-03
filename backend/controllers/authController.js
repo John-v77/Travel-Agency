@@ -5,10 +5,24 @@ const catchAsync = require("../utils/catchAsync");
 const sendEmail = require("../utils/mailer");
 const colors = require("colors");
 const AppError = require("../utils/appError");
+
 // # signToken
 const signToken = (id) => {
   return jwt.sign({ id: id }, process.env.JWT_SECRET, {
     expiresIn: "30d",
+  });
+};
+
+// # createSendToken
+const createSendToken = (user, statusCode, res) => {
+  const token = signToken(user._id);
+
+  res.status(statusCode).json({
+    status: "success",
+    token,
+    data: {
+      user: user,
+    },
   });
 };
 
@@ -21,15 +35,7 @@ const signup = catchAsync(async (req, res, next) => {
     password: password,
     passwordConfirm: passwordConfirm,
   });
-
-  const token = signToken(newUser._id);
-  res.status(201).json({
-    status: "success",
-    token,
-    data: {
-      user: newUser,
-    },
-  });
+  createSendToken(newUser, 201, res);
 });
 
 // #2 Login
@@ -54,15 +60,7 @@ const login = catchAsync(async (req, res, next) => {
     return next();
   }
   // 3 if everything is ok, send token to client
-  const token = signToken(user._id);
-
-  res.status(200).json({
-    status: "success",
-    token: token,
-    userName: user.name,
-    _id: user._id,
-    favorites: user.favorites,
-  });
+  createSendToken(user, 200, res);
 });
 
 // Get all
@@ -83,7 +81,9 @@ const protect = catchAsync(async (req, res, next) => {
   const { authorization } = req.headers;
   if (authorization && authorization.startsWith("Bearer")) {
     token = authorization.split(" ")[1];
+    console.log(token, "we are protecting".red);
   }
+
   if (!token) {
     res.status(401).json({
       status: "fail",
@@ -128,6 +128,27 @@ const restrictedTo = (...roles) => {
     next();
   };
 };
+
+//  #5 Update Password
+
+const updatePassword = catchAsync(async (req, res, next) => {
+  console.log(req, "VV".red);
+  // 1. get user from colection
+  const user = await User.findById(req.user.id).select("+password");
+
+  // 2.check if POST-ed current password is correct
+  if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+    return next(new AppError("Your current password is wrong.", 400));
+  }
+
+  // 3. If so, update password
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  await user.save();
+
+  // 4. Log user in, send JWT
+  createSendToken(user, 200, res);
+});
 
 // // # Forgot password
 // const forgotPassword = catchAsync(async (req, res, next) => {
@@ -174,4 +195,5 @@ module.exports = {
   protect,
   getAllUsers,
   restrictedTo,
+  updatePassword,
 };

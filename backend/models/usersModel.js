@@ -32,7 +32,7 @@ const userSchema = new Schema({
       validator: function (el) {
         return el == this.password;
       },
-      message: "Password doesn't match",
+      message: "Password are not the same",
     },
     select: false,
   },
@@ -61,6 +61,12 @@ userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 12);
   // delete password confirm field
   this.passwordConfirm = null;
+  next();
+});
+
+userSchema.pre("save", function (next) {
+  if (!this.isModified("password") || this.isNew) return next();
+  this.passwordChangedAt = Date.now() - 1000;
   next();
 });
 

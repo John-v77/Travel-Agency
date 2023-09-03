@@ -12,6 +12,8 @@ router.post("/login", authController.login);
 router.post("/addFavorite", userController.addFavorite);
 router.post("/removeFavorite", userController.remoreFavorite);
 
+router.patch("/updateMyPassword", protect, authController.updatePassword);
+
 // router.route("addFav/:id").patch(protect, authControler.addFavorite);
 
 module.exports = router;
