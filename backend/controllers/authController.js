@@ -63,16 +63,6 @@ const login = catchAsync(async (req, res, next) => {
   createSendToken(user, 200, res);
 });
 
-// Get all
-const getAllUsers = catchAsync(async (req, res) => {
-  const users = await User.find();
-  res.status(200).json({
-    status: "success",
-    results: users.length,
-    data: { users },
-  });
-});
-
 // #3 Protect Routes
 const protect = catchAsync(async (req, res, next) => {
   let token;
@@ -193,7 +183,6 @@ module.exports = {
   signup,
   login,
   protect,
-  getAllUsers,
   restrictedTo,
   updatePassword,
 };

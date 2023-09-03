@@ -5,7 +5,7 @@ const userController = require("../controllers/userController");
 const { protect } = require("../controllers/authController");
 
 router.post("/signup", authController.signup);
-router.get("/users", authController.getAllUsers);
+router.get("/users", userController.getAllUsers);
 router.post("/login", authController.login);
 // router.post("/forgotPassword", authController.forgotPassword);
 // router.patch("/resetPassword/:token", authController.resetPassword);
@@ -13,6 +13,7 @@ router.post("/addFavorite", userController.addFavorite);
 router.post("/removeFavorite", userController.remoreFavorite);
 
 router.patch("/updateMyPassword", protect, authController.updatePassword);
+router.patch("/updateMyInfo", protect, userController.updateMyInfo);
 
 // router.route("addFav/:id").patch(protect, authControler.addFavorite);
 
