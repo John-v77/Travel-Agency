@@ -45,11 +45,8 @@ const reviewSchema = new Schema(
 
 reviewSchema.pre(/^find/, function (next) {
   this.populate({
-    path: "product",
-    select: "name price",
-  }).populate({
     path: "user",
-    select: "name photo",
+    select: "-favorites -email -roles -__v",
   });
   next();
 });
