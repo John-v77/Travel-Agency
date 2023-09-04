@@ -8,10 +8,12 @@ const Destination = require("../models/destinationModel");
 dotenv.config({ path: "../.env" });
 
 const MONGODB_URI =
-  process.env.MONGODB_URI || `mongodb://localhost/localTravelDB`;
+  process.env.MONGODB_URI.replace("<PSW>", process.env.BD_PASS) || `mongodb://localhost/localTravelDB`;
 
 console.log(process.env.MONGODB_URI);
+
 //   connect to DB
+mongoose.set("strictQuery", true);
 mongoose
   .connect(MONGODB_URI, {
     useNewUrlParser: true,
@@ -22,9 +24,7 @@ mongoose
   .catch((err) => console.error("Error connectiong to mongoDB", err));
 
 // read Json files
-const destinations = JSON.parse(
-  fs.readFileSync(`${__dirname}/destinations.json`, "utf-8")
-);
+const destinations = JSON.parse(fs.readFileSync(`${__dirname}/destinations.json`, "utf-8"));
 
 const importData = async () => {
   try {
