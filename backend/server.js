@@ -19,8 +19,8 @@ process.on("uncaughtException", (err) => {
 // connect to DB
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI =
-  process.env.MONGODB_URI.replace("<PSW>", process.env.BD_PASS) ||
-  `mongodb://localhost/localTravelDB`;
+  process.env.MONGODB_URI.replace("<PSW>", process.env.BD_PASS) || `mongodb://localhost/localTravelDB`;
+mongoose.set("strictQuery", true);
 mongoose
   .connect(MONGODB_URI, {
     useNewUrlParser: true,
@@ -28,9 +28,7 @@ mongoose
     serverSelectionTimeoutMS: 5000,
   })
   .then((x) => console.log(`connected to MongoDB!: "${x.connections[0].name}"`))
-  .catch((err) =>
-    console.error("Error connectiong to mongoDB ==>", err.name, err.message)
-  );
+  .catch((err) => console.error("Error connectiong to mongoDB ==>", err.name, err.message));
 
 //|
 //|
