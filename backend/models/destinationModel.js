@@ -8,10 +8,10 @@ const DestinationSchema = new Schema({
     required: [true, "Add a name for Trip Destination"],
     maxlength: [40, "Destinations name has to be less then 40 characters"],
     minlength: [4, "Destinations name has to be less then 4 characters"],
-    validate: [
-      validator.isAlpha,
-      "Destinations name must only contain characters",
-    ],
+    validate: {
+      validator: (val) => validator.isAlpha(val, ["en-US"], { ignore: " " }),
+      message: "Destinations name must only contain characters",
+    },
   },
   slug: {
     type: String,
@@ -67,6 +67,7 @@ DestinationSchema.pre("save", function (next) {
 
 DestinationSchema.pre("save", function (next) {
   console.log("will save document", this);
+  next();
 });
 
 DestinationSchema.post("save", function (doc, next) {
