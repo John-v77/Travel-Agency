@@ -8,6 +8,10 @@ const rateLimit = require("express-rate-limit");
 // import module
 const destinationsRouter = require("./routes/destinationsRoutes");
 const userRouter = require("./routes/userRoutes");
+const helmet = require("helmet");
+const mongoSanitize = require("express-mongo-sanitize");
+const xss = require("xss-clean");
+const hpp = require("hpp");
 
 //|
 //|
@@ -29,13 +33,27 @@ app.use(
 
 //|
 //|
-// serve static files
+// Set Security HTTP headers
+app.use(helmet());
 
-// const path = require("path");
-// app.use(express, static(path.join(__dirname, "../client/build")));
-// app.get("*", (req, res, next) => {
-//   res.sendFile(path.join(__dirname, "../client/build/index.html"));
-// });
+//|
+//|
+// Sanitazes data againt NoSQL query injection
+app.use(mongoSanitize());
+
+//|
+//|
+// Sanitazes data against xss - <html code attacks>
+app.use(xss());
+
+//|
+//|
+// Prevent parameter poluation
+app.use(
+  hpp({
+    whitelist: ["durationInDays", "price"],
+  })
+);
 
 //|
 //|
@@ -46,7 +64,7 @@ app.use(
 
 //|
 //|
-// Rate limiter
+// Limit request from same API
 const limiter = rateLimit({
   max: 100,
   windowMs: 60 * 60 * 1000,
@@ -68,10 +86,19 @@ app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 
 //|
 //|
+// serve static files
+// const path = require("path");
+// app.use(express, static(path.join(__dirname, "../client/build")));
+// app.get("*", (req, res, next) => {
+//   res.sendFile(path.join(__dirname, "../client/build/index.html"));
+// });
+
+//|
+//|
 // Testing middleware
 app.use((req, res, next) => {
   req.requstTime = new Date().toISOString();
-  console.log("what are the headers", req.headers);
+  // console.log("what are the headers", req.headers);
   next();
 });
 
