@@ -3,50 +3,58 @@
         "name": "Cinque Terre",
         "price": 500,
         "image_url": "https://imageio.forbes.com/specials-images/dam/imageserve/1170705808/960x0.jpg?height=474&width=711&fit=bounds",
-        "description": "Beauty"
+        "description": "Beautiful place filled with serenity",
+        "durationInDays": 5
     },
 
     {
         "name": "Venice",
         "price": 700,
         "image_url": "https://cdn.cnn.com/cnnnext/dam/assets/170606121206-italy---travel-destination---shutterstock-517522957-super-tease.jpg",
-        "description": "Beauty"
+        "description": "Beautiful place filled with serenity",
+        "durationInDays": 5
     },
 
     {
         "name": "Maldives",
         "price": 1000,
         "image_url": "https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704__340.jpg",
-        "description": "Beauty"
+        "description": "Beautiful place filled with serenity",
+        "durationInDays": 5
     },
     {
         "name": "Vernazza",
         "price": 800,
         "image_url": "https://static.euronews.com/articles/stories/05/43/01/18/1000x563_cmsv2_61438a3f-ea37-5b7c-aee1-f743502f9df7-5430118.jpg",
-        "description": "Beauty"
+        "description": "Beautiful place filled with serenity",
+        "durationInDays": 5
     },
     {
         "name": "Santorini",
         "price": 700,
         "image_url": "https://media.istockphoto.com/id/1161971232/photo/travel-tourist-happy-woman-running-stairs-santorini.jpg?s=612x612&w=0&k=20&c=vasSp0MXXPI1pgflPhDBtpZ0t3tO_Ql283RKrApY27Y=",
-        "description": "Beauty"
+        "description": "Beautiful place filled with serenity",
+        "durationInDays": 5
     },
     {
         "name": "Vietnam",
         "price": 900,
         "image_url": "https://media.nomadicmatt.com/2022/vietnamcheap1.jpeg",
-        "description": "Beauty"
+        "description": "Beautiful place filled with serenity",
+        "durationInDays": 5
     },
     {
         "name": "Tailand",
         "price": 500,
         "image_url": "https://imageio.forbes.com/specials-images/dam/imageserve/1171238184/0x0.jpg?format=jpg&width=1200",
-        "description": "Beauty"
+        "description": "Beautiful place filled with serenity",
+        "durationInDays": 5
     }, 
     {
         "name": "Vietnam",
         "price": 800,
         "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTueWXfz-ENvZoMTxrJzjzmmHZdJ3do2DUX7Q&usqp=CAU",
-        "description": "Beauty"
+        "description": "Beautiful place filled with serenity",
+        "durationInDays": 5
     }
 ]
