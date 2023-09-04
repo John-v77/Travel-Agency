@@ -53,6 +53,8 @@ const userSchema = new Schema({
   },
 });
 
+// Query Middleware
+
 userSchema.pre("save", async function (next) {
   // only run if password was modified
   if (!this.isModified("password")) return next();
@@ -67,6 +69,14 @@ userSchema.pre("save", async function (next) {
 userSchema.pre("save", function (next) {
   if (!this.isModified("password") || this.isNew) return next();
   this.passwordChangedAt = Date.now() - 1000;
+  next();
+});
+
+userSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "favorites",
+    select: "-__v -vipDestinations",
+  });
   next();
 });
 
