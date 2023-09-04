@@ -4,8 +4,8 @@ const authController = require("../controllers/authController");
 const userController = require("../controllers/userController");
 const { protect } = require("../controllers/authController");
 
-router.post("/signup", authController.signup);
 router.get("/users", userController.getAllUsers);
+router.post("/signup", authController.signup);
 router.post("/login", authController.login);
 // router.post("/forgotPassword", authController.forgotPassword);
 // router.patch("/resetPassword/:token", authController.resetPassword);

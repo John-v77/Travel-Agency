@@ -8,6 +8,7 @@ const rateLimit = require("express-rate-limit");
 // import module
 const destinationsRouter = require("./routes/destinationsRoutes");
 const userRouter = require("./routes/userRoutes");
+const reviewRouter = require("./routes/reviewRoutes");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
@@ -107,6 +108,7 @@ app.use((req, res, next) => {
 // Routers
 app.use("/api/v1/vacantions", destinationsRouter);
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/reviews", reviewRouter);
 
 // handle unknown routes
 app.all("*", (req, res, next) => {
