@@ -3,6 +3,7 @@
 // imports packages
 const express = require("express");
 const cors = require("cors");
+const rateLimit = require("express-rate-limit");
 
 // import module
 const destinationsRouter = require("./routes/destinationsRoutes");
@@ -24,6 +25,8 @@ app.use(
 );
 // app.options("*", cors());
 
+// GLOBAL MIDDLEWARES
+
 //|
 //|
 // serve static files
@@ -40,6 +43,17 @@ app.use(
 // if (process.NODE_ENV === "development") {
 //   app.use(morgan("dev"));
 // }
+
+//|
+//|
+// Rate limiter
+const limiter = rateLimit({
+  max: 100,
+  windowMs: 60 * 60 * 1000,
+  message: "Too many requests from this IP, please try again in an hour",
+});
+
+app.use("/api", limiter);
 
 //|
 //|
