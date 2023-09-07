@@ -1,37 +1,30 @@
-import { createAction, createSlice } from "@reduxjs/toolkit";
-import { loginUser, registerUser } from "../actions/authActions";
+import {
+  createAction,
+  createSlice,
+} from "@reduxjs/toolkit";
+import {
+  loginUser,
+  registerUser,
+} from "../actions/authActions";
 import { getWithExpiry } from "../../utils/setStorage";
 
-export const addFavoritesError = createAction("addFavoritesError");
+export const addFavoritesError = createAction(
+  "addFavoritesError"
+);
 
-// const items = sessionStorage.getItem("cartItems") !== null ? JSON.parse(sessionStorage.getItem("cartItems")) : [];
-// const totalAmount = sessionStorage.getItem("totalAmount") !== null ? JSON.parse(sessionStorage.getItem("totalAmount")) : 0;
-// const totalQty = sessionStorage.getItem("totalQty") !== null ? JSON.parse(sessionStorage.getItem("totalQty")) : 0;
-
-// sessionStorage.setItem("cartItems", JSON.stringify(state.cartItems.map((item) => item)));
-// sessionStorage.setItem("totalAmount", JSON.stringify(state.totalAmount));
-// sessionStorage.setItem("totalqty", JSON.stringify(state.totalqty));
-
-// setItemFunc = (item, totalAmount, totalQty){
-
-// }
-//
-//
-
-const savedUserToken = getWithExpiry("userToken") ?? getWithExpiry("userToken");
-const savedUserName = getWithExpiry("userName") ?? getWithExpiry("userName");
-const savedUserFavorites = getWithExpiry("userFavorites") ? getWithExpiry("userFavorites") : [];
-
-console.log(savedUserToken, "userToken user slice");
+const savedUserInfo = getWithExpiry("userInfo")
+  ? getWithExpiry("userInfo")
+  : null;
+const savedToken = getWithExpiry("userToken")
+  ? getWithExpiry("userToken")
+  : null;
 
 const initialValue = {
   isLoading: false,
-  userInfo: null,
-  userName: savedUserName,
-  userToken: savedUserToken,
+  userInfo: savedUserInfo,
+  userToken: savedToken,
   error: null,
   success: false,
-  favorites: [],
 };
 
 const authSlice = createSlice({
@@ -72,12 +65,14 @@ const authSlice = createSlice({
     },
 
     [loginUser.fulfilled]: (state, { payload }) => {
+      console.log(
+        payload.data.user,
+        "what is the payload MMJ"
+      );
       state.isLoading = false;
       state.success = true;
-      state.userInfo = payload;
-      state.userName = payload.userName;
+      state.userInfo = payload.data.user;
       state.userToken = payload.token;
-      state.favorites = payload.favorites;
     },
 
     [loginUser.rejected]: (state, { payload }) => {

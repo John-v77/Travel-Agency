@@ -8,9 +8,11 @@ export function setWithExpiry(key, value, ttl) {
     value: value,
     expiry: now.getTime() + ttl,
   };
-  sessionStorage.setItem(key, JSON.stringify(item));
-
-  console.log(sessionStorage, "what is storage");
+  sessionStorage.setItem(
+    key,
+    JSON.stringify(item, null, 2)
+    // add indentation for readability
+  );
 }
 
 export function getWithExpiry(key) {
@@ -22,6 +24,8 @@ export function getWithExpiry(key) {
   }
 
   const item = JSON.parse(itemStr);
+  const res = item.value;
+
   const now = new Date();
 
   // compare the expiry time of the item with the current time
@@ -31,5 +35,6 @@ export function getWithExpiry(key) {
     sessionStorage.removeItem(key);
     return null;
   }
-  return item.value;
+
+  return res;
 }
