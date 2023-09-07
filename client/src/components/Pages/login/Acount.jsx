@@ -4,8 +4,7 @@ import { logOut } from "../../../store/slices/userSlice";
 import DestinationsDisplayCard from "../../Features/destinationsDisplay/DestinationsDisplay.card";
 
 function Acount(props) {
-  const { userToken, userName, favorites } = useSelector((state) => {
-    console.log(state.user.favorites, "what is user sate 224");
+  const { userToken, userInfo } = useSelector((state) => {
     return state.user;
   });
   const dispatch = useDispatch();
@@ -18,9 +17,16 @@ function Acount(props) {
       />
       {/* log out container */}
       <div className="p-4 flex justify-end">
-        <p>{userToken ? `Welcome ${userName}` : "not auth"}</p>
+        <p>
+          {userToken
+            ? `Welcome ${userInfo.name}`
+            : "not auth"}
+        </p>
         <div className="test11 ">
-          <button className="py-0 px-2 ml-4 hover:bg-orange-600" onClick={() => dispatch(logOut())}>
+          <button
+            className="py-0 px-2 ml-4 hover:bg-orange-600"
+            onClick={() => dispatch(logOut())}
+          >
             log out
           </button>
         </div>
@@ -30,17 +36,21 @@ function Acount(props) {
       <div className="max-w-[1640px] m-auto px-8 py-12">
         <h2 className="mb-10">Favorites</h2>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
-          {favorites.length === 0 ? (
-            <div className="bg bg-red-500 text-white">Destinations could not be fetched</div>
+          {!userInfo ? (
+            <div className="bg bg-red-500 text-white">
+              Destinations could not be fetched
+            </div>
           ) : (
             // mapping products
-            favorites.map((el) => {
+            userInfo.favorites.map((el) => {
               return (
                 <DestinationsDisplayCard
                   key={el._id}
-                  name={el}
-                  description={el.dcescription}
-                  bg={"https://portugaltravelguide.com/wp-content/uploads/2020/07/Visiting-Portugal.jpeg"}
+                  name={el.name}
+                  description={el.description}
+                  bg={
+                    "https://portugaltravelguide.com/wp-content/uploads/2020/07/Visiting-Portugal.jpeg"
+                  }
                   price={200}
                   prodId={el._id}
                   userToken={userToken}
@@ -49,7 +59,10 @@ function Acount(props) {
               );
             })
           )}
-          {[].length === 0 ?? <p>no favorites</p>}
+          {(userInfo &&
+            userInfo.favorites.length === 0) ?? (
+            <p>No favorites yet</p>
+          )}
           {/* Test the products */}
         </div>
       </div>
