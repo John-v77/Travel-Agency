@@ -1,4 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import DestinationsDisplayCard from "./DestinationsDisplay.card";
 import { useSelector } from "react-redux";
 
@@ -10,33 +14,45 @@ function DestinationsDisplay(props) {
 
   useEffect(() => {
     setDestPackages(destPacks);
-    console.log("double render?");
+    console.log(destPackages, "double render?");
   }, []);
 
   const priceFilters = ["$", "$$", "$$$"];
-  const regionFilters = ["Asia", "Europa", "America", "Africa"];
+  const regionFilters = [
+    "Asia",
+    "Europa",
+    "America",
+    "Africa",
+  ];
 
   const filterByRegion = (region) => {
     destPackages.filter((item) => item.region === region);
   };
   const filterByPrice = useCallback(
     (price) => {
-      setDestPackages(destPacks.filter((item) => item.price <= price));
+      setDestPackages(
+        destPacks.filter((item) => item.price <= price)
+      );
     },
     [destPackages]
   );
 
   return (
     <div className="max-w-[1640px] m-auto px-4 py-12">
-      <h1 className="text-center mb-10">Top Rated Destinations</h1>
+      <h1 className="text-center mb-10">
+        Top Rated Destinations
+      </h1>
       <div className="flex flex-col lg:flex-row justify-between">
         <div>
           {/* Filter Region */}
-          <p className="font-bold text-gray-700">Filter by Continent</p>
+          <p className="font-bold text-gray-700">
+            Filter by Continent
+          </p>
           <div className="flex justfiy-between flex-wrap">
-            {regionFilters.map((el) => {
+            {regionFilters.map((el, index) => {
               return (
                 <button
+                  key={`${index}regionFilter`}
                   onClick={() => filterByRegion(el)}
                   className="mr-1 my-1 w-20 p-0
                             border border-orange-600 bg-white text-orange-600 
@@ -52,12 +68,17 @@ function DestinationsDisplay(props) {
 
         {/* Filter Price */}
         <div>
-          <p className="font-bold text-gray-700 lg:text-right">Filter Price</p>
+          <p className="font-bold text-gray-700 lg:text-right">
+            Filter Price
+          </p>
           <div className="flex justify-start lg:justify-end w-40">
             {priceFilters.map((el, index) => {
               return (
                 <button
-                  onClick={() => filterByPrice((index + 1) * 500)}
+                  key={`${index}priceFilter`}
+                  onClick={() =>
+                    filterByPrice((index + 1) * 500)
+                  }
                   className="mr-1 my-1 w-12 p-0  border border-orange-600 bg-white text-orange-600 rounded-xl hover:bg-orange-600 hover:text-white lg:mr-0 lg:ml-1"
                 >
                   {el}
@@ -69,7 +90,9 @@ function DestinationsDisplay(props) {
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-4">
         {destPacks.length === 0 ? (
-          <div className="bg bg-red-500 text-white">Destinations could not be fetched</div>
+          <div className="bg bg-red-500 text-white">
+            Destinations could not be fetched
+          </div>
         ) : (
           // mapping products
           destPackages.map((el) => {
