@@ -1,0 +1,62 @@
+
+#spinnerContainer{
+    position:absolute;
+    left:30%;
+    top:30%;
+}
+
+.animationClass{
+    
+border-radius:50%;
+position:absolute;
+border: 1px solid blue;
+animation: up 4s;
+animation-iteration-count: infinite;
+transition:2s;
+border-bottom:none;
+border-right:none;
+animation-timing-function:linear;
+margin-left: 20px;
+margin-top: 20px;
+
+}
+
+@keyframes up{
+from{transform:rotate(0deg); }
+50%{transform:rotate(180deg);}
+100%{transform:rotate(360deg);}
+}
+
+#img1{
+position:absolute;
+background-color:transparent;
+border-bottom:none;
+border-right:none;
+width:90px;
+height:90px;
+left:50.35%;
+top:50.7%;
+animation-delay:.2s;
+
+}
+#img2{
+
+position:absolute;
+background-color:transparent;
+border-bottom:none;
+border-right:none;
+width:80px;
+height:80px;
+left:50.70%;
+top:51.4%;
+animation-delay:.4s;
+}
+
+
+#text{
+    position:absolute;
+    width:60px;
+    height:60px;
+    left:33px;
+    top:43px;
+    }
