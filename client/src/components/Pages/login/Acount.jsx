@@ -48,10 +48,8 @@ function Acount(props) {
                   key={el._id}
                   name={el.name}
                   description={el.description}
-                  bg={
-                    "https://portugaltravelguide.com/wp-content/uploads/2020/07/Visiting-Portugal.jpeg"
-                  }
-                  price={200}
+                  bg={el.image_url}
+                  price={el.price}
                   prodId={el._id}
                   userToken={userToken}
                   favD={true}
