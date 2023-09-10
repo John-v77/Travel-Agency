@@ -86,7 +86,7 @@ userSchema.pre("save", function (next) {
   next();
 });
 
-userSchema.pre(/^find/, function (next) {
+userSchema.pre(/^(find|save)/, function (next) {
   this.populate({
     path: "favorites",
     select: "-__v -vipDestinations",
