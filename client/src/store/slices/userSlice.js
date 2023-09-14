@@ -31,12 +31,6 @@ const authSlice = createSlice({
   name: "auth",
   initialState: initialValue,
   reducers: {
-    login: (state) => {
-      loginUser().then((res) => {
-        // history.pushState('/');
-      });
-    },
-
     logOut: (state) => {
       return {
         ...state.initialState,
@@ -47,57 +41,64 @@ const authSlice = createSlice({
         success: false,
       };
     },
-    signUp: (state) => {
-      registerUser().then((res) => {
-        // history.pushState('/');
-      });
-    },
-
     addFavorites: (state, action) => {
-      return { ...state, favorites: [...action.payload] };
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          favorites: [...action.payload],
+        },
+      };
     },
   },
-  extraReducers: {
+  extraReducers: (builder) => {
     // 1 login user
-    [loginUser.pending]: (state) => {
-      state.isLoading = true;
-      state.error = null;
-    },
+    builder
+      .addCase(loginUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
 
-    [loginUser.fulfilled]: (state, { payload }) => {
-      console.log(
-        payload.data.user,
-        "what is the payload MMJ"
+      .addCase(
+        loginUser.fulfilled,
+        (state, { payload }) => {
+          console.log(
+            payload.data.user,
+            "what is the payload MMJ"
+          );
+          state.isLoading = false;
+          state.success = true;
+          state.userInfo = payload.data.user;
+          state.userToken = payload.token;
+        }
+      )
+
+      .addCase(loginUser.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+
+      // 2 register user
+      .addCase(registerUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(
+        registerUser.fulfilled,
+        (state, { payload }) => {
+          state.isLoading = false;
+          state.success = true;
+          state.userInfo = payload;
+          state.userToken = payload.token;
+        }
+      )
+      .addCase(
+        registerUser.rejected,
+        (state, { payload }) => {
+          state.isLoading = false;
+          state.error = payload;
+        }
       );
-      state.isLoading = false;
-      state.success = true;
-      state.userInfo = payload.data.user;
-      state.userToken = payload.token;
-    },
-
-    [loginUser.rejected]: (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload;
-    },
-
-    // 2 register user
-
-    [registerUser.pending]: (state) => {
-      state.isLoading = true;
-      state.error = null;
-    },
-
-    [registerUser.fulfilled]: (state, { payload }) => {
-      state.isLoading = false;
-      state.success = true;
-      state.userInfo = payload;
-      state.userToken = payload.token;
-    },
-
-    [registerUser.rejected]: (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload;
-    },
   },
 });
 

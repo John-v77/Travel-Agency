@@ -12,7 +12,7 @@ function Login(props) {
     password: "pass1345",
   };
   const [userZ, setUser] = useState(user);
-
+  let navigate = useNavigate();
   // record input
   const recordInput = (e) => {
     const { name, value } = e.target;
@@ -21,10 +21,14 @@ function Login(props) {
   };
 
   // submit form
-  const submitForm = (e) => {
+  const loginHandler = async (e) => {
     e.preventDefault();
-    console.log("submitting", e);
-    dispatch(loginUser(user));
+    try {
+      await dispatch(loginUser(user)).unwrap();
+      navigate("/account");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -62,7 +66,7 @@ function Login(props) {
             </div>
 
             <button
-              onClick={submitForm}
+              onClick={loginHandler}
               className="w-full my-4 border-none"
             >
               Login
