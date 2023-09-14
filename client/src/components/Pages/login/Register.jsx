@@ -14,7 +14,7 @@ function Register(props) {
     confirmPassword: "123",
   };
   const [userZ, setUser] = useState(user);
-
+  let navigate = useNavigate();
   const recordInput = (e) => {
     const { name, value } = e.target;
 
@@ -22,9 +22,14 @@ function Register(props) {
     console.log(userZ);
   };
 
-  const submitForm = (e) => {
+  const registerHandler = async (e) => {
     e.preventDefault();
-    dispatch(registerUser(userZ));
+    try {
+      await dispatch(registerUser(userZ)).unwrap();
+      navigate("/account");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -32,36 +37,66 @@ function Register(props) {
       <img
         src="https://www.wallpaperup.com/uploads/wallpapers/2013/09/29/153361/44e5a3fd8a183ce3ab4d2130ba1b66bb.jpg"
         className="w-full h-20 object-cover object-top "
+        alt="blue sky"
       />
 
       <div className="test11 ">
         {userToken ? "logged in" : "not auth"}
-        <button onClick={() => dispatch(logOut())}>log out</button>
+        <button onClick={() => dispatch(logOut())}>
+          log out
+        </button>
       </div>
       <div className="my-20">
-        <h2 className="text-2xl text-center my-4 md:my-6">Register</h2>
+        <h2 className="text-2xl text-center my-4 md:my-6">
+          Register
+        </h2>
         <div className="form  p-2 md:p3 rounded-md  max-w-xl mx-auto my-4">
           <form className="w-full border border-black rounded-md p-3 md:p-4">
             <div className="flex flex-col my-2">
               <label className="mx-1">Username</label>
-              <input onChange={recordInput} className="border rounded-md p-2" type="text" name="userName" />
+              <input
+                onChange={recordInput}
+                className="border rounded-md p-2"
+                type="text"
+                name="userName"
+              />
             </div>
             <div className="flex flex-col my-2">
               <label className="mx-1">Email</label>
-              <input onChange={recordInput} className="border rounded-md p-2" type="text" name="email" />
+              <input
+                onChange={recordInput}
+                className="border rounded-md p-2"
+                type="text"
+                name="email"
+              />
             </div>
             <div className="flex flex-col my-4">
               <label className="mx-1">Password</label>
 
-              <input className="border rounded-md p-2" onChange={recordInput} type="password" name="password" />
+              <input
+                className="border rounded-md p-2"
+                onChange={recordInput}
+                type="password"
+                name="password"
+              />
             </div>
             <div className="flex flex-col my-4">
-              <label className="mx-1">Password Confirm</label>
+              <label className="mx-1">
+                Password Confirm
+              </label>
 
-              <input className="border rounded-md p-2" onChange={recordInput} type="password" name="confirmPassword" />
+              <input
+                className="border rounded-md p-2"
+                onChange={recordInput}
+                type="password"
+                name="confirmPassword"
+              />
             </div>
 
-            <button onClick={submitForm} className="w-full my-4 border-none">
+            <button
+              onClick={registerHandler}
+              className="w-full my-4 border-none"
+            >
               Register
             </button>
           </form>
