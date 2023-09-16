@@ -1,13 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import apiActions from "../../utils/api";
-import {
-  setWithExpiry,
-  getWithExpiry,
-} from "../../utils/setStorage";
+import { setWithExpiry } from "../../utils/setStorage";
 
 export const loginUser = createAsyncThunk(
   "auth/login",
   async ({ email, password }, { rejectWithValue }) => {
+    console.log(email, password, "is this working? jk$");
     try {
       const data = await apiActions.loginUser(
         email,
@@ -30,7 +28,7 @@ export const loginUser = createAsyncThunk(
 );
 
 export const registerUser = createAsyncThunk(
-  "auth/register22",
+  "auth/register",
   async (
     { name, email, password },
     { rejectWithValue }

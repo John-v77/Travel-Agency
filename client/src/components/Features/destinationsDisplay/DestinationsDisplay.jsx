@@ -9,8 +9,8 @@ import { useSelector } from "react-redux";
 function DestinationsDisplay(props) {
   const { destPacks } = props;
   const [destPackages, setDestPackages] = useState([]);
-  const { userToken } = useSelector((state) => state.user);
-  const usertoken = userToken ?? userToken;
+  const { userInfo } = useSelector((state) => state.user);
+  const userId = userInfo ? userInfo.id : null;
 
   useEffect(() => {
     setDestPackages(destPacks);
@@ -103,7 +103,7 @@ function DestinationsDisplay(props) {
                 description={el.dcescription}
                 bg={el.image_url}
                 price={el.price}
-                userToken={usertoken}
+                userId={userId}
                 prodId={el._id}
                 favD={false}
               />

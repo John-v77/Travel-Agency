@@ -53,7 +53,7 @@ function Acount(props) {
                   }
                   price={200}
                   prodId={el._id}
-                  userToken={userToken}
+                  userId={userInfo.id}
                   favD={true}
                 />
               );

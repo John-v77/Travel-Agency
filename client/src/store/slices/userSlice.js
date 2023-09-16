@@ -2,10 +2,13 @@ import {
   createAction,
   createSlice,
 } from "@reduxjs/toolkit";
+
 import {
   loginUser,
   registerUser,
 } from "../actions/authActions";
+
+import { addProdToFavorites } from "../services/userService";
 import { getWithExpiry } from "../../utils/setStorage";
 
 export const addFavoritesError = createAction(
@@ -39,15 +42,6 @@ const authSlice = createSlice({
         userToken: null,
         error: null,
         success: false,
-      };
-    },
-    addFavorites: (state, action) => {
-      return {
-        ...state,
-        userInfo: {
-          ...state.userInfo,
-          favorites: [...action.payload],
-        },
       };
     },
   },
@@ -94,6 +88,27 @@ const authSlice = createSlice({
       )
       .addCase(
         registerUser.rejected,
+        (state, { payload }) => {
+          state.isLoading = false;
+          state.error = payload;
+        }
+      )
+      // 3 add to favorites
+      .addCase(addProdToFavorites.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(
+        addProdToFavorites.fulfilled,
+        (state, { payload }) => {
+          console.log(payload, "what is the payload JJI2");
+          state.isLoading = false;
+          state.success = true;
+          state.userInfo.favorites = payload;
+        }
+      )
+      .addCase(
+        addProdToFavorites.rejected,
         (state, { payload }) => {
           state.isLoading = false;
           state.error = payload;
