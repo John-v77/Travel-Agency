@@ -1,5 +1,4 @@
 const User = require("../models/usersModel");
-const jwt = require("jsonwebtoken");
 const catchAsync = require("../utils/catchAsync");
 const colors = require("colors");
 const AppError = require("../utils/appError");
@@ -56,17 +55,17 @@ const updateMyInfo = catchAsync(async (req, res, next) => {
 //  add to favorites
 const addFavorite = catchAsync(async (req, res, next) => {
   const { userId, prodId } = req.body;
-  // console.log(userId, prodId, ".TY.".red);
+
   const user = await User.findById(userId);
 
   if (user) {
-    console.log(user, "user.favorites2".green);
     const alreadyFavorite = user.favorites.find(
-      (favorite) => favorite.toString() === prodId.toString()
+      (favoriteItem) =>
+        favoriteItem.id.toString() === prodId.toString()
     );
-    console.log(alreadyFavorite, "alreadyFavorite".blue);
+
     if (alreadyFavorite) {
-      res.status(200).json({
+      return res.status(200).json({
         status: "success",
         results: user.favorites.length,
         message: "favorite already added",
@@ -79,10 +78,6 @@ const addFavorite = catchAsync(async (req, res, next) => {
   }
 
   user.favorites.push(prodId);
-  console.log(user.favorites, "user.favorites1".red);
-
-  // fav = [];
-  // user.favorites = fav;
 
   await user.save();
 
@@ -98,11 +93,9 @@ const addFavorite = catchAsync(async (req, res, next) => {
 // remove favorite
 const removeFavorite = catchAsync(async (req, res, next) => {
   const { userId, prodId } = req.body;
-  console.log(userId, prodId, ".TY we are removing favorites.".red);
   const user = await User.findById(userId);
-
   updatedFav = user.favorites.filter(
-    (favorite) => favorite.toString() != prodId.toString()
+    (favoriteItem) => favoriteItem.id.toString() !== prodId.toString()
   );
 
   user.favorites = updatedFav;
@@ -119,7 +112,7 @@ const removeFavorite = catchAsync(async (req, res, next) => {
 // #1 add to favorites
 const clearAllFavorites = catchAsync(async (req, res, next) => {
   const { userId } = req.body;
-  // console.log(userId, prodId, ".TY.".red);
+  console.log(userId, ".all favorites cleared.".red);
   const user = await User.findById(userId);
 
   if (user) {

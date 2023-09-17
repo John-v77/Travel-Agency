@@ -16,7 +16,10 @@ class APIFeatures {
 
     // adjust query for <less then> <more then> lte, gte, gt, lt
     // uses regex to patern match and add '$'
-    queryStr = queryStr.replace(/\b(gte|lte|gt|lt)\b/g, (match) => `$${match}`);
+    queryStr = queryStr.replace(
+      /\b(gte|lte|gt|lt)\b/g,
+      (match) => `$${match}`
+    );
 
     this.query.find(JSON.parse(queryStr));
 
@@ -37,11 +40,8 @@ class APIFeatures {
 
   // 3 # custom fiels query
   limitFields() {
-    console.log(this.queryString.fields, "fields".red);
     if (this.queryString.fields) {
       const fields = this.queryString.fields.split(",").join(" ");
-
-      console.log(fields, "fields".green);
       this.query = this.query.select(fields);
     } else {
       this.query.select("-__id");
