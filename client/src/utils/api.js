@@ -5,7 +5,9 @@ const baseURL = "http://localhost:5000/api";
 let resetHead = () => {
   return {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+      Authorization: `Bearer ${localStorage.getItem(
+        "userToken"
+      )}`,
     },
   };
 };
@@ -40,7 +42,11 @@ const apiActions = {
   },
 
   addProdToUserFav: async (user_id, prod_id) => {
-    console.log("do we have the data for fav", user_id, prod_id);
+    console.log(
+      "do we have the data for fav",
+      user_id,
+      prod_id
+    );
     const res = await axios.post(
       `${baseURL}/v1/user/addFavorite`,
       {
@@ -50,14 +56,21 @@ const apiActions = {
       //   resetHead()
     );
 
-    console.log(res.data.data.user.favorites, "is data coming?");
+    console.log(
+      res.data.data.user.favorites,
+      "is data coming add fav?"
+    );
     return res.data.data.user.favorites;
   },
 
   removeProdFromUserFav: async (user_id, prod_id) => {
-    console.log("do we have the data for fav", user_id, prod_id);
+    console.log(
+      "do we have the data for rem fav",
+      user_id,
+      prod_id
+    );
     const res = await axios.post(
-      `${baseURL}/v1/user/addFavorite`,
+      `${baseURL}/v1/user/removeFavorite`,
       {
         userId: user_id,
         prodId: prod_id,
@@ -65,7 +78,10 @@ const apiActions = {
       //   resetHead()
     );
 
-    console.log(res.data.data.user.favorites, "is data coming?");
+    console.log(
+      res.data.data.user.favorites,
+      "is data coming- remove fav?"
+    );
     return res.data.data.user.favorites;
   },
 
@@ -83,7 +99,8 @@ const apiActions = {
         name: "ClearWater, FL",
         price: 500,
         durationInDays: 4,
-        image_url: "https://img1.10bestmedia.com/Images/Photos/343768/SHOR-Terrace--1-_55_660x440.jpg",
+        image_url:
+          "https://img1.10bestmedia.com/Images/Photos/343768/SHOR-Terrace--1-_55_660x440.jpg",
         description: "Hello for Jamaica",
         slug: "ClearWater, FL",
         __v: 0,
@@ -94,7 +111,8 @@ const apiActions = {
         name: "Tampa, FL",
         price: 1000,
         durationInDays: 4,
-        image_url: "https://tampabaydatenightguide.com/wp-content/uploads/sites/2/2021/05/sandpearl-1024x768.jpg",
+        image_url:
+          "https://tampabaydatenightguide.com/wp-content/uploads/sites/2/2021/05/sandpearl-1024x768.jpg",
         description: "Hello for Jamaica",
         __v: 0,
       },
@@ -104,7 +122,8 @@ const apiActions = {
         name: "Tampa, FL",
         price: 1500,
         durationInDays: 4,
-        image_url: "https://tampabaydatenightguide.com/wp-content/uploads/sites/2/2021/05/sandpearl-1024x768.jpg",
+        image_url:
+          "https://tampabaydatenightguide.com/wp-content/uploads/sites/2/2021/05/sandpearl-1024x768.jpg",
         description: "Hello for Jamaica",
         __v: 0,
       },
@@ -114,7 +133,8 @@ const apiActions = {
         name: "Tampa, FL",
         price: 1200,
         durationInDays: 4,
-        image_url: "https://tampabaydatenightguide.com/wp-content/uploads/sites/2/2021/05/sandpearl-1024x768.jpg",
+        image_url:
+          "https://tampabaydatenightguide.com/wp-content/uploads/sites/2/2021/05/sandpearl-1024x768.jpg",
         description: "Hello for Jamaica",
         __v: 0,
       },

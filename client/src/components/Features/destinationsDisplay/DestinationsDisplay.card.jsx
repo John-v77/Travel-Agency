@@ -5,7 +5,10 @@ import {
   MdOutlineFavorite,
 } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { addProdToFavorites } from "../../../store/services/userService";
+import {
+  addProdToFavorites,
+  removeProdFromFavorites,
+} from "../../../store/services/userService";
 
 function DestinationsDisplayCard(props) {
   const { prodId, userId, name, bg, price, favD } = props;
@@ -23,9 +26,17 @@ function DestinationsDisplayCard(props) {
     }
   }, [favored]);
 
-  const removeItemFromFav = useCallback(() => {
+  const removeItemFromFav = useCallback(async () => {
     console.log("removing item placeholder");
-    setFavored((currrent) => !currrent);
+
+    try {
+      await dispatch(
+        removeProdFromFavorites({ userId, prodId })
+      );
+      setFavored((currrent) => !currrent);
+    } catch (err) {
+      console.log(err);
+    }
   }, [favored]);
   return (
     <div className="relative">

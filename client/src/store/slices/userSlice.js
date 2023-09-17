@@ -8,7 +8,10 @@ import {
   registerUser,
 } from "../actions/authActions";
 
-import { addProdToFavorites } from "../services/userService";
+import {
+  addProdToFavorites,
+  removeProdFromFavorites,
+} from "../services/userService";
 import { getWithExpiry } from "../../utils/setStorage";
 
 export const addFavoritesError = createAction(
@@ -109,6 +112,30 @@ const authSlice = createSlice({
       )
       .addCase(
         addProdToFavorites.rejected,
+        (state, { payload }) => {
+          state.isLoading = false;
+          state.error = payload;
+        }
+      )
+      // this will need to be refactored later
+      .addCase(removeProdFromFavorites.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(
+        removeProdFromFavorites.fulfilled,
+        (state, { payload }) => {
+          console.log(
+            payload,
+            "what is the payload remove JJI2"
+          );
+          state.isLoading = false;
+          state.success = true;
+          state.userInfo.favorites = payload;
+        }
+      )
+      .addCase(
+        removeProdFromFavorites.rejected,
         (state, { payload }) => {
           state.isLoading = false;
           state.error = payload;
