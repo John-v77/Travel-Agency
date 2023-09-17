@@ -1,4 +1,3 @@
-const { promisify } = require("util");
 const User = require("../models/usersModel");
 const jwt = require("jsonwebtoken");
 const catchAsync = require("../utils/catchAsync");
@@ -16,7 +15,8 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 };
 
-// Get all
+// @@
+// Get all users
 const getAllUsers = catchAsync(async (req, res) => {
   const users = await User.find();
   res.status(200).json({
@@ -26,14 +26,24 @@ const getAllUsers = catchAsync(async (req, res) => {
   });
 });
 
-// Update my info
+// @@
+// Update my user info
 const updateMyInfo = catchAsync(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfirm) {
-    return next(new AppError("This route is not for password updates. Please use/updateMyPassword", 400));
+    return next(
+      new AppError(
+        "This route is not for password updates. Please use/updateMyPassword",
+        400
+      )
+    );
   }
 
   const filteredBody = filterObj(req.body, "name", "email", "photo");
-  const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, { new: true, runValidators: true });
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user.id,
+    filteredBody,
+    { new: true, runValidators: true }
+  );
   res.status(200).json({
     status: "success",
     data: {
@@ -42,15 +52,19 @@ const updateMyInfo = catchAsync(async (req, res, next) => {
   });
 });
 
-// #1 add to favorites
+//  @@
+//  add to favorites
 const addFavorite = catchAsync(async (req, res, next) => {
   const { userId, prodId } = req.body;
   // console.log(userId, prodId, ".TY.".red);
   const user = await User.findById(userId);
 
   if (user) {
-    const alreadyFavorite = user.favorites.find((favorite) => favorite.toString() === prodId.toString());
-    console.log(alreadyFavorite, "mg".blue);
+    console.log(user, "user.favorites2".green);
+    const alreadyFavorite = user.favorites.find(
+      (favorite) => favorite.toString() === prodId.toString()
+    );
+    console.log(alreadyFavorite, "alreadyFavorite".blue);
     if (alreadyFavorite) {
       res.status(200).json({
         status: "success",
@@ -64,8 +78,8 @@ const addFavorite = catchAsync(async (req, res, next) => {
     throw new Error("User not found");
   }
 
-  console.log(user.favorites, "name".red);
   user.favorites.push(prodId);
+  console.log(user.favorites, "user.favorites1".red);
 
   // fav = [];
   // user.favorites = fav;
@@ -80,13 +94,16 @@ const addFavorite = catchAsync(async (req, res, next) => {
   });
 });
 
-//#2 remove favorite
-const remoreFavorite = catchAsync(async (req, res, next) => {
+// @@
+// remove favorite
+const removeFavorite = catchAsync(async (req, res, next) => {
   const { userId, prodId } = req.body;
-  console.log(userId, prodId, ".TY.".red);
+  console.log(userId, prodId, ".TY we are removing favorites.".red);
   const user = await User.findById(userId);
 
-  updatedFav = user.favorites.filter((favorite) => favorite.toString() != prodId.toString());
+  updatedFav = user.favorites.filter(
+    (favorite) => favorite.toString() != prodId.toString()
+  );
 
   user.favorites = updatedFav;
   await user.save();
@@ -99,9 +116,33 @@ const remoreFavorite = catchAsync(async (req, res, next) => {
   });
 });
 
+// #1 add to favorites
+const clearAllFavorites = catchAsync(async (req, res, next) => {
+  const { userId } = req.body;
+  // console.log(userId, prodId, ".TY.".red);
+  const user = await User.findById(userId);
+
+  if (user) {
+    fav = [];
+    user.favorites = fav;
+    await user.save();
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  res.status(200).json({
+    status: "success",
+    results: user.favorites.length,
+    message: "all favorites removed",
+    data: { user },
+  });
+});
+
 module.exports = {
   addFavorite,
-  remoreFavorite,
+  removeFavorite,
   getAllUsers,
   updateMyInfo,
+  clearAllFavorites,
 };
