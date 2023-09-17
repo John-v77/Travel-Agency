@@ -51,7 +51,7 @@ function Acount(props) {
                   bg={el.image_url}
                   price={el.price}
                   prodId={el._id}
-                  userToken={userToken}
+                  userId={userInfo.id}
                   favD={true}
                 />
               );

@@ -1,26 +1,18 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import apiActions from "../../utils/api";
-import { addFavorites, addFavoritesError } from "../slices/userSlice";
 
-export const AddProdToFavorites = async (dispatch, user_id, prod_id) => {
-  console.log(dispatch, user_id, prod_id, "waht is dispatch 22s");
-  try {
-    // api call
-    const data = await apiActions.addProdToUserFav(user_id, prod_id);
-
-    dispatch(addFavorites(data));
-  } catch {
-    dispatch(addFavoritesError());
+export const addProdToFavorites = createAsyncThunk(
+  "auth/addFav",
+  async ({ userId, prodId }, thunkApi) => {
+    console.log(userId, prodId, "is this working? jk$");
+    try {
+      const data = await apiActions.addProdToUserFav(
+        userId,
+        prodId
+      );
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
   }
-};
-
-export const RemoveProdFromFavorites = async (dispatch, user_id, prod_id) => {
-  console.log(dispatch, user_id, prod_id, "waht is dispatch 22s");
-  try {
-    // api call
-    const data = await apiActions.addProdToUserFav(user_id, prod_id);
-
-    dispatch(addFavorites(data));
-  } catch {
-    dispatch(addFavoritesError());
-  }
-};
+);
