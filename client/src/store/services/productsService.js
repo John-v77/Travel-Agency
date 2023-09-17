@@ -1,12 +1,28 @@
 import apiActions from "../../utils/api";
-import { incrementZ, setProducts, setProductsError } from "../slices/productSlice";
+import {
+  incrementZ,
+  setProducts,
+  setProductsError,
+} from "../slices/productSlice";
 
 export const GetProducts = async (dispatch) => {
   try {
     // api call
     // const data = await apiActions.getDestinations();
 
-    const data = await apiActions.getDestinations2();
+    const data = await apiActions.getDestinations();
+
+    console.log(data, "what id the cumulative data");
+
+    dispatch(setProducts(data));
+  } catch {
+    dispatch(setProductsError());
+  }
+};
+
+export const SearchProducts = async (dispatch, searchedWord) => {
+  try {
+    const data = await apiActions.getDestinations();
 
     console.log(data, "what id the cumulative data");
 

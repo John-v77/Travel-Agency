@@ -9,6 +9,7 @@ import Register from "./components/Pages/login/Register";
 import Sandbox from "./components/Pages/TestPage/Sandbox";
 import { useSelector } from "react-redux";
 import Acount from "./components/Pages/login/Acount";
+import SearchPage from "./components/Features/SearchBox/SearchPage";
 
 function App() {
   const { userToken } = useSelector((state) => state.user);
@@ -19,7 +20,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="destinations" element={<Destinations />} />
         <Route path="test" element={<Sandbox />} />
-        <Route path="page3" element={<Home />} />
+        <Route path="searched" element={<SearchPage />} />
         <Route
           path="account"
           element={userToken ? <Acount /> : <Login />}

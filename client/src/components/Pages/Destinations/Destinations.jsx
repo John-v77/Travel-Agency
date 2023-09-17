@@ -6,17 +6,9 @@ import DestinationsDisplay from "../../Features/destinationsDisplay/Destinations
 import { GetProducts } from "../../../store/services/productsService";
 import Spinner from "../../Features/spinner/Spinner";
 function Destinations(props) {
-  // const { favorites } = useSelector((state) => {
-  //   console.log(state.user.favorites, "what is state new23");
-  //   return state.user;
-  // });
-
-  const { products } = useSelector(
-    (state) => state.products
-  );
+  const { products } = useSelector((state) => state.products);
 
   const [isLoading, setIsLoading] = useState(true);
-  // console.log(counter, 'hello1');
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -4,9 +4,7 @@ import { logOut } from "../../../store/slices/userSlice";
 import DestinationsDisplayCard from "../../Features/destinationsDisplay/DestinationsDisplay.card";
 
 function Acount(props) {
-  const { userToken, userInfo } = useSelector((state) => {
-    return state.user;
-  });
+  const { userToken, userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   return (
     <div className="min-h-screen">
@@ -17,11 +15,7 @@ function Acount(props) {
       />
       {/* log out container */}
       <div className="p-4 flex justify-end">
-        <p>
-          {userToken
-            ? `Welcome ${userInfo.name}`
-            : "not auth"}
-        </p>
+        <p>{userToken ? `Welcome ${userInfo.name}` : "not auth"}</p>
         <div className="test11 ">
           <button
             className="py-0 px-2 ml-4 hover:bg-orange-600"
@@ -57,8 +51,7 @@ function Acount(props) {
               );
             })
           )}
-          {(userInfo &&
-            userInfo.favorites.length === 0) ?? (
+          {(userInfo && userInfo.favorites.length === 0) ?? (
             <p>No favorites yet</p>
           )}
           {/* Test the products */}

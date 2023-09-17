@@ -3,8 +3,9 @@ import { createAction, createSlice } from "@reduxjs/toolkit";
 export const setProductsError = createAction("setProductsError");
 
 const initialValue = {
-  coi: 2,
+  coin: 2,
   products: [],
+  searchedProducts: [],
 };
 
 const productSlice = createSlice({
