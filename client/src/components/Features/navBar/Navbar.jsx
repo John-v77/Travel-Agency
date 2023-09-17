@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { BsPerson } from "react-icons/bs";
@@ -13,9 +13,15 @@ import {
   FaPinterest,
   FaYoutube,
 } from "react-icons/fa";
+import SearchBox from "../SearchBox/SearchBox";
 
 function Navbar(props) {
   const [mobNav, setMobNav] = useState(false);
+  const [searchBar, setSearchBar] = useState(false);
+
+  const handleSearchBar = useCallback(async () => {
+    setSearchBar(!searchBar);
+  });
 
   const handleNav = () => {
     setMobNav(!mobNav);
@@ -36,9 +42,17 @@ function Navbar(props) {
           <Link to="/test">test</Link>
         </li>
       </ul>
-
+      <div
+        className={
+          searchBar
+            ? "bg-gray-800/95 relative left-0 top-0 z-10"
+            : "hidden"
+        }
+      >
+        <SearchBox handleSearchBar={handleSearchBar} />
+      </div>
       <div className="hidden md:flex">
-        <BiSearch size={20} />
+        <BiSearch size={20} onClick={handleSearchBar} />
         <Link to="/account">
           <BsPerson size={20} />
         </Link>
@@ -86,7 +100,15 @@ function Navbar(props) {
           </ul>
 
           <div className="flex flex-col">
-            <button className="my-6 border-none">Search</button>
+            <button
+              className="my-6 border-none"
+              onClick={(event) => {
+                handleSearchBar();
+                handleNav();
+              }}
+            >
+              Search
+            </button>
             <button className="login border-none">
               <Link to="/account" onClick={handleNav}>
                 Account
