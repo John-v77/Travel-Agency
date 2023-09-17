@@ -13,14 +13,17 @@ import Acount from "./components/Pages/login/Acount";
 function App() {
   const { userToken } = useSelector((state) => state.user);
   return (
-    <div className="max-w-[1600px] mx-auto ">
+    <div className="max-w-[1600px] mx-auto px-4">
       <Navbar />
       <Routes>
         <Route index element={<Home />} />
         <Route path="destinations" element={<Destinations />} />
         <Route path="test" element={<Sandbox />} />
         <Route path="page3" element={<Home />} />
-        <Route path="account" element={userToken ? <Acount /> : <Login />} />
+        <Route
+          path="account"
+          element={userToken ? <Acount /> : <Login />}
+        />
         <Route path="register" element={<Register />} />
       </Routes>
       <Footer />

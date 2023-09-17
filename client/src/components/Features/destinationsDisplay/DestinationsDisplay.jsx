@@ -1,8 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import DestinationsDisplayCard from "./DestinationsDisplay.card";
 import { useSelector } from "react-redux";
 
@@ -18,12 +14,7 @@ function DestinationsDisplay(props) {
   }, []);
 
   const priceFilters = ["$", "$$", "$$$"];
-  const regionFilters = [
-    "Asia",
-    "Europa",
-    "America",
-    "Africa",
-  ];
+  const regionFilters = ["Asia", "Europa", "America", "Africa"];
 
   const filterByRegion = (region) => {
     destPackages.filter((item) => item.region === region);
@@ -38,10 +29,8 @@ function DestinationsDisplay(props) {
   );
 
   return (
-    <div className="max-w-[1640px] m-auto px-4 py-12">
-      <h1 className="text-center mb-10">
-        Top Rated Destinations
-      </h1>
+    <div className="max-w-[1640px] mx-auto py-12">
+      <h1 className="text-center mb-10">Top Rated Destinations</h1>
       <div className="flex flex-col lg:flex-row justify-between">
         <div>
           {/* Filter Region */}
@@ -76,9 +65,7 @@ function DestinationsDisplay(props) {
               return (
                 <button
                   key={`${index}priceFilter`}
-                  onClick={() =>
-                    filterByPrice((index + 1) * 500)
-                  }
+                  onClick={() => filterByPrice((index + 1) * 500)}
                   className="mr-1 my-1 w-12 p-0  border border-orange-600 bg-white text-orange-600 rounded-xl hover:bg-orange-600 hover:text-white lg:mr-0 lg:ml-1"
                 >
                   {el}

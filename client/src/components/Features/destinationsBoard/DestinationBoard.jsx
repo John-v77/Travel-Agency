@@ -3,7 +3,7 @@ import { homeCategories } from "../../../data/data";
 
 function DestinationBoard(props) {
   return (
-    <div className="py-16 px-4 max-w-[1600px]">
+    <div className="py-16 px-0 max-w-[1600px]">
       <div>
         <h1>All-inclusive Resorts</h1>
         <p>on Caribbean best beaches</p>

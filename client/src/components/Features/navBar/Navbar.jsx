@@ -6,7 +6,13 @@ import { BiSearch } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 
-import { FaFacebook, FaTwitter, FaInstagram, FaPinterest, FaYoutube } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaTwitter,
+  FaInstagram,
+  FaPinterest,
+  FaYoutube,
+} from "react-icons/fa";
 
 function Navbar(props) {
   const [mobNav, setMobNav] = useState(false);
@@ -15,7 +21,7 @@ function Navbar(props) {
     setMobNav(!mobNav);
   };
   return (
-    <div className="w-full max-w-[1600px] p-4 flex justify-between absolute top-0  z-10 text-white bg-gray-600">
+    <div className="w-full max-w-[1600px] p-4 flex justify-between relative top-0  z-10 text-white bg-gray-400">
       <Link to="/">
         <h1 className="">Travel.</h1>
       </Link>
@@ -38,14 +44,30 @@ function Navbar(props) {
         </Link>
       </div>
 
-      <div onClick={handleNav} className="md:hidden  z-20 mobile-menu-btn ">
-        {mobNav ? <AiOutlineClose size={20} className="text-black" /> : <HiOutlineMenuAlt4 size={20} />}
+      <div
+        onClick={handleNav}
+        className="md:hidden  z-20 mobile-menu-btn "
+      >
+        {mobNav ? (
+          <AiOutlineClose size={20} className="text-black" />
+        ) : (
+          <HiOutlineMenuAlt4 size={20} />
+        )}
       </div>
 
-      <div className={mobNav ? "md:hidden w-full h-[100vh] bg-gray-800/95 absolute left-0 top-0 z-10" : "hidden"}>
+      <div
+        className={
+          mobNav
+            ? "md:hidden w-full h-[100vh] bg-gray-800/95 absolute left-0 top-0 z-10"
+            : "hidden"
+        }
+      >
         <div className="bg-gray-100/95 p-4 px-4  text-black">
           <h1 className="">Travel.</h1>
-          <ul onClick={handleNav} className="flex flex-col md:hidden ">
+          <ul
+            onClick={handleNav}
+            className="flex flex-col md:hidden "
+          >
             <li className="mobileLi">
               <Link to="/" onClick={handleNav}>
                 Home
