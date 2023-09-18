@@ -17,9 +17,7 @@ function DestinationsDisplayCard(props) {
 
   const addItemtoFav = useCallback(async () => {
     try {
-      await dispatch(
-        addProdToFavorites({ userId, prodId })
-      );
+      await dispatch(addProdToFavorites({ userId, prodId }));
       setFavored((currrent) => !currrent);
     } catch (err) {
       console.log(err);
@@ -30,9 +28,7 @@ function DestinationsDisplayCard(props) {
     console.log("removing item placeholder");
 
     try {
-      await dispatch(
-        removeProdFromFavorites({ userId, prodId })
-      );
+      await dispatch(removeProdFromFavorites({ userId, prodId }));
       setFavored((currrent) => !currrent);
     } catch (err) {
       console.log(err);
@@ -40,11 +36,7 @@ function DestinationsDisplayCard(props) {
   }, [favored]);
   return (
     <div className="relative">
-      <img
-        className="w-full h-full object-cover"
-        src={bg}
-        alt="/"
-      />
+      <img className="w-full h-full object-cover" src={bg} alt="/" />
       <div className="bg-gray-900/30 absolute top-0 left-0 w-full h-full">
         <p className="left-4 bottom-2 text-xl font-bold text-white absolute">
           {name}
@@ -56,16 +48,11 @@ function DestinationsDisplayCard(props) {
         {/* show add to favorite only if user is logged in */}
         {userId ? (
           <button
-            onClick={
-              favored ? removeItemFromFav : addItemtoFav
-            }
+            onClick={favored ? removeItemFromFav : addItemtoFav}
             className="bg-transparent  hover:bg-orange-600 p-1 m-1"
           >
             {favored ? (
-              <MdOutlineFavorite
-                size={20}
-                className="text-white"
-              />
+              <MdOutlineFavorite size={20} className="text-white" />
             ) : (
               <MdOutlineFavoriteBorder
                 size={20}

@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+// const inputRef = useRef();
 
 function SearchBox({ handleSearchBar }) {
   const [keyword, setKeyword] = useState("");
   let navigate = useNavigate();
-  const handleSearchAction = () => {
-    navigate("/searched");
+
+  const handleSearchAction = (e) => {
+    e.preventDefault();
+    if (keyword.trim()) {
+      navigate(`/searched/${keyword}`);
+      setKeyword("");
+    } else {
+      navigate("/searched");
+    }
   };
+
   return (
-    <form className="w-full max-w-sm">
+    <form className="w-full max-w-sm" onSubmit={handleSearchAction}>
       <div className="flex items-center  py-1">
         <input
           className="appearance-none bg-transparent border-none w-full text-gray-700 py-1 px-2 leading-tight focus:outline-none"
           type="text"
+          value={keyword}
           placeholder="travel destination"
           aria-label="Keyword"
           onChange={(e) => setKeyword(e.target.value)}
@@ -26,8 +36,7 @@ function SearchBox({ handleSearchBar }) {
         </button>
         <button
           className="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-0 px-2 rounded"
-          type="button"
-          onClick={handleSearchBar}
+          type="submit"
         >
           X
         </button>

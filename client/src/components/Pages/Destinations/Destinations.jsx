@@ -13,7 +13,7 @@ function Destinations(props) {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await GetProducts(dispatch);
+      await GetProducts(dispatch);
       setIsLoading(false);
     };
     fetchProducts();

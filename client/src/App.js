@@ -20,7 +20,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="destinations" element={<Destinations />} />
         <Route path="test" element={<Sandbox />} />
-        <Route path="searched" element={<SearchPage />} />
+        <Route path="searched/:keyword" element={<SearchPage />} />
         <Route
           path="account"
           element={userToken ? <Acount /> : <Login />}
