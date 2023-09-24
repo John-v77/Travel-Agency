@@ -3,17 +3,20 @@ import React, { useCallback, useState } from "react";
 import {
   MdOutlineFavoriteBorder,
   MdOutlineFavorite,
+  MdRemoveRedEye,
 } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import {
   addProdToFavorites,
   removeProdFromFavorites,
 } from "../../../store/services/userService";
+import { Link, useNavigate } from "react-router-dom";
 
 function DestinationsDisplayCard(props) {
   const { prodId, userId, name, bg, price, favD } = props;
   const [favored, setFavored] = useState(favD);
   const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   const addItemtoFav = useCallback(async () => {
     try {
@@ -26,7 +29,6 @@ function DestinationsDisplayCard(props) {
 
   const removeItemFromFav = useCallback(async () => {
     console.log("removing item placeholder");
-
     try {
       await dispatch(removeProdFromFavorites({ userId, prodId }));
       setFavored((currrent) => !currrent);
@@ -34,6 +36,7 @@ function DestinationsDisplayCard(props) {
       console.log(err);
     }
   }, [favored]);
+
   return (
     <div className="relative">
       <img className="w-full h-full object-cover" src={bg} alt="/" />
@@ -61,6 +64,10 @@ function DestinationsDisplayCard(props) {
             )}
           </button>
         ) : null}
+        <br />
+        <Link to={`/details/${prodId}`}>
+          <MdRemoveRedEye size={20} className="text-white" />
+        </Link>
       </div>
     </div>
   );
