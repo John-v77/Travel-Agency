@@ -11,12 +11,14 @@ import { useSelector } from "react-redux";
 import Acount from "./components/Pages/login/Acount";
 import SearchPage from "./components/Features/SearchBox/SearchPage";
 import DestinationDetails from "./components/Pages/Destinations/DestinationDetails";
+import ShoppingCartPage from "./components/Pages/ShoppingCart/ShoppingCartPage";
 
 function App() {
   const { userToken } = useSelector((state) => state.user);
   return (
-    <div className="max-w-[1600px] mx-auto px-4">
+    <div className="max-w-[1600px] mx-auto px-4 ">
       <Navbar />
+
       <Routes>
         <Route index element={<Home />} />
         <Route path="destinations" element={<Destinations />} />
@@ -31,6 +33,7 @@ function App() {
           element={userToken ? <Acount /> : <Login />}
         />
         <Route path="register" element={<Register />} />
+        <Route path="/cart" element={<ShoppingCartPage />} />
       </Routes>
       <Footer />
     </div>
