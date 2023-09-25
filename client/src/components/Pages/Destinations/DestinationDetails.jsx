@@ -1,15 +1,22 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { addToCart } from "../../../store/slices/cartSlice";
 
 function DestinationDetails(props) {
   const { productId } = useParams();
   const { products } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
 
-  const productDetails = products.filter((item) => {
+  const featuredProduct = products.filter((item) => {
     return item.id.includes(productId.toLowerCase());
   })[0];
-  console.log(productId, products, productDetails);
+  console.log(productId, products, featuredProduct);
+
+  const addToCartHandler = (product) => {
+    console.log("adding product", product);
+    dispatch(addToCart({ product, qty: 1 }));
+  };
   return (
     <div className="min-h-screen">
       <img
@@ -21,17 +28,25 @@ function DestinationDetails(props) {
         <div className="w-2/3 h-1/2 mx-auto">
           <img
             className="w-full h-full object-cover rounded-md"
-            src={productDetails.image_url}
+            src={featuredProduct.image_url}
             alt="/"
           />
         </div>
         <div className="w-2/3 md:flex justify-between pt-6 mx-auto">
           <div>
-            <h3>{productDetails.name} </h3>
-            <button className="my-5 p-1 mx-auto">book now</button>
+            <h3>{featuredProduct.name} </h3>
+            <button
+              className="my-5 p-1 mx-auto"
+              onClick={() => addToCartHandler(featuredProduct)}
+            >
+              book now
+            </button>
+            <Link to="/cart" className="mx-10">
+              Shopping Cart
+            </Link>
           </div>
           <p className="break-normal max-w-20">
-            {productDetails.description}
+            {featuredProduct.description}
           </p>
         </div>
       </div>
