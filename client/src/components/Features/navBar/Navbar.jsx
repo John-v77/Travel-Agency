@@ -5,6 +5,7 @@ import { BsPerson } from "react-icons/bs";
 import { BiSearch } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
+import { TiShoppingCart } from "react-icons/ti";
 
 import {
   FaFacebook,
@@ -27,7 +28,7 @@ function Navbar(props) {
     setMobNav(!mobNav);
   };
   return (
-    <div className="w-full max-w-[1600px] p-4 flex justify-between relative top-0  z-10 text-white bg-gray-400">
+    <div className="w-full max-w-[1600px] p-4  flex justify-between relative top-0  z-10 text-white bg-slate-500 ">
       <Link to="/">
         <h1 className="">Travel.</h1>
       </Link>
@@ -52,7 +53,14 @@ function Navbar(props) {
         <SearchBox handleSearchBar={handleSearchBar} />
       </div>
       <div className="hidden md:flex">
-        <BiSearch size={20} onClick={handleSearchBar} />
+        <BiSearch
+          size={20}
+          onClick={handleSearchBar}
+          className="cursor-pointer"
+        />
+        <Link to="/cart">
+          <TiShoppingCart size={20} />
+        </Link>
         <Link to="/account">
           <BsPerson size={20} />
         </Link>
@@ -101,13 +109,18 @@ function Navbar(props) {
 
           <div className="flex flex-col">
             <button
-              className="my-6 border-none"
+              className="mt-3 border-none"
               onClick={(event) => {
                 handleSearchBar();
                 handleNav();
               }}
             >
               Search
+            </button>
+            <button className="my-3 border-none">
+              <Link to="/cart" onClick={handleNav}>
+                Shopping Cart
+              </Link>
             </button>
             <button className="login border-none">
               <Link to="/account" onClick={handleNav}>
