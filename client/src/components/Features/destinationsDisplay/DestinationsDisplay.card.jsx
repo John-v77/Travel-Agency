@@ -52,21 +52,27 @@ function DestinationsDisplayCard(props) {
         {userId ? (
           <button
             onClick={favored ? removeItemFromFav : addItemtoFav}
-            className="bg-transparent  hover:bg-orange-600 p-1 m-1"
+            className="bg-transparent   p-1 m-1"
           >
             {favored ? (
-              <MdOutlineFavorite size={20} className="text-white" />
+              <MdOutlineFavorite
+                size={20}
+                className="text-white hover:text-orange-400"
+              />
             ) : (
               <MdOutlineFavoriteBorder
                 size={20}
-                className="text-white"
+                className="text-white hover:text-orange-400"
               />
             )}
           </button>
         ) : null}
         <br />
         <Link to={`/details/${prodId}`}>
-          <MdRemoveRedEye size={20} className="text-white" />
+          <MdRemoveRedEye
+            size={20}
+            className="text-white mx-2 hover:text-orange-400"
+          />
         </Link>
       </div>
     </div>
