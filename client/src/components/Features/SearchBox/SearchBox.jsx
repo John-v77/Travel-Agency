@@ -28,15 +28,16 @@ function SearchBox({ handleSearchBar }) {
           onChange={(e) => setKeyword(e.target.value)}
         />
         <button
-          className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-0 px-2"
-          type="button"
+          className="flex-shrink-0 bg-blue-700 hover:bg-blue-500 border-blue-700 hover:border-blue-500 text-sm border-4 text-white py-0 px-2"
+          type="submit"
           onClick={handleSearchAction}
         >
           Search
         </button>
         <button
-          className="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-0 px-2 rounded"
-          type="submit"
+          className="flex-shrink-0 border-transparent border-4 text-blue-700 hover:text-blue-700 text-sm py-0 px-2 rounded"
+          type="button"
+          onClick={handleSearchBar}
         >
           X
         </button>

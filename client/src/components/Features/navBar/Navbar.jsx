@@ -46,13 +46,22 @@ function Navbar(props) {
       <div
         className={
           searchBar
-            ? "bg-gray-800/95 relative left-0 top-0 z-10"
+            ? "bg-gray-800/95 relative left-0 top-0 z-10 md:hidden"
             : "hidden"
         }
       >
         <SearchBox handleSearchBar={handleSearchBar} />
       </div>
       <div className="hidden md:flex">
+        <div
+          className={
+            searchBar
+              ? "bg-gray-800/95 relative left-0 top-0 z-10 hidden md:block mr-2"
+              : "hidden"
+          }
+        >
+          <SearchBox handleSearchBar={handleSearchBar} />
+        </div>
         <BiSearch
           size={20}
           onClick={handleSearchBar}
