@@ -28,7 +28,7 @@ function Navbar(props) {
     setMobNav(!mobNav);
   };
   return (
-    <div className="w-full max-w-[1600px] p-4  flex justify-between relative top-0  z-10 text-white bg-slate-500 ">
+    <div className="navBarWidth">
       <Link to="/">
         <h1 className="">Travel.</h1>
       </Link>
