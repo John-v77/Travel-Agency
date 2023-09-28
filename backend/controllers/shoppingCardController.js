@@ -82,24 +82,64 @@ const addItemToCart = catchAsync(async (req, res, next) => {
   }
 
   // if cart exists
-  const itemIndex = cart.items.findIndex(
-    (item) => item.itemId == prodId
-  );
+  const itemIndex = cart.items.findIndex((el) => el.itemId == prodId);
 
   if (itemIndex > -1) {
     let product = cart.items[itemIndex];
     product.quantity += qty;
     cart.totalCost += qty * item.price;
     cart.items[itemIndex] = product;
+  } else {
+    const newItem = {
+      itemId: prodId,
+      name: item.name,
+      quantity: qty,
+      price: item.price,
+    };
+    cart.totalCost += qty * newItem.price;
+    cart.items.push(newItem);
+  }
 
-    await cart.save();
+  await cart.save();
+  res
+    .status(200)
+    .send({ message: "success, item added to cart ", cart });
+});
+
+const removeItemFromCart = catchAsync(async (req, res, next) => {
+  const { userId, prodId, qty } = req.body;
+
+  const cart = await ShoppingCart.findOne({ owner: userId });
+  const itemIndex = cart.items.findIndex((el) => el.itemId == prodId);
+
+  // if item not in cart
+  if (itemIndex <= -1) {
     res
       .status(200)
-      .send({ message: "success items added to cart Miami", cart });
+      .send({ message: "item already not present in cart ", cart });
   }
+
+  let undatedProduct = cart.items[itemIndex];
+  undatedProduct.quantity -= qty;
+
+  // remove item if qty is 0
+  if (undatedProduct.quantity <= 0) {
+    cart.items.splice(itemIndex, 1);
+  } else {
+    cart.items[itemIndex] = undatedProduct;
+  }
+
+  cart.totalCost -= qty * undatedProduct.price;
+  if (cart.totalCost < 0) cart.totalCost = 0;
+
+  await cart.save();
+  res
+    .status(200)
+    .send({ message: "success, item removed from cart ", cart });
 });
 
 const deleteAllCarts = catchAsync(async (req, res, next) => {
+  ``;
   const carts = await ShoppingCart.deleteMany();
   res.status(200).send(carts);
 });
@@ -107,8 +147,13 @@ const deleteAllCarts = catchAsync(async (req, res, next) => {
 const clearAllCartItems = catchAsync(async (req, res, next) => {
   const { userId } = req.body;
   const cart = await ShoppingCart.findOne({ owner: userId });
-  console.log(cart, userId, "cartA".bgYellow);
+  if (!cart) {
+    return next(
+      new AppError("Shopping cartd for user not found.", 404)
+    );
+  }
   cart.items = [];
+  cart.totalCost = 0;
   await cart.save();
   res.status(200).send(cart);
 });
@@ -116,6 +161,7 @@ const clearAllCartItems = catchAsync(async (req, res, next) => {
 module.exports = {
   getCart,
   addItemToCart,
+  removeItemFromCart,
   createCart,
   getAllCarts,
   deleteAllCarts,
