@@ -9,6 +9,7 @@ const rateLimit = require("express-rate-limit");
 const destinationsRouter = require("./routes/destinationsRoutes");
 const userRouter = require("./routes/userRoutes");
 const reviewRouter = require("./routes/reviewRoutes");
+const cartRouter = require("./routes/shoppingCartRoutes");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
@@ -69,7 +70,8 @@ app.use(
 const limiter = rateLimit({
   max: 100,
   windowMs: 60 * 60 * 1000,
-  message: "Too many requests from this IP, please try again in an hour",
+  message:
+    "Too many requests from this IP, please try again in an hour",
 });
 
 app.use("/api", limiter);
@@ -109,10 +111,16 @@ app.use((req, res, next) => {
 app.use("/api/v1/vacantions", destinationsRouter);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/reviews", reviewRouter);
+app.use("/api/v1/cart", cartRouter);
 
 // handle unknown routes
 app.all("*", (req, res, next) => {
-  next(new AppError(`Cannot find ${req.originalUrl} on this server!`, 404));
+  next(
+    new AppError(
+      `Cannot find ${req.originalUrl} on this server!`,
+      404
+    )
+  );
 });
 
 //|
