@@ -6,6 +6,7 @@ const cartController = require("../controllers/shoppingCardController");
 router.get("/cart", protect, cartController.getCart);
 router.get("/getAllCarts", protect, cartController.getAllCarts);
 router.post("/createCart", protect, cartController.createCart);
+router.post("/addItemToCart", protect, cartController.addItemToCart);
 router.delete(
   "/deleteAllCarts",
   protect,
