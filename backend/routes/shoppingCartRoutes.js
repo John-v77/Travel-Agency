@@ -12,5 +12,10 @@ router.delete(
   protect,
   cartController.deleteAllCarts
 );
+router.delete(
+  "/clearAllCartItems",
+  protect,
+  cartController.clearAllCartItems
+);
 
 module.exports = router;

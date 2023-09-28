@@ -104,10 +104,20 @@ const deleteAllCarts = catchAsync(async (req, res, next) => {
   res.status(200).send(carts);
 });
 
+const clearAllCartItems = catchAsync(async (req, res, next) => {
+  const { userId } = req.body;
+  const cart = await ShoppingCart.findOne({ owner: userId });
+  console.log(cart, userId, "cartA".bgYellow);
+  cart.items = [];
+  await cart.save();
+  res.status(200).send(cart);
+});
+
 module.exports = {
   getCart,
   addItemToCart,
   createCart,
   getAllCarts,
   deleteAllCarts,
+  clearAllCartItems,
 };
