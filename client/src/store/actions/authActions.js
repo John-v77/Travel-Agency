@@ -7,10 +7,7 @@ export const loginUser = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     console.log(email, password, "is this working? jk$");
     try {
-      const data = await apiActions.loginUser(
-        email,
-        password
-      );
+      const data = await apiActions.loginUser(email, password);
 
       console.log("thunk1 - login::", data);
       setWithExpiry("userToken", data.token, 900000);
@@ -29,10 +26,7 @@ export const loginUser = createAsyncThunk(
 
 export const registerUser = createAsyncThunk(
   "auth/register",
-  async (
-    { name, email, password },
-    { rejectWithValue }
-  ) => {
+  async ({ name, email, password }, { rejectWithValue }) => {
     console.log("thunk - register", name, email, password);
     try {
       const data = await apiActions.registerUser(
@@ -41,7 +35,7 @@ export const registerUser = createAsyncThunk(
         password
       );
       console.log("thunk register - data::", data);
-      localStorage.setItem("userToken", data.token);
+      setWithExpiry("userToken", data.token, 900000);
 
       return data;
     } catch (error) {
