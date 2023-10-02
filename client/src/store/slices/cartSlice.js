@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setWithExpiry, getWithExpiry } from "../../utils/setStorage";
 
-const localCartItems = localStorage.getItem("cartItems")
-  ? JSON.parse(localStorage.getItem("cartItems"))
+const localCartItems = getWithExpiry("cartItems")
+  ? getWithExpiry("cartItems")
   : [];
 
 const initialValue = {
@@ -28,11 +29,7 @@ const cartSlice = createSlice({
         let cartItem = { ...action.payload, qty: 1 };
         console.log(cartItem, "xxkd");
         state.cartItems.push(cartItem);
-
-        localStorage.setItem(
-          "cartItems",
-          JSON.stringify(state.cartItems)
-        );
+        setWithExpiry("cartItems", state.cartItems, 900000);
       }
     },
     removeItem: (state, action) => {
@@ -41,17 +38,11 @@ const cartSlice = createSlice({
         (item) => item?.product?._id !== action.payload?._id
       );
       state.cartItems = updatedCartItems;
-      localStorage.setItem(
-        "cartItems",
-        JSON.stringify(state.cartItems)
-      );
+      setWithExpiry("cartItems", state.cartItems, 900000);
     },
     clearAllCart: (state) => {
       state.cartItems = [];
-      localStorage.setItem(
-        "cartItems",
-        JSON.stringify(state.cartItems)
-      );
+      setWithExpiry("cartItems", state.cartItems, 900000);
     },
     incrementQty: (state, action) => {
       console.log(action.payload, "add cartItem tty");
@@ -64,10 +55,7 @@ const cartSlice = createSlice({
         state.cartItems[existingCartItemIndex].qty += 1;
       }
       // state.cartItems = "updatedCartItems";
-      localStorage.setItem(
-        "cartItems",
-        JSON.stringify(state.cartItems)
-      );
+      setWithExpiry("cartItems", state.cartItems, 900000);
     },
     decrementQty: (state, action) => {
       console.log(action.payload, "add cartItem tty");
@@ -85,10 +73,7 @@ const cartSlice = createSlice({
         state.cartItems.splice(existingCartItemIndex, 1);
       }
 
-      localStorage.setItem(
-        "cartItems",
-        JSON.stringify(state.cartItems)
-      );
+      setWithExpiry("cartItems", state.cartItems, 900000);
     },
   },
 });
