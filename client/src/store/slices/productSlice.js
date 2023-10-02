@@ -1,9 +1,14 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
+import { getWithExpiry, setWithExpiry } from "../../utils/setStorage";
 
 export const setProductsError = createAction("setProductsError");
 
+const savedproducts = getWithExpiry("products")
+  ? getWithExpiry("products")
+  : [];
+
 const initialValue = {
-  products: [],
+  products: savedproducts,
   searchedProducts: [],
 };
 
@@ -13,6 +18,7 @@ const productSlice = createSlice({
 
   reducers: {
     setProducts: (state, action) => {
+      setWithExpiry("products", action.payload, 900000);
       return { ...state, products: [...action.payload] };
     },
   },
