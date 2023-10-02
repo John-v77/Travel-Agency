@@ -22,12 +22,13 @@ function DestinationsDisplay(props) {
   const filterByPrice = useCallback(
     (price) => {
       setDestPackages(
-        destPacks.filter((item) => item.price <= price)
+        destPacks.filter(
+          (item) => item.price >= price && item.price < price + 500
+        )
       );
     },
     [destPackages]
   );
-
   return (
     <div className="max-w-[1640px] mx-auto py-12">
       <h1 className="text-center mb-10">Top Rated Destinations</h1>
@@ -35,10 +36,10 @@ function DestinationsDisplay(props) {
         <div>
           {/* Filter Region */}
           <p className="font-bold text-gray-700">
-            Filter by Continent
+            {/* Filter by Continent */}
           </p>
           <div className="flex justfiy-between flex-wrap">
-            {regionFilters.map((el, index) => {
+            {/* {regionFilters.map((el, index) => {
               return (
                 <button
                   key={`${index}regionFilter`}
@@ -51,7 +52,16 @@ function DestinationsDisplay(props) {
                   {el}
                 </button>
               );
-            })}
+            })} */}
+            <button
+              onClick={() => setDestPackages(destPacks)}
+              className="mr-1 my-1 w-20 p-0
+                            border border-orange-600 bg-white text-orange-600 
+                            hover:bg-orange-600 hover:text-white
+                            rounded-xl"
+            >
+              Clear
+            </button>
           </div>
         </div>
 
