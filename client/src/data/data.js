@@ -5,7 +5,8 @@ export const productOBj = [
     name: "Delud",
     price: 500,
     durationInDays: 4,
-    image_url: "https://media.nomadicmatt.com/2022/vietnamcheap1.jpeg",
+    image_url:
+      "https://media.nomadicmatt.com/2022/vietnamcheap1.jpeg",
     description: "Hello for Jamaica",
     slug: "delud",
     __v: 0,
@@ -16,7 +17,8 @@ export const productOBj = [
     name: "Delud",
     price: 500,
     durationInDays: 4,
-    image_url: "https://media.nomadicmatt.com/2022/vietnamcheap1.jpeg",
+    image_url:
+      "https://media.nomadicmatt.com/2022/vietnamcheap1.jpeg",
     description: "Hello for Jamaica",
     __v: 0,
   },
@@ -43,7 +45,8 @@ export const data = [
     id: 3,
     name: "Maldives",
     category: "Asia",
-    image: "https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704__340.jpg",
+    image:
+      "https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704__340.jpg",
     price: "$$$$",
   },
   {
@@ -73,14 +76,16 @@ export const data = [
     id: 7,
     name: "Tailand",
     category: "Asia",
-    image: "https://imageio.forbes.com/specials-images/dam/imageserve/1171238184/0x0.jpg?format=jpg&width=1200",
+    image:
+      "https://imageio.forbes.com/specials-images/dam/imageserve/1171238184/0x0.jpg?format=jpg&width=1200",
     price: "$$",
   },
   {
     id: 8,
     name: "Vietnam",
     category: "Asia",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTueWXfz-ENvZoMTxrJzjzmmHZdJ3do2DUX7Q&usqp=CAU",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTueWXfz-ENvZoMTxrJzjzmmHZdJ3do2DUX7Q&usqp=CAU",
     price: "$$",
   },
 ];
@@ -101,12 +106,14 @@ export const categories = [
   {
     id: 3,
     name: "Fast Food",
-    image: "https://imageio.forbes.com/specials-images/dam/imageserve/1171238184/0x0.jpg?format=jpg&width=1200",
+    image:
+      "https://imageio.forbes.com/specials-images/dam/imageserve/1171238184/0x0.jpg?format=jpg&width=1200",
   },
   {
     id: 4,
     name: "Fast Food",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTueWXfz-ENvZoMTxrJzjzmmHZdJ3do2DUX7Q&usqp=CAU",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTueWXfz-ENvZoMTxrJzjzmmHZdJ3do2DUX7Q&usqp=CAU",
   },
   {
     id: 5,
@@ -123,7 +130,8 @@ export const categories = [
   {
     id: 7,
     name: "Fast Food",
-    image: "https://portugaltravelguide.com/wp-content/uploads/2020/07/Visiting-Portugal.jpeg",
+    image:
+      "https://portugaltravelguide.com/wp-content/uploads/2020/07/Visiting-Portugal.jpeg",
   },
 
   {
@@ -150,7 +158,8 @@ export const homeCategories = [
   {
     id: 11,
     name: "boraBora1",
-    image: "https://milesopedia.com/wp-content/uploads/2023/02/Plage-avec-vue-sur-le-mont.jpg",
+    image:
+      "https://milesopedia.com/wp-content/uploads/2023/02/Plage-avec-vue-sur-le-mont.jpg",
   },
 
   {
@@ -168,7 +177,8 @@ export const homeCategories = [
   {
     id: 14,
     name: "maldives2",
-    image: "https://www.hollywoodreporter.com/wp-content/uploads/2023/03/Maldives-ArrivalJetty-9-H-2023.jpg?w=1296",
+    image:
+      "https://www.hollywoodreporter.com/wp-content/uploads/2023/03/Maldives-ArrivalJetty-9-H-2023.jpg?w=1296",
   },
   {
     id: 15,
@@ -179,7 +189,8 @@ export const homeCategories = [
   {
     id: 16,
     name: "maldives4",
-    image: "https://lp-cms-production.imgix.net/2020-09/The%20Nautilus%20Maldives_July19-9335.jpg",
+    image:
+      "https://lp-cms-production.imgix.net/2020-09/The%20Nautilus%20Maldives_July19-9335.jpg",
   },
   {
     id: 17,
@@ -190,7 +201,8 @@ export const homeCategories = [
   {
     id: 18,
     name: "maldives6",
-    image: "https://cdn.britannica.com/11/83811-050-8A8D9F24/Island-resort-Maldives-Indian-Ocean.jpg",
+    image:
+      "https://cdn.britannica.com/11/83811-050-8A8D9F24/Island-resort-Maldives-Indian-Ocean.jpg",
   },
 
   {
@@ -204,36 +216,41 @@ export const homeCategories = [
 export const goodPictures = [
   // { name: "maldives" },
   {
-    name: "xx1",
+    name: "Madives",
     image:
       "https://m.economictimes.com/thumb/msid-82330294,width-1200,height-900,resizemode-4,imgsize-1111158/maldvies.jpg",
   },
+
   {
-    name: "xx2",
-    image: "https://www.virginholidays.co.uk/.imaging/Desktop/dam/d8b61612-3c8d-4f56-a091-f17401bf77a3.jpeg",
-  },
-  {
-    name: "xx3",
+    name: "Hawaii",
     image:
       "https://hblimg.mmtcdn.com/content/hubble/img/dest_img/mmt/activities/m_Maldives_Romantic_dest_landscape_l_1304_1956.jpg",
   },
   {
-    name: "xx4",
-    image: "https://d1l3wviaauwkfu.cloudfront.net/2021/11/Milaidhoo_Maldives_Beach_Pool_Villa_Interior-2-1.jpg",
+    name: "Virgin Islands",
+    image:
+      "https://www.virginholidays.co.uk/.imaging/Desktop/dam/d8b61612-3c8d-4f56-a091-f17401bf77a3.jpeg",
   },
-
+  {
+    name: "xx4",
+    image:
+      "https://d1l3wviaauwkfu.cloudfront.net/2021/11/Milaidhoo_Maldives_Beach_Pool_Villa_Interior-2-1.jpg",
+  },
   {
     name: "xx5",
     image:
       "https://blog.goway.com/globetrotting/wp-content/uploads/2016/03/Woman-on-a-Tropical-Beach-Jetty-in-the-Maldives_141417316.jpg",
   },
   {
-    name: "xx6",
-    image: "https://i.pinimg.com/originals/74/51/50/745150d4e96f7030f5ff40e12d350f58.jpg",
-  },
-  {
     name: "xx",
-    image: "https://ibp.info6tm.fr/api/v1/files/5a7b13c08fe56f19fa40ca73/methodes/article/image.jpg",
+    image:
+      "https://ibp.info6tm.fr/api/v1/files/5a7b13c08fe56f19fa40ca73/methodes/article/image.jpg",
+  },
+
+  {
+    name: "xx6",
+    image:
+      "https://i.pinimg.com/originals/74/51/50/745150d4e96f7030f5ff40e12d350f58.jpg",
   },
 
   {
@@ -248,15 +265,18 @@ export const goodPictures = [
   },
   {
     name: "xx",
-    image: "https://www.baros.com/wp-content/uploads/2021/05/Gourmet-dining.jpg",
+    image:
+      "https://www.baros.com/wp-content/uploads/2021/05/Gourmet-dining.jpg",
   },
   {
     name: "xx",
-    image: "https://thepointsguy.freetls.fastly.net/us/originals/2019/11/maldives-pool-0045-hor-clsc.jpg",
+    image:
+      "https://thepointsguy.freetls.fastly.net/us/originals/2019/11/maldives-pool-0045-hor-clsc.jpg",
   },
   {
     name: "xx",
-    image: "https://www.goway.com/media/cache/70/c8/70c8b9f5cd72b8dc491ce7ec65fc36ec.jpg",
+    image:
+      "https://www.goway.com/media/cache/70/c8/70c8b9f5cd72b8dc491ce7ec65fc36ec.jpg",
   },
   // {
   //   name: "colage",
@@ -271,11 +291,13 @@ export const goodPictures = [
   },
   {
     name: "keywest",
-    image: "https://lp-cms-production.imgix.net/2020-11/500pxRF_87001949.jpg",
+    image:
+      "https://lp-cms-production.imgix.net/2020-11/500pxRF_87001949.jpg",
   },
   {
     name: "snorkling",
-    image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/8f/9f/c1/caption.jpg?w=500&h=400&s=1",
+    image:
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/8f/9f/c1/caption.jpg?w=500&h=400&s=1",
   },
   {
     name: "sunset",
@@ -294,7 +316,8 @@ export const goodPictures = [
   },
   {
     name: "girl1",
-    image: "https://www.gateshotelkeywest.com/images/two-col-left.jpg",
+    image:
+      "https://www.gateshotelkeywest.com/images/two-col-left.jpg",
   },
   {
     name: "girl2",
@@ -303,19 +326,23 @@ export const goodPictures = [
   },
   {
     name: "girl3",
-    image: "https://www.gateshotelkeywest.com/images/gates/amenities/gateskeywest-underwater-library.jpg",
+    image:
+      "https://www.gateshotelkeywest.com/images/gates/amenities/gateskeywest-underwater-library.jpg",
   },
   {
     name: "girl4",
-    image: " https://cdn.getyourguide.com/img/tour/6405f330197fd.jpeg/146.jpg",
+    image:
+      " https://cdn.getyourguide.com/img/tour/6405f330197fd.jpeg/146.jpg",
   },
   {
     name: "girlWhite",
-    image: "https://www.wedreamoftravel.com/wp-content/uploads/2019/10/Sophie-behind-the-camera-1440x960.jpg",
+    image:
+      "https://www.wedreamoftravel.com/wp-content/uploads/2019/10/Sophie-behind-the-camera-1440x960.jpg",
   },
   {
     name: "girlAtNight",
-    image: " https://marianapostcards.files.wordpress.com/2019/09/key-west-sunset-cruise.jpg?w=750",
+    image:
+      " https://marianapostcards.files.wordpress.com/2019/09/key-west-sunset-cruise.jpg?w=750",
   },
   // {
   //   name: "girlDinner",
@@ -327,11 +354,13 @@ export const goodPictures = [
   },
   {
     name: "girlLunch",
-    image: "https://pbs.twimg.com/media/DnZR_ddXsAQKCzM?format=jpg&name=large",
+    image:
+      "https://pbs.twimg.com/media/DnZR_ddXsAQKCzM?format=jpg&name=large",
   },
   {
     name: "beachArticles",
-    image: "https://media-cdn.tripadvisor.com/media/photo-s/15/4a/03/07/alexandra-a.jpg",
+    image:
+      "https://media-cdn.tripadvisor.com/media/photo-s/15/4a/03/07/alexandra-a.jpg",
   },
   // {
   //   name: "xxsa",
@@ -365,38 +394,46 @@ export const goodPictures = [
   },
   {
     name: "buffet",
-    image: "https://theluxuryvacationguide.com/wp-content/uploads/2017/11/3latitudes-key-west.jpg",
+    image:
+      "https://theluxuryvacationguide.com/wp-content/uploads/2017/11/3latitudes-key-west.jpg",
   },
   {
     name: "dinner2",
-    image: "https://www.justtravelous.com/wp-content/uploads/2016/02/Florida-Keys-13.jpg",
+    image:
+      "https://www.justtravelous.com/wp-content/uploads/2016/02/Florida-Keys-13.jpg",
   },
   {
     name: "launch2",
-    image: "https://garymcadams.typepad.com/.a/6a00d8341c4fc653ef01b8d25a0042970c-pi",
+    image:
+      "https://garymcadams.typepad.com/.a/6a00d8341c4fc653ef01b8d25a0042970c-pi",
   },
   {
     name: "xx",
-    image: "https://media-cdn.tripadvisor.com/media/photo-s/1a/b1/f3/5e/tuna-avocado-appetizer.jpg",
+    image:
+      "https://media-cdn.tripadvisor.com/media/photo-s/1a/b1/f3/5e/tuna-avocado-appetizer.jpg",
   },
   {
     name: "diner1",
-    image: "https://media-cdn.tripadvisor.com/media/photo-s/25/29/6e/63/full-menu.jpg",
+    image:
+      "https://media-cdn.tripadvisor.com/media/photo-s/25/29/6e/63/full-menu.jpg",
   },
 ];
 
 export const ameneties = [
   {
     name: "Outstanding cuisine",
-    image: "https://www.justtravelous.com/wp-content/uploads/2016/02/Florida-Keys-13.jpg",
+    image:
+      "https://www.justtravelous.com/wp-content/uploads/2016/02/Florida-Keys-13.jpg",
   },
   {
     name: "Breath taking views",
-    image: "https://pbs.twimg.com/media/DnZR_ddXsAQKCzM?format=jpg&name=large",
+    image:
+      "https://pbs.twimg.com/media/DnZR_ddXsAQKCzM?format=jpg&name=large",
   },
   {
     name: "Sailing at dawn",
-    image: " https://marianapostcards.files.wordpress.com/2019/09/key-west-sunset-cruise.jpg?w=750",
+    image:
+      " https://marianapostcards.files.wordpress.com/2019/09/key-west-sunset-cruise.jpg?w=750",
   },
   {
     name: "Sailing trips",
@@ -405,7 +442,8 @@ export const ameneties = [
   },
   {
     name: "Executive suits",
-    image: "https://d1l3wviaauwkfu.cloudfront.net/2021/11/Milaidhoo_Maldives_Beach_Pool_Villa_Interior-2-1.jpg",
+    image:
+      "https://d1l3wviaauwkfu.cloudfront.net/2021/11/Milaidhoo_Maldives_Beach_Pool_Villa_Interior-2-1.jpg",
   },
   {
     name: "Total Relaxation",
