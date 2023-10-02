@@ -24,7 +24,7 @@ function DestinationDetails(props) {
         alt="navbar background"
       />
       <div className="w-2/3 mx-auto mt-10 ">
-        <div className="w-2/3 h-1/2 mx-auto">
+        <div className="md:w-2/3 h-1/2 mx-auto">
           <img
             className="w-full h-full object-cover rounded-md"
             src={featuredProduct.image_url}

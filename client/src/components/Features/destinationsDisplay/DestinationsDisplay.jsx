@@ -14,11 +14,11 @@ function DestinationsDisplay(props) {
   }, []);
 
   const priceFilters = ["$", "$$", "$$$"];
-  const regionFilters = ["Asia", "Europa", "America", "Africa"];
+  // const regionFilters = ["Asia", "Europa", "America", "Africa"];
 
-  const filterByRegion = (region) => {
-    destPackages.filter((item) => item.region === region);
-  };
+  // const filterByRegion = (region) => {
+  //   destPackages.filter((item) => item.region === region);
+  // };
   const filterByPrice = useCallback(
     (price) => {
       setDestPackages(
