@@ -7,9 +7,11 @@ const User = require("../models/usersModel");
 
 const getCart = catchAsync(async (req, res, next) => {
   const { userId } = req.body;
+
   const cart = await ShoppingCart.findOne({ owner: userId });
+
   if (cart && cart.items) {
-    res.status(200).send(cart);
+    return res.status(200).send(cart);
   } else {
     return next(new AppError("cart not found.", 404));
   }
@@ -30,6 +32,7 @@ const createCart = catchAsync(async (req, res, next) => {
     discountApplied: 0,
     paymentMethod: "",
     shippingAddress: "",
+    image_url: "",
     createdAt: Date.now(),
     paid: false,
   };
@@ -56,6 +59,7 @@ const addItemToCart = catchAsync(async (req, res, next) => {
     if (!user) {
       return next(new AppError("User not found.", 404));
     }
+
     const newCart = {
       owner: userId,
       items: [
@@ -64,6 +68,7 @@ const addItemToCart = catchAsync(async (req, res, next) => {
           name: item.name,
           quantity: qty,
           price: item.price,
+          image_url: item.image_url,
         },
       ],
       totalCost: item.price * qty,
@@ -73,6 +78,7 @@ const addItemToCart = catchAsync(async (req, res, next) => {
       createdAt: Date.now(),
       paid: false,
     };
+
     const newShoppingCart = await ShoppingCart.create(newCart);
 
     return res.status(201).send({
@@ -95,7 +101,9 @@ const addItemToCart = catchAsync(async (req, res, next) => {
       name: item.name,
       quantity: qty,
       price: item.price,
+      image_url: item.image_url,
     };
+
     cart.totalCost += qty * newItem.price;
     cart.items.push(newItem);
   }

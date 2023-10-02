@@ -14,8 +14,7 @@ function DestinationDetails(props) {
   console.log(productId, products, featuredProduct);
 
   const addToCartHandler = (product) => {
-    console.log("adding product", product);
-    dispatch(addToCart({ product, qty: 1 }));
+    dispatch(addToCart({ ...product, qty: 1 }));
   };
   return (
     <div className="min-h-screen">

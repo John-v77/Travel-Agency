@@ -22,13 +22,18 @@ const ShoppingCartSchema = new Schema({
         default: 1,
       },
       price: Number,
+      image_url: {
+        type: String,
+        require: [true, "product must have an image"],
+      },
     },
   ],
 
   totalCost: {
     type: Number,
-    require: [true, "Booking must have a price"],
+    require: [true, "product must have a price"],
   },
+
   discountApplied: {
     type: Number,
   },

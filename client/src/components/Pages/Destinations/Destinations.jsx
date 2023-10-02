@@ -19,8 +19,6 @@ function Destinations(props) {
     fetchProducts();
   }, []);
 
-  console.log(isLoading);
-  console.log(products, "are destinations set?");
   if (products.length === 0) {
     return <Spinner />;
   } else {
