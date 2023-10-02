@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -8,20 +8,38 @@ import {
   incrementQty,
   removeItem,
 } from "../../../store/slices/cartSlice";
+import { GetCart } from "../../../store/services/cartService";
 
 function ShoppingCartPage(props) {
   const { cartItems } = useSelector((state) => {
     return state.cart;
   });
-  console.log(cartItems, cartItems.length, "what is state");
+
+  const [isLoading, setIsLoading] = useState(true);
+  const { userInfo } = useSelector((state) => state.user);
+  const userId = userInfo ? userInfo.id : null;
   const dispatch = useDispatch();
 
   const orderTotal = cartItems.reduce((acc, el) => {
-    return (acc += el?.product?.price * el.qty);
+    return (acc += el?.price * el.quantity);
   }, 0);
 
+  useEffect(() => {
+    const fetchCart = async () => {
+      await GetCart(dispatch, userId);
+      setIsLoading(false);
+    };
+    if (userId) fetchCart();
+  }, []);
+
   return (
-    <div className="min-h-screen mt-10">
+    <div className="min-h-screen">
+      <img
+        src="https://www.wallpaperup.com/uploads/wallpapers/2013/09/29/153361/44e5a3fd8a183ce3ab4d2130ba1b66bb.jpg"
+        className="w-full h-20 object-cover object-top "
+        alt="navbar background"
+      />
+
       <div className="grid md:grid-cols-3 md:gap-2 ">
         <div className="flex justify-between col-span-2 xl:px-20 border-b-2">
           <h3>Shopping Cart</h3>
@@ -30,44 +48,39 @@ function ShoppingCartPage(props) {
 
         <div className="col-span-2">
           {cartItems.map((el, index) => {
-            console.log(el, el.product.name);
             return (
               <div
                 key={`${index}cart`}
                 className="grid grid-cols-6 gap-3 xl:px-20 py-2"
               >
                 <img
-                  src={el?.product?.image_url}
+                  src={el?.image_url}
                   alt=""
                   className="w-16 h-10 rounded-md"
                 />
-                <p className="mt-2">{el?.product?.name}</p>
-                <p className="mt-2">${el?.product?.price}</p>
+                <p className="mt-2">{el?.name}</p>
+                <p className="mt-2">${el?.price}</p>
                 <div className="flex">
                   <button
                     className="p-1 bg-transparent text-black border"
-                    onClick={() =>
-                      dispatch(decrementQty(el?.product))
-                    }
+                    onClick={() => dispatch(decrementQty(el))}
                   >
                     -
                   </button>
-                  <p className="mt-2">{el.qty}</p>
+                  <p className="mt-2">{el.quantity}</p>
                   <button
                     className="py-0 bg-transparent text-black border "
-                    onClick={() =>
-                      dispatch(incrementQty(el?.product))
-                    }
+                    onClick={() => dispatch(incrementQty(el))}
                   >
                     +
                   </button>
                 </div>
                 <p className="mt-2">
-                  Total: ${el.qty * el?.product?.price}
+                  Total: ${el.quantity * el?.price}
                 </p>
                 <p
                   className="mt-2 text-red-600 text-right cursor-pointer"
-                  onClick={() => dispatch(removeItem(el?.product))}
+                  onClick={() => dispatch(removeItem(el))}
                 >
                   remove
                 </p>

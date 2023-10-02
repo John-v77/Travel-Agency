@@ -1,5 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
 import { setWithExpiry, getWithExpiry } from "../../utils/setStorage";
+
+export const setCartItemsError = createAction("setCartItemsError");
 
 const localCartItems = getWithExpiry("cartItems")
   ? getWithExpiry("cartItems")
@@ -13,21 +15,23 @@ const cartSlice = createSlice({
   name: "CartSlice",
   initialState: initialValue,
   reducers: {
+    setCartItems: (state, action) => {
+      console.log(action.payload, "waht is the cart payload");
+      setWithExpiry("cartItems", state.cartItems, 900000);
+      return {
+        ...state,
+        cartItems: [...action.payload.items],
+      };
+    },
     addToCart: (state, action) => {
-      console.log(action.payload, "assit car");
-
-      console.log(state.cartItems, "statej");
-
       const exitingCartProdIndex = state.cartItems.findIndex(
-        (item) => item?.product?._id === action.payload?.product?._id
+        (item) => item?._id === action.payload?._id
       );
-
       if (exitingCartProdIndex >= 0) {
-        state.cartItems[exitingCartProdIndex].qty += 1;
+        state.cartItems[exitingCartProdIndex].quantity += 1;
       } else {
-        //constructs a new object with qty key
-        let cartItem = { ...action.payload, qty: 1 };
-        console.log(cartItem, "xxkd");
+        //constructs a new object with quantity key
+        let cartItem = { ...action.payload, quantity: 1 };
         state.cartItems.push(cartItem);
         setWithExpiry("cartItems", state.cartItems, 900000);
       }
@@ -35,7 +39,7 @@ const cartSlice = createSlice({
     removeItem: (state, action) => {
       console.log(action.payload, "remove tty");
       const updatedCartItems = state.cartItems.filter(
-        (item) => item?.product?._id !== action.payload?._id
+        (item) => item?._id !== action.payload?._id
       );
       state.cartItems = updatedCartItems;
       setWithExpiry("cartItems", state.cartItems, 900000);
@@ -45,31 +49,31 @@ const cartSlice = createSlice({
       setWithExpiry("cartItems", state.cartItems, 900000);
     },
     incrementQty: (state, action) => {
-      console.log(action.payload, "add cartItem tty");
+      console.log(action.payload, "add cartItem qu");
       const existingCartItemIndex = state.cartItems.findIndex(
-        (item) => item?.product?._id === action.payload?._id
+        (item) => item?._id === action.payload?._id
       );
 
       console.log(existingCartItemIndex, "add cartItem tty");
       if (existingCartItemIndex >= 0) {
-        state.cartItems[existingCartItemIndex].qty += 1;
+        state.cartItems[existingCartItemIndex].quantity += 1;
       }
       // state.cartItems = "updatedCartItems";
       setWithExpiry("cartItems", state.cartItems, 900000);
     },
     decrementQty: (state, action) => {
-      console.log(action.payload, "add cartItem tty");
+      console.log(action.payload, "minus cartItem tty");
       const existingCartItemIndex = state.cartItems.findIndex(
-        (item) => item?.product?._id === action.payload?._id
+        (item) => item?._id === action.payload?._id
       );
 
-      console.log(existingCartItemIndex, "add cartItem tty");
+      console.log(existingCartItemIndex, "minus cartItem tty");
 
       if (existingCartItemIndex >= 0) {
-        state.cartItems[existingCartItemIndex].qty -= 1;
+        state.cartItems[existingCartItemIndex].quantity -= 1;
       }
 
-      if (state.cartItems[existingCartItemIndex].qty === 0) {
+      if (state.cartItems[existingCartItemIndex].quantity === 0) {
         state.cartItems.splice(existingCartItemIndex, 1);
       }
 
@@ -84,6 +88,7 @@ export const {
   clearAllCart,
   incrementQty,
   decrementQty,
+  setCartItems,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

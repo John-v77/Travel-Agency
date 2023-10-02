@@ -16,7 +16,6 @@ function DestinationsDisplayCard(props) {
   const { prodId, userId, name, bg, price, favD } = props;
   const [favored, setFavored] = useState(favD);
   const dispatch = useDispatch();
-  let navigate = useNavigate();
 
   const addItemtoFav = useCallback(async () => {
     try {

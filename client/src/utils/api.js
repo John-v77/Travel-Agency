@@ -5,9 +5,7 @@ const baseURL = "http://localhost:5000/api";
 let resetHead = () => {
   return {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem(
-        "userToken"
-      )}`,
+      Authorization: `Bearer ${localStorage.getItem("userToken")}`,
     },
   };
 };
@@ -19,8 +17,8 @@ const apiActions = {
       {
         email: user,
         password: password,
-      }
-      //   resetHead()
+      },
+      resetHead()
     );
 
     return res.data;
@@ -34,26 +32,22 @@ const apiActions = {
         email: email,
         password: password,
         passwordConfirm: password,
-      }
-      //   resetHead()
+      },
+      resetHead()
     );
 
     return res.data;
   },
 
   addProdToUserFav: async (user_id, prod_id) => {
-    console.log(
-      "do we have the data for fav",
-      user_id,
-      prod_id
-    );
+    console.log("do we have the data for fav", user_id, prod_id);
     const res = await axios.post(
       `${baseURL}/v1/user/addFavorite`,
       {
         userId: user_id,
         prodId: prod_id,
-      }
-      //   resetHead()
+      },
+      resetHead()
     );
 
     console.log(
@@ -64,18 +58,14 @@ const apiActions = {
   },
 
   removeProdFromUserFav: async (user_id, prod_id) => {
-    console.log(
-      "do we have the data for rem fav",
-      user_id,
-      prod_id
-    );
+    console.log("do we have the data for rem fav", user_id, prod_id);
     const res = await axios.post(
       `${baseURL}/v1/user/removeFavorite`,
       {
         userId: user_id,
         prodId: prod_id,
-      }
-      //   resetHead()
+      },
+      resetHead()
     );
 
     console.log(
@@ -142,7 +132,21 @@ const apiActions = {
     return dataY;
   },
 
-  // http://localhost:5000/api/v1/vacantions
+  getUserCart: async (user_id) => {
+    console.log("axios cart", user_id);
+    const res = await axios.post(
+      `${baseURL}/v1/cart/cart`,
+      {
+        userId: user_id,
+      }
+      // resetHead()
+    );
+
+    console.log(res.data.items, "what is the cart front end");
+    return res.data;
+
+    // http://localhost:5000/api/v1/vacantions
+  },
 };
 
 export default apiActions;
