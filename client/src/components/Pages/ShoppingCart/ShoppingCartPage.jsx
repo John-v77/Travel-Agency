@@ -40,24 +40,24 @@ function ShoppingCartPage(props) {
 
       <div className="grid md:grid-cols-4 mt-10 mb-4 shadow-sm">
         <div className="prod-list md:col-span-3 bg-slate-100 p-4">
-          <div class="flex justify-between border-b">
-            <h1 class="font-semibold text-xl">Shopping Cart</h1>
-            <h2 class="font-semibold text-xl">
+          <div className="flex justify-between border-b">
+            <h1 className="font-semibold text-xl">Shopping Cart</h1>
+            <h2 className="font-semibold text-xl">
               {cartItems.length} Items
             </h2>
           </div>
 
-          <div class="grid grid-cols-5 mt-4 mb-5">
-            <h3 class="font-semibold text-gray-600 text-xs uppercase col-span-2">
+          <div className="grid grid-cols-5 mt-4 mb-5">
+            <h3 className="font-semibold text-gray-600 text-xs uppercase col-span-2">
               Product Details
             </h3>
-            <h3 class="font-semibold  text-gray-600 text-xs uppercase  text-right">
+            <h3 className="font-semibold  text-gray-600 text-xs uppercase  text-right">
               Quantity
             </h3>
-            <h3 class="font-semibold  text-gray-600 text-xs uppercase  text-right">
+            <h3 className="font-semibold  text-gray-600 text-xs uppercase  text-right">
               Price
             </h3>
-            <h3 class="font-semibold text-gray-600 text-xs uppercase  text-right">
+            <h3 className="font-semibold text-gray-600 text-xs uppercase  text-right">
               Total
             </h3>
           </div>
@@ -129,55 +129,54 @@ function ShoppingCartPage(props) {
           </div>
         </div>
         <div className="col-span-1 bg-slate-200 p-8 ">
-          <p class="font-semibold text-xl border-b pb-4">
+          <p className="font-semibold text-xl border-b pb-4">
             Order Summary
           </p>
-          <div class="flex justify-between mt-10 mb-5">
-            <span class="font-semibold text-sm uppercase">
-              {cartItems.length} Items
-            </span>
-            <span class="font-semibold text-sm">${orderTotal}</span>
-          </div>
-          <div class="flex justify-between mt-10 mb-5">
-            <span class="font-semibold text-sm uppercase">Tax</span>
-            <span class="font-semibold text-sm">
-              ${orderTotal * 0.065}
-            </span>
-          </div>
-          {/* <div>
-            <label class="font-medium inline-block mb-3 text-sm uppercase">
-              Shipping
-            </label>
-            <select class="block p-2 text-gray-600 w-full text-sm">
-              <option>Standard shipping - $10.00</option>
-            </select>
-          </div> */}
-          <div class="py-4">
-            <label
-              for="promo"
-              class="font-semibold inline-block mb-3 text-sm uppercase"
-            >
-              Promo Code
-            </label>
-            <input
-              type="text"
-              id="promo"
-              placeholder="Enter your code"
-              class="p-2 text-sm w-full"
-            />
-          </div>
-          <button class="bg-indigo-500 hover:bg-indigo-600 px-5 py-2 text-sm text-white uppercase">
-            Apply
-          </button>
-          <div class="border-t mt-4">
-            <div class="flex font-semibold justify-between py-6 text-sm uppercase">
-              <span>Total cost</span>
-              <span>${orderTotal * 1.065} </span>
+          {cartItems.length !== 0 ? (
+            <div>
+              <div className="flex justify-between mt-10 mb-5">
+                <span className="font-semibold text-sm uppercase">
+                  {cartItems.length} Items
+                </span>
+                <span className="font-semibold text-sm">
+                  ${orderTotal}
+                </span>
+              </div>
+              <div className="flex justify-between mt-10 mb-5">
+                <span className="font-semibold text-sm uppercase">
+                  Tax 6.5%
+                </span>
+                <span className="font-semibold text-sm">
+                  ${orderTotal * 0.065}
+                </span>
+              </div>
+              <div className="py-4">
+                <label className="font-semibold inline-block mb-3 text-sm uppercase">
+                  Promo Code
+                </label>
+                <input
+                  type="text"
+                  id="promo"
+                  placeholder="Enter your code"
+                  className="p-2 text-sm w-full"
+                />
+              </div>
+              <button className="bg-indigo-500 hover:bg-indigo-600 px-5 py-2 text-sm text-white uppercase">
+                Apply
+              </button>
+              <div className="border-t mt-4">
+                <div className="flex font-semibold justify-between py-6 text-sm uppercase">
+                  <span>Total cost</span>
+                  <span>${orderTotal * 1.065} </span>
+                </div>
+                <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
+                  Checkout
+                </button>
+              </div>
             </div>
-            <button class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
-              Checkout
-            </button>
-          </div>
+          ) : (
+            <p>Shopping is empty</p>
+          )}
         </div>
       </div>
     </div>

@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginUser } from "../../../store/actions/authActions";
 
-// ('https://www.wallpaperup.com/uploads/wallpapers/2013/09/29/153361/44e5a3fd8a183ce3ab4d2130ba1b66bb.jpg');
 function Login(props) {
   const dispatch = useDispatch();
   const user = {
-    email: "john21@test.com",
-    password: "pass1345",
+    // email: "john21@test.com",
+    // password: "pass1345",
+    email: "",
+    password: "",
   };
   const [userZ, setUser] = useState(user);
   let navigate = useNavigate();
   // record input
   const recordInput = (e) => {
-    const { name, value } = e.target;
+    const { name } = e.target;
 
     setUser({ ...userZ, [name]: e.target.value });
   };
@@ -40,9 +40,7 @@ function Login(props) {
       />
 
       <div className="my-20">
-        <h2 className="text-2xl text-center my-4 md:my-6">
-          Login
-        </h2>
+        <h2 className="text-2xl text-center my-4 md:my-6">Login</h2>
         <div className="form  p-2 md:p3 rounded-md  max-w-xl mx-auto my-4">
           <form className="w-full border border-black rounded-md p-3 md:p-4">
             <div className="flex flex-col my-2">
