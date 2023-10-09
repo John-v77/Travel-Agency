@@ -3,7 +3,7 @@ const User = require("../models/usersModel");
 const jwt = require("jsonwebtoken");
 const catchAsync = require("../utils/catchAsync");
 const sendEmail = require("../utils/mailer");
-const colors = require("colors");
+
 const AppError = require("../utils/appError");
 
 // # signToken
@@ -17,7 +17,10 @@ const signToken = (id) => {
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
   const cookieOptions = {
-    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
+    expires: new Date(
+      Date.now() +
+        process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
     httpOnly: true,
   };
 
@@ -62,8 +65,13 @@ const login = catchAsync(async (req, res, next) => {
     return next();
   }
   // 2 Check if user exists && password is correct
-  const user = await User.findOne({ email: email }).select("+password");
-  if (!user || !(await user.correctPassword(password, user.password))) {
+  const user = await User.findOne({ email: email }).select(
+    "+password"
+  );
+  if (
+    !user ||
+    !(await user.correctPassword(password, user.password))
+  ) {
     res.status(401).json({
       status: "fail",
       message: "incorect email or password",
@@ -94,7 +102,10 @@ const protect = catchAsync(async (req, res, next) => {
   }
 
   // validate token
-  const decodedPayload = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  const decodedPayload = await promisify(jwt.verify)(
+    token,
+    process.env.JWT_SECRET
+  );
 
   // check user still exists
   const freshUser = await User.findById(decodedPayload.id);
@@ -124,7 +135,12 @@ const restrictedTo = (...roles) => {
   return (req, res, next) => {
     // roles =['user', 'admin']
     if (!roles.includes(req.user.role)) {
-      return next(new AppError("You do not have permission to perform this action", 403));
+      return next(
+        new AppError(
+          "You do not have permission to perform this action",
+          403
+        )
+      );
     }
     next();
   };
@@ -138,7 +154,12 @@ const updatePassword = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id).select("+password");
 
   // 2.check if POST-ed current password is correct
-  if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+  if (
+    !(await user.correctPassword(
+      req.body.passwordCurrent,
+      user.password
+    ))
+  ) {
     return next(new AppError("Your current password is wrong.", 400));
   }
 

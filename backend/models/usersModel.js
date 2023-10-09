@@ -18,10 +18,7 @@ const userSchema = new Schema(
       required: [true, "Email is required"],
       unique: true,
       lowercase: true,
-      validate: [
-        validator.isEmail,
-        "Please provide a valid email",
-      ],
+      validate: [validator.isEmail, "Please provide a valid email"],
     },
     photo: {
       type: String,
@@ -29,7 +26,7 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: [true, "Password is required"],
-      minlength: 8,
+      minlength: 4,
       select: false,
     },
     passwordConfirm: {
@@ -80,8 +77,7 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.pre("save", function (next) {
-  if (!this.isModified("password") || this.isNew)
-    return next();
+  if (!this.isModified("password") || this.isNew) return next();
   this.passwordChangedAt = Date.now() - 1000;
   next();
 });
@@ -99,16 +95,11 @@ userSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword
 ) {
-  const res = await bcrypt.compare(
-    candidatePassword,
-    userPassword
-  );
+  const res = await bcrypt.compare(candidatePassword, userPassword);
   return res;
 };
 
-userSchema.methods.changedPasswordAfter = function (
-  JWTTimestamp
-) {
+userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(
       this.passwordChangedAt.getTime() / 1000,
@@ -126,7 +117,6 @@ userSchema.methods.createPasswordResetToken = function () {
     .update(resetToken)
     .digest("hex");
 
-  console.log({ resetToken }, this.passwordResetToken);
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
   return resetToken;

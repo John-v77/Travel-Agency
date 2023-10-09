@@ -1,6 +1,6 @@
 const User = require("../models/usersModel");
 const catchAsync = require("../utils/catchAsync");
-const colors = require("colors");
+// const colors = require("colors");
 const AppError = require("../utils/appError");
 
 const filterObj = (obj, ...allowedFields) => {
@@ -9,7 +9,7 @@ const filterObj = (obj, ...allowedFields) => {
     if (allowedFields.includes(el)) {
       newObj[el] = obj[el];
     }
-    console.log(newObj, "00".yellow);
+    // console.log(newObj, "00".yellow);
   });
   return newObj;
 };
@@ -112,7 +112,7 @@ const removeFavorite = catchAsync(async (req, res, next) => {
 // #1 add to favorites
 const clearAllFavorites = catchAsync(async (req, res, next) => {
   const { userId } = req.body;
-  console.log(userId, ".all favorites cleared.".red);
+  // console.log(userId, ".all favorites cleared.".red);
   const user = await User.findById(userId);
 
   if (user) {

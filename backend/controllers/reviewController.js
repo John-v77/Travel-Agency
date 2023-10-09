@@ -1,7 +1,7 @@
 const Review = require("../models/reviewModel");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
-const colors = require("colors");
+// const colors = require("colors");
 const APIFeatures = require("../utils/apiFeatures");
 
 const getAllReviews = catchAsync(async (req, res, next) => {

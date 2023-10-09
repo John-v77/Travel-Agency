@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const colors = require("colors");
+// const colors = require("colors");
 
 const settingsWWW = {
   host: process.env.EMAIL_HOST,
@@ -10,11 +10,7 @@ const settingsWWW = {
   },
 };
 
-// console.log(settingsWWW, "KKKKKKKKKKKKKKK".red);
-
 const sendEmail = async (options) => {
-  // console.log(options, "KKKKKKKKKKKKKKK".blue);
-
   // create transporter
   const transporter = nodemailer.createTransport({
     // service: "Gmail",

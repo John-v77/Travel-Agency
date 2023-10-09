@@ -1,5 +1,5 @@
 const catchAsync = require("../utils/catchAsync");
-const colors = require("colors");
+// const colors = require("colors");
 const AppError = require("../utils/appError");
 const ShoppingCart = require("../models/shoppingCartModel");
 const Destination = require("../models/destinationModel");

@@ -20,8 +20,7 @@ const DestinationSchema = new Schema(
           validator.isAlpha(val, ["en-US"], {
             ignore: " ",
           }),
-        message:
-          "Destinations name must only contain characters",
+        message: "Destinations name must only contain characters",
       },
     },
     slug: {
@@ -29,10 +28,7 @@ const DestinationSchema = new Schema(
     },
     price: {
       type: Number,
-      required: [
-        true,
-        "Add a price for the vacantion package",
-      ],
+      required: [true, "Add a price for the vacantion package"],
       min: [100, "Price must be at least $100"],
       max: [10000, "Price must be at less then $10,000"],
     },
@@ -49,10 +45,7 @@ const DestinationSchema = new Schema(
     },
     durationInDays: {
       type: Number,
-      required: [
-        true,
-        "Add a duration for the vacantion package",
-      ],
+      required: [true, "Add a duration for the vacantion package"],
       max: [90, "Duration must be at less then 90 days"],
     },
     image_url: {
@@ -61,10 +54,7 @@ const DestinationSchema = new Schema(
     },
     description: {
       type: String,
-      required: [
-        true,
-        "Add description to destination package",
-      ],
+      required: [true, "Add description to destination package"],
       maxlength: [
         40,
         "Description has to be less then 40 characters",
@@ -105,12 +95,12 @@ DestinationSchema.pre("save", function (next) {
 });
 
 DestinationSchema.pre("save", function (next) {
-  console.log("will save document", this);
+  // console.log("will save document", this);
   next();
 });
 
 DestinationSchema.post("save", function (doc, next) {
-  console.log(doc, "post doc - document is saved".red);
+  // console.log(doc, "post doc - document is saved".red);
   next();
 });
 
@@ -123,17 +113,11 @@ DestinationSchema.pre(/^find/, function (next) {
 });
 
 DestinationSchema.post(/^find/, function (doc, next) {
-  console.log(
-    `query took ${Date.now() - this.start}  milliseconds`
-      .yellow
-  );
+  console.log(`query took ${Date.now() - this.start}  milliseconds`);
 
   next();
 });
 
-const destinationModel = model(
-  "Destination",
-  DestinationSchema
-);
+const destinationModel = model("Destination", DestinationSchema);
 
 module.exports = destinationModel;
