@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../../store/slices/userSlice";
 import DestinationsDisplayCard from "../../Features/destinationsDisplay/DestinationsDisplay.card";
 
-function Acount(props) {
+function Account(props) {
   const { userToken, userInfo } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
   return (
     <div className="min-h-screen">
@@ -51,9 +52,9 @@ function Acount(props) {
               );
             })
           )}
-          {(userInfo && userInfo.favorites.length === 0) ?? (
+          {userInfo && userInfo.favorites.length === 0 ? (
             <p>No favorites yet</p>
-          )}
+          ) : null}
           {/* Test the products */}
         </div>
       </div>
@@ -61,4 +62,4 @@ function Acount(props) {
   );
 }
 
-export default Acount;
+export default Account;

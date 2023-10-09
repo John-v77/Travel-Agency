@@ -39,9 +39,9 @@ function Navbar(props) {
         <li>
           <Link to="/destinations">Destinations</Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/test">test</Link>
-        </li>
+        </li> */}
       </ul>
       <div
         className={
@@ -109,11 +109,11 @@ function Navbar(props) {
                 Destinations
               </Link>
             </li>
-            <li className="mobileLi">
+            {/* <li className="mobileLi">
               <Link to="/test" onClick={handleNav}>
                 test
               </Link>
-            </li>
+            </li> */}
           </ul>
 
           <div className="flex flex-col">

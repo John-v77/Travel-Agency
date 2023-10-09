@@ -6,9 +6,9 @@ import Footer from "./components/Features/footer/Footer";
 import Destinations from "./components/Pages/Destinations/Destinations";
 import Login from "./components/Pages/login/Login";
 import Register from "./components/Pages/login/Register";
-import Sandbox from "./components/Pages/TestPage/Sandbox";
+// import Sandbox from "./components/Pages/TestPage/Sandbox";
 import { useSelector } from "react-redux";
-import Acount from "./components/Pages/login/Acount";
+import Account from "./components/Pages/login/Acount";
 import SearchPage from "./components/Features/SearchBox/SearchPage";
 import DestinationDetails from "./components/Pages/Destinations/DestinationDetails";
 import ShoppingCartPage from "./components/Pages/ShoppingCart/ShoppingCartPage";
@@ -22,7 +22,7 @@ function App() {
       <Routes>
         <Route index element={<Home />} />
         <Route path="destinations" element={<Destinations />} />
-        <Route path="test" element={<Sandbox />} />
+        {/* <Route path="test" element={<Sandbox />} /> */}
         <Route path="searched/:keyword" element={<SearchPage />} />
         <Route
           path="details/:productId"
@@ -30,7 +30,7 @@ function App() {
         />
         <Route
           path="account"
-          element={userToken ? <Acount /> : <Login />}
+          element={userToken ? <Account /> : <Login />}
         />
         <Route path="register" element={<Register />} />
         <Route path="/cart" element={<ShoppingCartPage />} />
