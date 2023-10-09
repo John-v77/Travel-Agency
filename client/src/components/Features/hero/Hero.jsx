@@ -8,7 +8,7 @@ function Hero(props) {
         className="w-full h-full object-cover"
         src={video1}
         loop
-        // autoPlay
+        autoPlay
         muted
       />
       <div className="absolute w-full h-full left-0 top-0 bg-gray-900/30"></div>

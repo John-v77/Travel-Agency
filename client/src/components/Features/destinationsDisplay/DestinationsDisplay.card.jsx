@@ -10,7 +10,7 @@ import {
   addProdToFavorites,
   removeProdFromFavorites,
 } from "../../../store/services/userService";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function DestinationsDisplayCard(props) {
   const { prodId, userId, name, bg, price, favD } = props;
@@ -22,7 +22,7 @@ function DestinationsDisplayCard(props) {
       await dispatch(addProdToFavorites({ userId, prodId }));
       setFavored((currrent) => !currrent);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   }, [favored]);
 
@@ -32,7 +32,7 @@ function DestinationsDisplayCard(props) {
       await dispatch(removeProdFromFavorites({ userId, prodId }));
       setFavored((currrent) => !currrent);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   }, [favored]);
 
@@ -40,9 +40,11 @@ function DestinationsDisplayCard(props) {
     <div className="relative">
       <img className="w-full h-full object-cover" src={bg} alt="/" />
       <div className="bg-gray-900/30 absolute top-0 left-0 w-full h-full">
-        <p className="left-4 bottom-2 text-xl font-bold text-white absolute">
-          {name}
-        </p>
+        <Link to={`/details/${prodId}`}>
+          <p className="left-4 bottom-2 text-xl font-bold text-white hover:border-b-2 absolute">
+            {name}
+          </p>
+        </Link>
         <p className="right-4 bottom-2  text-white absolute">
           ${price}
         </p>
@@ -67,12 +69,6 @@ function DestinationsDisplayCard(props) {
           </button>
         ) : null}
         <br />
-        <Link to={`/details/${prodId}`}>
-          <MdRemoveRedEye
-            size={20}
-            className="text-white mx-2 hover:text-orange-400"
-          />
-        </Link>
       </div>
     </div>
   );
