@@ -8,10 +8,10 @@ function Register(props) {
 
   const dispatch = useDispatch();
   const user = {
-    name: "john",
-    email: "email@test.com",
-    password: "123",
-    confirmPassword: "123",
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   };
   const [userZ, setUser] = useState(user);
   let navigate = useNavigate();
@@ -19,7 +19,7 @@ function Register(props) {
     const { name, value } = e.target;
 
     setUser({ ...userZ, [name]: value });
-    console.log(userZ);
+    // console.log(userZ);
   };
 
   const registerHandler = async (e) => {
@@ -28,7 +28,7 @@ function Register(props) {
       await dispatch(registerUser(userZ)).unwrap();
       navigate("/account");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -42,9 +42,7 @@ function Register(props) {
 
       <div className="test11 ">
         {userToken ? "logged in" : "not auth"}
-        <button onClick={() => dispatch(logOut())}>
-          log out
-        </button>
+        <button onClick={() => dispatch(logOut())}>log out</button>
       </div>
       <div className="my-20">
         <h2 className="text-2xl text-center my-4 md:my-6">
@@ -81,9 +79,7 @@ function Register(props) {
               />
             </div>
             <div className="flex flex-col my-4">
-              <label className="mx-1">
-                Password Confirm
-              </label>
+              <label className="mx-1">Password Confirm</label>
 
               <input
                 className="border rounded-md p-2"

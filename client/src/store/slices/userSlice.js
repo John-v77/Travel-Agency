@@ -1,12 +1,6 @@
-import {
-  createAction,
-  createSlice,
-} from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
 
-import {
-  loginUser,
-  registerUser,
-} from "../actions/authActions";
+import { loginUser, registerUser } from "../actions/authActions";
 
 import {
   addProdToFavorites,
@@ -14,9 +8,7 @@ import {
 } from "../services/userService";
 import { getWithExpiry } from "../../utils/setStorage";
 
-export const addFavoritesError = createAction(
-  "addFavoritesError"
-);
+export const addFavoritesError = createAction("addFavoritesError");
 
 const savedUserInfo = getWithExpiry("userInfo")
   ? getWithExpiry("userInfo")
@@ -56,19 +48,12 @@ const authSlice = createSlice({
         state.error = null;
       })
 
-      .addCase(
-        loginUser.fulfilled,
-        (state, { payload }) => {
-          console.log(
-            payload.data.user,
-            "what is the payload MMJ"
-          );
-          state.isLoading = false;
-          state.success = true;
-          state.userInfo = payload.data.user;
-          state.userToken = payload.token;
-        }
-      )
+      .addCase(loginUser.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.success = true;
+        state.userInfo = payload.data.user;
+        state.userToken = payload.token;
+      })
 
       .addCase(loginUser.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -80,43 +65,30 @@ const authSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(
-        registerUser.fulfilled,
-        (state, { payload }) => {
-          state.isLoading = false;
-          state.success = true;
-          state.userInfo = payload;
-          state.userToken = payload.token;
-        }
-      )
-      .addCase(
-        registerUser.rejected,
-        (state, { payload }) => {
-          state.isLoading = false;
-          state.error = payload;
-        }
-      )
+      .addCase(registerUser.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.success = true;
+        state.userInfo = payload.data.user;
+        state.userToken = payload.token;
+      })
+      .addCase(registerUser.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
       // 3 add to favorites
       .addCase(addProdToFavorites.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(
-        addProdToFavorites.fulfilled,
-        (state, { payload }) => {
-          console.log(payload, "what is the payload JJI2");
-          state.isLoading = false;
-          state.success = true;
-          state.userInfo.favorites = payload;
-        }
-      )
-      .addCase(
-        addProdToFavorites.rejected,
-        (state, { payload }) => {
-          state.isLoading = false;
-          state.error = payload;
-        }
-      )
+      .addCase(addProdToFavorites.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.success = true;
+        state.userInfo.favorites = payload;
+      })
+      .addCase(addProdToFavorites.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
       // this will need to be refactored later
       .addCase(removeProdFromFavorites.pending, (state) => {
         state.isLoading = true;
@@ -125,10 +97,6 @@ const authSlice = createSlice({
       .addCase(
         removeProdFromFavorites.fulfilled,
         (state, { payload }) => {
-          console.log(
-            payload,
-            "what is the payload remove JJI2"
-          );
           state.isLoading = false;
           state.success = true;
           state.userInfo.favorites = payload;
