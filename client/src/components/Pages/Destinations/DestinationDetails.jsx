@@ -11,7 +11,7 @@ function DestinationDetails(props) {
   const featuredProduct = products.filter((item) => {
     return item.id.includes(productId.toLowerCase());
   })[0];
-  console.log(productId, products, featuredProduct);
+  // console.log(productId, products, featuredProduct);
 
   const addToCartHandler = (product) => {
     dispatch(addToCart({ ...product, qty: 1 }));
@@ -19,6 +19,7 @@ function DestinationDetails(props) {
   return (
     <div className="min-h-screen">
       <img
+        data="header_image"
         src="https://www.wallpaperup.com/uploads/wallpapers/2013/09/29/153361/44e5a3fd8a183ce3ab4d2130ba1b66bb.jpg"
         className="w-full h-20 object-cover object-top "
         alt="navbar background"
@@ -40,9 +41,20 @@ function DestinationDetails(props) {
             >
               book now
             </button>
-            <Link to="/cart" className="mx-10">
-              Shopping Cart
-            </Link>
+            <div>
+              <Link
+                to="/destinations"
+                className="border-solid border-b-2 border-gray-600 p-1"
+              >
+                Continue Shopping
+              </Link>
+              <Link
+                to="/cart"
+                className="mx-10 border-solid border-b-2 border-gray-600 p-1"
+              >
+                Shopping Cart
+              </Link>
+            </div>
           </div>
           <p className="break-normal max-w-20">
             {featuredProduct.description}

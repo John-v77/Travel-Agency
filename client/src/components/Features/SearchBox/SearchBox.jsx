@@ -1,6 +1,5 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// const inputRef = useRef();
 
 function SearchBox({ handleSearchBar }) {
   const [keyword, setKeyword] = useState("");
@@ -11,8 +10,6 @@ function SearchBox({ handleSearchBar }) {
     if (keyword.trim()) {
       navigate(`/searched/${keyword}`);
       setKeyword("");
-    } else {
-      navigate("/searched");
     }
   };
 
@@ -20,7 +17,7 @@ function SearchBox({ handleSearchBar }) {
     <form className="w-full max-w-sm" onSubmit={handleSearchAction}>
       <div className="flex items-center  py-1">
         <input
-          className="appearance-none bg-transparent border-none w-full text-gray-700 py-1 px-2 leading-tight focus:outline-none"
+          className="appearance-none bg-transparent border-none w-full text-gray-400 py-1 px-2 leading-tight focus:outline-none"
           type="text"
           value={keyword}
           placeholder="travel destination"
