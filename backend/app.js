@@ -10,10 +10,11 @@ const destinationsRouter = require("./routes/destinationsRoutes");
 const userRouter = require("./routes/userRoutes");
 const reviewRouter = require("./routes/reviewRoutes");
 const cartRouter = require("./routes/shoppingCartRoutes");
-const helmet = require("helmet");
+
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const hpp = require("hpp");
+const compression = require("compression");
 
 //|
 //|
@@ -23,10 +24,16 @@ const app = express();
 //|
 //|
 // Implement Cors
+
+const clientUrl =
+  process.NODE_ENV === "production"
+    ? process.env.CORS_ORIGIN
+    : "http://localhost:3000";
+
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:3000"], //Swap this with the client url
+    origin: [clientUrl], //Swap this with the client url
   })
 );
 // app.options("*", cors());
@@ -36,7 +43,6 @@ app.use(
 //|
 //|
 // Set Security HTTP headers
-app.use(helmet());
 
 //|
 //|
@@ -90,11 +96,32 @@ app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 //|
 //|
 // serve static files
-// const path = require("path");
-// app.use(express, static(path.join(__dirname, "../client/build")));
-// app.get("*", (req, res, next) => {
-//   res.sendFile(path.join(__dirname, "../client/build/index.html"));
-// });
+if (process.env.NODE_ENV === "production") {
+  const path = require("path");
+  app.use(express.static(path.join(__dirname, "../client/build")));
+
+  app.get("*", (req, res, next) => {
+    console.log(
+      "something strange",
+      req.headers.host,
+      "\n reqUrl:",
+      req.url
+    );
+
+    if (req.headers.host.includes("heroku")) {
+      res.sendFile(
+        path.join(__dirname, "../client/build/index.html")
+      );
+    } else {
+      next();
+    }
+  });
+}
+
+//|
+//|
+// compresses the api response
+app.use(compression());
 
 //|
 //|

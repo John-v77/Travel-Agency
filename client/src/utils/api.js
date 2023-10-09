@@ -1,6 +1,16 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:5000/api";
+const baseURL =
+  process.env.NODE_ENV !== "production"
+    ? "http://localhost:5000/api"
+    : process.env.CORS_ORIGIN;
+
+const token = localStorage.getItem("token");
+
+// const API = axios.create({
+//   baseURL,
+//   headers: { Authorization: `Bearer ${token}` },
+// });
 
 let resetHead = () => {
   return {
@@ -40,7 +50,6 @@ const apiActions = {
   },
 
   addProdToUserFav: async (user_id, prod_id) => {
-    console.log("do we have the data for fav", user_id, prod_id);
     const res = await axios.post(
       `${baseURL}/v1/user/addFavorite`,
       {
@@ -50,15 +59,10 @@ const apiActions = {
       resetHead()
     );
 
-    console.log(
-      res.data.data.user.favorites,
-      "is data coming add fav?"
-    );
     return res.data.data.user.favorites;
   },
 
   removeProdFromUserFav: async (user_id, prod_id) => {
-    console.log("do we have the data for rem fav", user_id, prod_id);
     const res = await axios.post(
       `${baseURL}/v1/user/removeFavorite`,
       {
@@ -68,16 +72,11 @@ const apiActions = {
       resetHead()
     );
 
-    console.log(
-      res.data.data.user.favorites,
-      "is data coming- remove fav?"
-    );
     return res.data.data.user.favorites;
   },
 
   getDestinations: async () => {
     const res = await axios.get(`${baseURL}/v1/vacantions`);
-
     return res.data.data.destinations;
   },
 
@@ -133,7 +132,6 @@ const apiActions = {
   },
 
   getUserCart: async (user_id) => {
-    console.log("axios cart", user_id);
     const res = await axios.post(
       `${baseURL}/v1/cart/cart`,
       {
@@ -142,7 +140,6 @@ const apiActions = {
       // resetHead()
     );
 
-    console.log(res.data.items, "what is the cart front end");
     return res.data;
 
     // http://localhost:5000/api/v1/vacantions
