@@ -24,7 +24,7 @@ function Login(props) {
   const loginHandler = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(loginUser(user)).unwrap();
+      await dispatch(loginUser(userZ)).unwrap();
       navigate("/account");
     } catch (err) {
       console.log(err);
@@ -59,7 +59,7 @@ function Login(props) {
                 className="border rounded-md p-2"
                 onChange={recordInput}
                 type="password"
-                name="pswd"
+                name="password"
               />
             </div>
 

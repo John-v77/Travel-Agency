@@ -32,8 +32,7 @@ function Destinations(props) {
           </div>
           <img
             className="w-full max-h-[500px] object-cover"
-            //   src='https://jeunessetravel.com/wp-content/uploads/jeunesse-travel-video-thumbnail.jpg?auto=compress@cs=tinysrgb@w=1260&h=750&pr=2'
-            src="https://imageio.forbes.com/specials-images/dam/imageserve/1171238184/0x0.jpg?format=jpg&width=1600"
+             src="https://imageio.forbes.com/specials-images/dam/imageserve/1171238184/0x0.jpg?format=jpg&width=1600"
             alt="/"
           />
         </div>

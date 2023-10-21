@@ -1,21 +1,23 @@
 import axios from "axios";
+import { getWithExpiry } from "./setStorage";
 
 const baseURL =
-  process.env.NODE_ENV !== "production"
-    ? "http://localhost:5000/api"
-    : process.env.CORS_ORIGIN;
-
-const token = localStorage.getItem("token");
+  "https://prod-app-travel-v1-acd8e432771b.herokuapp.com";
+// "http://localhost:5000";
 
 // const API = axios.create({
 //   baseURL,
 //   headers: { Authorization: `Bearer ${token}` },
 // });
 
+const utoken = getWithExpiry("userToken")
+  ? getWithExpiry("userToken")
+  : null;
+
 let resetHead = () => {
   return {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+      Authorization: `Bearer ${utoken}`,
     },
   };
 };
@@ -23,7 +25,7 @@ let resetHead = () => {
 const apiActions = {
   loginUser: async (user, password) => {
     const res = await axios.post(
-      `${baseURL}/v1/user/login`,
+      `${baseURL}/api/v1/user/login`,
       {
         email: user,
         password: password,
@@ -36,7 +38,7 @@ const apiActions = {
 
   registerUser: async (name, email, password) => {
     const res = await axios.post(
-      `${baseURL}/v1/user/signup`,
+      `${baseURL}/api/v1/user/signup`,
       {
         name: name,
         email: email,
@@ -51,7 +53,7 @@ const apiActions = {
 
   addProdToUserFav: async (user_id, prod_id) => {
     const res = await axios.post(
-      `${baseURL}/v1/user/addFavorite`,
+      `${baseURL}/api/v1/user/addFavorite`,
       {
         userId: user_id,
         prodId: prod_id,
@@ -64,7 +66,7 @@ const apiActions = {
 
   removeProdFromUserFav: async (user_id, prod_id) => {
     const res = await axios.post(
-      `${baseURL}/v1/user/removeFavorite`,
+      `${baseURL}/api/v1/user/removeFavorite`,
       {
         userId: user_id,
         prodId: prod_id,
@@ -76,68 +78,21 @@ const apiActions = {
   },
 
   getDestinations: async () => {
-    const res = await axios.get(`${baseURL}/v1/vacantions`);
+    console.log("getting prod3", `${baseURL}/api/v1/vacantions`);
+    const res = await axios.get(
+      `${baseURL}/api/v1/vacantions`,
+      resetHead()
+    );
     return res.data.data.destinations;
-  },
-
-  getDestinations2: async () => {
-    const dataY = [
-      {
-        vipDestinations: false,
-        _id: "64d7c935e4ff661b0d0f109z",
-        name: "ClearWater, FL",
-        price: 500,
-        durationInDays: 4,
-        image_url:
-          "https://img1.10bestmedia.com/Images/Photos/343768/SHOR-Terrace--1-_55_660x440.jpg",
-        description: "Hello for Jamaica",
-        slug: "ClearWater, FL",
-        __v: 0,
-      },
-      {
-        vipDestinations: false,
-        _id: "64d7c6f5bb810ad92d8ce7ae",
-        name: "Tampa, FL",
-        price: 1000,
-        durationInDays: 4,
-        image_url:
-          "https://tampabaydatenightguide.com/wp-content/uploads/sites/2/2021/05/sandpearl-1024x768.jpg",
-        description: "Hello for Jamaica",
-        __v: 0,
-      },
-      {
-        vipDestinations: false,
-        _id: "64d7c6f5bb810ad92d8ce77e",
-        name: "Tampa, FL",
-        price: 1500,
-        durationInDays: 4,
-        image_url:
-          "https://tampabaydatenightguide.com/wp-content/uploads/sites/2/2021/05/sandpearl-1024x768.jpg",
-        description: "Hello for Jamaica",
-        __v: 0,
-      },
-      {
-        vipDestinations: false,
-        _id: "64d7c6f5bb810ad92dghj77e",
-        name: "Tampa, FL",
-        price: 1200,
-        durationInDays: 4,
-        image_url:
-          "https://tampabaydatenightguide.com/wp-content/uploads/sites/2/2021/05/sandpearl-1024x768.jpg",
-        description: "Hello for Jamaica",
-        __v: 0,
-      },
-    ];
-    return dataY;
   },
 
   getUserCart: async (user_id) => {
     const res = await axios.post(
-      `${baseURL}/v1/cart/cart`,
+      `${baseURL}/api/v1/cart/cart`,
       {
         userId: user_id,
-      }
-      // resetHead()
+      },
+      resetHead()
     );
 
     return res.data;

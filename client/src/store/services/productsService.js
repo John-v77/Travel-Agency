@@ -1,6 +1,5 @@
 import apiActions from "../../utils/api";
 import {
-  incrementZ,
   setProducts,
   setProductsError,
 } from "../slices/productSlice";

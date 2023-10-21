@@ -26,23 +26,19 @@ const app = express();
 // Implement Cors
 
 const clientUrl =
-  process.NODE_ENV === "production"
+  process.env.NODE_ENV === "production"
     ? process.env.CORS_ORIGIN
     : "http://localhost:3000";
 
 app.use(
   cors({
     credentials: true,
-    origin: [clientUrl], //Swap this with the client url
+    origin: clientUrl, //Swap this with the client url
   })
 );
 // app.options("*", cors());
 
 // GLOBAL MIDDLEWARES
-
-//|
-//|
-// Set Security HTTP headers
 
 //|
 //|
@@ -66,9 +62,9 @@ app.use(
 //|
 //|
 // Dev logging
-// if (process.NODE_ENV === "development") {
-//   app.use(morgan("dev"));
-// }
+if (process.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
 //|
 //|
@@ -96,27 +92,9 @@ app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 //|
 //|
 // serve static files
-if (process.env.NODE_ENV === "production") {
-  const path = require("path");
-  app.use(express.static(path.join(__dirname, "../client/build")));
 
-  app.get("*", (req, res, next) => {
-    console.log(
-      "something strange",
-      req.headers.host,
-      "\n reqUrl:",
-      req.url
-    );
-
-    if (req.headers.host.includes("heroku")) {
-      res.sendFile(
-        path.join(__dirname, "../client/build/index.html")
-      );
-    } else {
-      next();
-    }
-  });
-}
+const path = require("path");
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 //|
 //|
@@ -126,11 +104,11 @@ app.use(compression());
 //|
 //|
 // Testing middleware
-app.use((req, res, next) => {
-  req.requstTime = new Date().toISOString();
-  // console.log("what are the headers", req.headers);
-  next();
-});
+// app.use((req, res, next) => {
+//   req.requstTime = new Date().toISOString();
+//   // console.log("what are the headers", req.headers);
+//   next();
+// });
 
 //|
 //|
@@ -139,6 +117,11 @@ app.use("/api/v1/vacantions", destinationsRouter);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/cart", cartRouter);
+
+
+// app.get("*", (req, res, next) => {
+//   res.sendFile(path.join(__dirname, "../client/build/index.html"));
+// });
 
 // handle unknown routes
 app.all("*", (req, res, next) => {

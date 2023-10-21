@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { registerUser } from "../../../store/actions/authActions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { logOut } from "../../../store/slices/userSlice";
-function Register(props) {
-  const { userToken } = useSelector((state) => state.user);
 
+function Register(props) {
   const dispatch = useDispatch();
   const user = {
     name: "",
@@ -40,10 +38,6 @@ function Register(props) {
         alt="blue sky"
       />
 
-      <div className="test11 ">
-        {userToken ? "logged in" : "not auth"}
-        <button onClick={() => dispatch(logOut())}>log out</button>
-      </div>
       <div className="my-20">
         <h2 className="text-2xl text-center my-4 md:my-6">
           Register
