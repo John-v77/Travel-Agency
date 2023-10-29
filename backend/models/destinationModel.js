@@ -34,6 +34,7 @@ const DestinationSchema = new Schema(
     },
     priceDiscount: {
       type: Number,
+      default: 0,
       validate: {
         // THIS VALIDATOR WILL NOT WORK ON UPDATE() this only point on NEW document creation
         validator: function (val) {
@@ -64,7 +65,15 @@ const DestinationSchema = new Schema(
         "Description has to be at least then 10 characters",
       ],
     },
+    region: {
+      type: String,
+      required: [true, "Add a name for Trip Destination"]
+    },
     vipDestinations: {
+      type: Boolean,
+      default: false,
+    },
+    featured: {
       type: Boolean,
       default: false,
     },

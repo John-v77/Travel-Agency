@@ -14,11 +14,13 @@ function DestinationsDisplay(props) {
   }, []);
 
   const priceFilters = ["$", "$$", "$$$"];
-  // const regionFilters = ["Asia", "Europa", "America", "Africa"];
+  const regionFilters = ["Asia", "Europe", "America", "Africa"];
 
-  // const filterByRegion = (region) => {
-  //   destPackages.filter((item) => item.region === region);
-  // };
+  const filterByRegion = (region) => {
+    console.log(region, "region")
+    setDestPackages(
+    destPacks.filter((item) => item.region === region))
+  };
   const filterByPrice = useCallback(
     (price) => {
       setDestPackages(
@@ -36,10 +38,10 @@ function DestinationsDisplay(props) {
         <div>
           {/* Filter Region */}
           <p className="font-bold text-gray-700">
-            {/* Filter by Continent */}
+            Region
           </p>
           <div className="flex justfiy-between flex-wrap">
-            {/* {regionFilters.map((el, index) => {
+            {regionFilters.map((el, index) => {
               return (
                 <button
                   key={`${index}regionFilter`}
@@ -52,7 +54,7 @@ function DestinationsDisplay(props) {
                   {el}
                 </button>
               );
-            })} */}
+            })}
             <button
               onClick={() => setDestPackages(destPacks)}
               className="mr-1 my-1 w-20 p-0
@@ -93,6 +95,7 @@ function DestinationsDisplay(props) {
         ) : (
           // mapping products
           destPackages.map((el) => {
+            if(!el.featured){
             return (
               <DestinationsDisplayCard
                 key={el._id}
@@ -105,6 +108,7 @@ function DestinationsDisplay(props) {
                 favD={false}
               />
             );
+            }
           })
         )}
         {destPacks.length === 0 ?? <p>no products</p>}

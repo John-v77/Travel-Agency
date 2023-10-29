@@ -37,7 +37,7 @@ function Destinations(props) {
           />
         </div>
 
-        <FeaturedDes />
+        <FeaturedDes destPacks={products} />
         <DestinationsDisplay destPacks={products} />
       </div>
     );
