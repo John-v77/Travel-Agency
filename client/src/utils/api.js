@@ -1,9 +1,9 @@
 import axios from "axios";
 import { getWithExpiry } from "./setStorage";
 
-const baseURL =
-  "https://prod-app-travel-v1-acd8e432771b.herokuapp.com";
-// "http://localhost:5000";
+const baseURL = process.env.NODE_ENV === "production" ?
+  "https://prod-app-travel-v1-acd8e432771b.herokuapp.com":
+  "http://localhost:5000";
 
 // const API = axios.create({
 //   baseURL,
