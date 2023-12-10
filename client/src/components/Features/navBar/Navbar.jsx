@@ -39,6 +39,10 @@ function Navbar(props) {
         <li>
           <Link to="/destinations">Destinations</Link>
         </li>
+
+        <li>
+          <Link to="/parallax">Special offer</Link>
+        </li>
         {/* <li>
           <Link to="/test">test</Link>
         </li> */}
@@ -75,10 +79,7 @@ function Navbar(props) {
         </Link>
       </div>
 
-      <div
-        onClick={handleNav}
-        className="md:hidden  z-20 mobile-menu-btn "
-      >
+      <div onClick={handleNav} className="md:hidden  z-20 mobile-menu-btn ">
         {mobNav ? (
           <AiOutlineClose size={20} className="text-black" />
         ) : (
@@ -95,10 +96,7 @@ function Navbar(props) {
       >
         <div className="bg-gray-100/95 p-4 px-4  text-black">
           <h1 className="">Travel.</h1>
-          <ul
-            onClick={handleNav}
-            className="flex flex-col md:hidden "
-          >
+          <ul onClick={handleNav} className="flex flex-col md:hidden ">
             <li className="mobileLi">
               <Link to="/" onClick={handleNav}>
                 Home
