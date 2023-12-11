@@ -27,31 +27,31 @@ import fog7 from "../../../assets/Parallax/fog_7.png";
 function Parallax(props) {
   return (
     <div className="main_div">
-      {/* <img src={background} alt="" className="bg_image" /> */}
+      <img src={background} alt="" className="bg_image" />
       {/* {/* <img src={fog7} alt="" className="fog-7" /> */}
-      {/* <img src={mountain10} alt="" className="mountain-10" /> */}
-      {/* <img src={fog6} alt="" className="" /> */}
-      {/* <img src={mountain9} alt="" className="mountain-9" /> */}
-      {/* <img src={mountain8} alt="" className="mountain-8" /> */}
-      {/* <img src={fog5} alt="" className="" /> */}
-      {/* <img src={mountain7} alt="" className="mountain-7" /> */}
+      <img src={mountain10} alt="" className="mountain-10" />
+      {/* <img src={fog6} alt="" className="fog-6" /> */}
+      <img src={mountain9} alt="" className="mountain-9" />
+      <img src={mountain8} alt="" className="mountain-8" />
+      {/* <img src={fog5} alt="" className="fog-5" /> */}
+      <img src={mountain7} alt="" className="mountain-7" />
       <div className="text parallax">
         <h1>A Daring</h1>
         <h2>Adventure</h2>
       </div>
       <img src={mountain6} alt="" className="mountain-6" />
-      {/* <img src={fog4} alt="" className="" /> */}
-      {/* <img src={mountain5} alt="" className="mountain-5" /> */}
-      {/* <img src={fog3} alt="" className="" /> */}
+      {/* <img src={fog4} alt="" className="fog-4" /> */}
+      <img src={mountain5} alt="" className="mountain-5" />
+      {/* <img src={fog3} alt="" className="fog-3" /> */}
       <img src={mountain4} alt="" className="mountain-4" />
       <img src={mountain3} alt="" className="mountain-3" />
 
-      {/* <img src={fog2} alt="" className="" /> */}
+      {/* <img src={fog2} alt="" className="fog-2" /> */}
       <img src={mountain2} alt="" className="mountain-2" />
       <img src={mountain1} alt="" className="mountain-1" />
-      {/* <img src={sun_rays} alt="" className="" />
-      <img src={shadow} alt="" className="" />
-      <img src={fog1} alt="" className="" />  */}
+      {/* <img src={sun_rays} alt="" className="" /> */}
+      {/* <img src={shadow} alt="" className="shadow-bt" /> */}
+      <img src={fog1} alt="" className="fog-1" />
     </div>
   );
 }

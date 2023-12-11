@@ -1,6 +1,7 @@
 .main_div {
   /* background-color: blueviolet; */
   width: calc(100vw - 3rem);
+  /* background-color: #0f555a; */
   background-color: blueviolet;
   height: 100vh;
   overflow: hidden;
@@ -10,8 +11,8 @@
 .bg_image {
   position: absolute;
   width: 100%;
-  top: calc(50% - 190px);
-  left: calc(50%);
+  top: 16%;
+  left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
 }
@@ -39,78 +40,77 @@
 
 .bg-img {
   width: 2800px;
-  top: calc(50% - 390px);
-  left: calc(50% + 10px);
+  top: calc(50% - 18rem);
+  left: calc(50% + 2rem);
   z-index: 1;
 }
 
 .mountain-10 {
   position: absolute;
   z-index: 3;
-  top: calc(50% + 69px);
+  top: calc(50% - 19rem);
   width: 55rem;
-  left: calc(50% + 230px);
+  left: calc(50% - 5rem);
 }
 .mountain-9 {
   position: absolute;
   z-index: 5;
-  top: calc(50% + 119px);
+  top: calc(50% - 16rem);
   width: 29rem;
-  left: calc(50% - 457px);
+  left: calc(50% - 44rem);
 }
 
 .mountain-8 {
   position: absolute;
   z-index: 6;
-  top: calc(50% + 96px);
-  width: 49rem;
-  left: calc(50% - 202px);
+  top: calc(50% - 10rem);
+  width: 55rem;
+  left: calc(50% - 39rem);
 }
 
 .mountain-7 {
   position: absolute;
   z-index: 8;
   width: 32rem;
-  top: calc(50% + 134px);
-  left: calc(50% + 305px);
+  top: calc(50% - 10rem);
+  left: calc(50%);
 }
 
 .mountain-6 {
   position: absolute;
   z-index: 10;
-  top: calc(20%);
+  top: calc(50% - 20rem);
   width: 24rem;
-  left: calc(70%);
+  left: calc(50% + 16rem);
 }
 .mountain-5 {
   position: absolute;
   z-index: 12;
-  top: calc(58%);
+  top: calc(50% + 4rem);
   width: 37rem;
-  left: calc(30% + 2rem);
+  left: calc(50% - 10rem);
 }
 .mountain-4 {
   position: absolute;
   z-index: 14;
-  top: calc(44%);
-  left: calc(-2rem);
-  width: 45rem;
+  top: calc(50% - 7rem);
+  left: calc(50% - 52rem);
+  width: 52rem;
 }
 
 .mountain-3 {
   position: absolute;
   z-index: 15;
-  top: calc(20%);
+  top: calc(50% - 15rem);
   right: -5%;
-  /* calc(2%); */
   width: 26rem;
 }
 
 .mountain-2 {
   position: absolute;
   z-index: 17;
-  top: calc(30%);
-  left: calc(45% + 1rem);
+  top: calc(50% - 2rem);
+  left: calc(52%);
   width: 33rem;
 }
 
@@ -118,19 +118,21 @@
   position: absolute;
   z-index: 18;
   top: 0;
-  left: -5.5rem;
-  width: 28rem;
+  left: calc(50% - 58rem);
+  width: 35rem;
 }
 
 .fog-1 {
+  /* border: solid 2px red; */
   position: absolute;
   z-index: 2;
-  top: calc(50% - 100px);
-  left: calc(50% + 300px);
-  width: 1900px;
+  top: calc(0%);
+  left: calc(0%);
+  width: 119rem;
 }
 
 .fog-2 {
+  display: none;
   position: absolute;
   z-index: 4;
   top: calc(50% + 95px);
@@ -139,14 +141,17 @@
 }
 
 .fog-3 {
+  display: none;
   position: absolute;
   z-index: 7;
+
   top: calc(50% + 171px);
   left: calc(50% + 29px);
   width: 449px;
 }
 
 .fog-4 {
+  display: none;
   position: absolute;
   z-index: 11;
   top: calc(50% + 242px);
@@ -155,6 +160,7 @@
 }
 
 .fog-5 {
+  display: none;
   position: absolute;
   z-index: 13;
   top: calc(50% + 149px);
@@ -163,6 +169,7 @@
 }
 
 .fog-6 {
+  display: none;
   position: absolute;
   z-index: 16;
   top: calc(50% + 177px);
