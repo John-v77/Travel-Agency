@@ -26,41 +26,46 @@ import fog7 from "../../../assets/Parallax/fog_7.png";
 
 function Parallax(props) {
   const [MousePosition, setMousePosition] = useState({
-    left: 0,
-    top: 0,
+    xValue: 0,
+    yValue: 0,
   });
 
+  console.log(window.innerHeight / 2, window.innerWidth / 2);
+
   function handleMouseMove(e) {
-    setMousePosition({ left: e.pageX, top: e.pageY });
-    console.log(e.pageX, e.pageY);
+    setMousePosition({
+      xValue: e.xValue - window.innerWidth / 2,
+      yValue: e.yValue - window.innerHeight / 2,
+    });
+    console.log(MousePosition.xValue, MousePosition.yValue);
   }
   return (
     <div className="main_div" onMouseMove={(e) => handleMouseMove(e)}>
-      <img src={background} alt="" className="bg_image" />
-      <img src={fog7} alt="" className="fog-7" />
-      <img src={mountain10} alt="" className="mountain-10" />
-      <img src={fog6} alt="" className="fog-6" />
-      <img src={mountain9} alt="" className="mountain-9" />
-      <img src={mountain8} alt="" className="mountain-8" />
-      <img src={fog5} alt="" className="fog-5" />
-      <img src={mountain7} alt="" className="mountain-7" />
+      <img src={background} alt="" className="bg_image parallax" />
+      <img src={fog7} alt="" className="fog-7 parallax" />
+      <img src={mountain10} alt="" className="mountain-10 parallax" />
+      <img src={fog6} alt="" className="fog-6 parallax" />
+      <img src={mountain9} alt="" className="mountain-9 parallax" />
+      <img src={mountain8} alt="" className="mountain-8 parallax" />
+      <img src={fog5} alt="" className="fog-5 parallax" />
+      <img src={mountain7} alt="" className="mountain-7 parallax" />
       <div className="text parallax">
         <h1>A Daring</h1>
         <h2>Adventure</h2>
       </div>
-      <img src={mountain6} alt="" className="mountain-6" />
-      <img src={fog4} alt="" className="fog-4" />
-      <img src={mountain5} alt="" className="mountain-5" />
-      <img src={fog3} alt="" className="fog-3" />
-      <img src={mountain4} alt="" className="mountain-4" />
-      <img src={mountain3} alt="" className="mountain-3" />
+      <img src={mountain6} alt="" className="mountain-6 parallax" />
+      <img src={fog4} alt="" className="fog-4 parallax" />
+      <img src={mountain5} alt="" className="mountain-5 parallax" />
+      <img src={fog3} alt="" className="fog-3 parallax" />
+      <img src={mountain4} alt="" className="mountain-4 parallax" />
+      <img src={mountain3} alt="" className="mountain-3 parallax" />
 
-      <img src={fog2} alt="" className="fog-2" />
-      <img src={mountain2} alt="" className="mountain-2" />
-      <img src={mountain1} alt="" className="mountain-1" />
-      <img src={sun_rays} alt="" className="" />
-      <img src={shadow} alt="" className="shadow-bt" />
-      <img src={fog1} alt="" className="fog-1" />
+      <img src={fog2} alt="" className="fog-2 parallax" />
+      <img src={mountain2} alt="" className="mountain-2 parallax" />
+      <img src={mountain1} alt="" className="mountain-1 parallax" />
+      <img src={sun_rays} alt="" className=" parallax" />
+      <img src={shadow} alt="" className="shadow-bt parallax" />
+      <img src={fog1} alt="" className="fog-1 parallax" />
     </div>
   );
 }
