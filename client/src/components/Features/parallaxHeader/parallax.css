@@ -9,20 +9,22 @@
 }
 
 .bg_image {
+  object-fit: cover;
   position: absolute;
-  width: 100%;
-  top: 16%;
-  left: 50%;
+  width: 2800px;
+  top: calc(50% - 290px);
+  left: calc(50%);
   transform: translate(-50%, -50%);
   z-index: 1;
 }
 
 .fog-7 {
+  /* display: none; */
   position: absolute;
   z-index: 2;
   width: 1900px;
-  top: calc(50% - 100px);
-  left: 50%;
+  top: calc(50% - 120px);
+  left: calc(50% + 250px);
   transform: translate(-50%, -50%);
 }
 
@@ -55,7 +57,7 @@
 .mountain-9 {
   position: absolute;
   z-index: 5;
-  top: calc(50% - 16rem);
+  top: calc(50% - 13rem);
   width: 29rem;
   left: calc(50% - 44rem);
 }
@@ -92,7 +94,7 @@
 }
 .mountain-4 {
   position: absolute;
-  z-index: 14;
+  z-index: 17;
   top: calc(50% - 7rem);
   left: calc(50% - 52rem);
   width: 52rem;
@@ -123,56 +125,60 @@
 }
 
 .fog-1 {
+  display: none;
   /* border: solid 2px red; */
+  top: calc(50% - 300px);
+  left: 0;
   position: absolute;
   z-index: 2;
-  top: calc(0%);
-  left: calc(0%);
+  /* top: calc(0%);
+  left: calc(0%); */
   width: 119rem;
 }
 
 .fog-2 {
-  display: none;
+  /* display: none; */
   position: absolute;
   z-index: 4;
-  top: calc(50% + 95px);
-  left: calc(50% + 7px);
+  top: calc(50% - 295px);
+  left: calc(50% - 800px);
   width: 1833px;
 }
 
 .fog-3 {
-  display: none;
+  /* display: none; */
   position: absolute;
   z-index: 7;
-
-  top: calc(50% + 171px);
-  left: calc(50% + 29px);
+  top: calc(50% + 150px);
+  left: calc(50% - 529px);
   width: 449px;
 }
 
 .fog-4 {
-  display: none;
+  /* display: none; */
   position: absolute;
   z-index: 11;
-  top: calc(50% + 242px);
-  left: calc(50% - 64px);
+
+  top: calc(50% - 72px);
+  left: calc(50% - 644px);
   width: 543px;
 }
 
 .fog-5 {
-  display: none;
+  /* display: none; */
   position: absolute;
   z-index: 13;
-  top: calc(50% + 149px);
-  left: calc(50% - 28px);
+  top: calc(50% - 400px);
+  left: calc(50% - 900px);
   width: 1435px;
 }
 
 .fog-6 {
-  display: none;
+  /* border: solid 2px red; */
+  /* display: none; */
   position: absolute;
   z-index: 16;
-  top: calc(50% + 177px);
-  left: calc(50% - 30px);
+  top: calc(50% - 10px);
+  left: calc(50% - 500px);
   width: 1418px;
 }
