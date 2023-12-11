@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./parallax.css";
 
 import background from "../../../assets/Parallax/background.png";
@@ -25,8 +25,17 @@ import fog6 from "../../../assets/Parallax/fog_6.png";
 import fog7 from "../../../assets/Parallax/fog_7.png";
 
 function Parallax(props) {
+  const [MousePosition, setMousePosition] = useState({
+    left: 0,
+    top: 0,
+  });
+
+  function handleMouseMove(e) {
+    setMousePosition({ left: e.pageX, top: e.pageY });
+    console.log(e.pageX, e.pageY);
+  }
   return (
-    <div className="main_div">
+    <div className="main_div" onMouseMove={(e) => handleMouseMove(e)}>
       <img src={background} alt="" className="bg_image" />
       <img src={fog7} alt="" className="fog-7" />
       <img src={mountain10} alt="" className="mountain-10" />
