@@ -19,11 +19,15 @@ function Home(props) {
       </header>
 
       {/* New Deals */}
-      <section className="NewDeals mt-20 ">
-        <h2 className="text-[20px]">Our new Deals</h2>
-        <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 md:grid-cols-3">
+      <section className="NewDeals max-w-7xl mx-auto mt-20">
+        <div className="flex flex-col px-10 sm:px-0 sm:flex-row">
+          <div className="border-b-2 mx-auto sm:flex-1 sm:mb-6 "></div>
+          <h2 className="text-[20px] my-3 sm:flex-1">Our new Deals</h2>
+          <div className="border-b-2 mx-auto sm:flex-1 sm:mb-6 "></div>
+        </div>
+        <div className="flex flex-wrap max-w-7xl sm:justify-between">
           {/* Item 1 */}
-          <div className="DestinationContainer w-80 mx-auto rounded-t-sm mt-20">
+          <div className="DestinationContainer w-80 mx-auto sm:mx-0 rounded-t-sm mt-20">
             <img src={paris} alt="paris" className="80w rounded-t-sm" />
             <div className="flex justify-between bg-green-800 h-16 text-white items-center px-4 uppercase rounded-b-sm">
               <p>Paris</p>
@@ -32,7 +36,7 @@ function Home(props) {
           </div>
 
           {/* Item 1 */}
-          <div className="DestinationContainer w-80 mx-auto rounded-t-sm mt-20">
+          <div className="DestinationContainer w-80 mx-auto sm:mx-0 rounded-t-sm mt-20">
             <img src={paris} alt="paris" className="80w rounded-t-sm" />
             <div className="flex justify-between bg-green-800 h-16 text-white items-center px-4 uppercase rounded-b-sm">
               <p>Paris</p>
@@ -41,7 +45,7 @@ function Home(props) {
           </div>
 
           {/* Item 1 */}
-          <div className="DestinationContainer w-80 mx-auto rounded-t-sm mt-20">
+          <div className="DestinationContainer w-80 mx-auto lg:mx-0 rounded-t-sm mt-20">
             <img src={paris} alt="paris" className="80w rounded-t-sm" />
             <div className="flex justify-between bg-green-800 h-16 text-white items-center px-4 uppercase rounded-b-sm">
               <p>Paris</p>
@@ -52,11 +56,15 @@ function Home(props) {
       </section>
 
       <section className="MostPopular mt-20 py-20 bg-[#E5E5E5]">
-        <h2 className="text-[20px]">Popular Deals</h2>
+        <div className="flex flex-col justify-center px-10 sm:px-0 sm:flex-row sm:px-0 max-w-7xl mx-auto">
+          <div className="border-b  border-black mx-auto sm:flex-1 sm:mb-6 "></div>
+          <h2 className="text-[20px] my-3 sm:flex-1">Popular Deals</h2>
+          <div className="border-b border-black mx-auto sm:flex-1 sm:mb-6 "></div>
+        </div>
 
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="bg-blue-300 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4 lg:gap-20 max-w-7xl mx-auto">
           {/* Item 2 */}
-          <div className="DestinationContainer w-64 mx-auto rounded-t-sm mt-20">
+          <div className="DestinationContainer w-64 m-auto sm:mx-0 rounded-t-sm mt-20">
             <img
               src="https://apicms.thestar.com.my/uploads/images/2022/11/04/1803987.jpg"
               alt="tailand"
@@ -75,7 +83,7 @@ function Home(props) {
           </div>
 
           {/* Item 2 */}
-          <div className="DestinationContainer w-64 mx-auto rounded-t-sm mt-20">
+          <div className="DestinationContainer w-64  m-auto  rounded-t-sm mt-20">
             <img
               src="https://apicms.thestar.com.my/uploads/images/2022/11/04/1803987.jpg"
               alt="tailand"
@@ -94,7 +102,7 @@ function Home(props) {
           </div>
 
           {/* Item 2 */}
-          <div className="DestinationContainer w-64 mx-auto rounded-t-sm mt-20">
+          <div className="DestinationContainer w-64  m-auto sm:mx-0 rounded-t-sm mt-20">
             <img
               src="https://apicms.thestar.com.my/uploads/images/2022/11/04/1803987.jpg"
               alt="tailand"
@@ -113,7 +121,7 @@ function Home(props) {
           </div>
 
           {/* Item 2 */}
-          <div className="DestinationContainer w-64 mx-auto rounded-t-sm mt-20">
+          <div className="DestinationContainer w-64  m-auto sm:mr-0 sm:ml-1 rounded-t-sm mt-20">
             <img
               src="https://apicms.thestar.com.my/uploads/images/2022/11/04/1803987.jpg"
               alt="tailand"
@@ -137,7 +145,7 @@ function Home(props) {
         <h2 className="text-[20px]">UpComing Deals</h2>
 
         {/* Item 2 */}
-        <div className="DestinationContainer w-64 mx-auto rounded-t-sm mt-20">
+        <div className="DestinationContainer w-64 rounded-t-sm mt-20">
           <img
             src="https://apicms.thestar.com.my/uploads/images/2022/11/04/1803987.jpg"
             alt="tailand"
@@ -156,7 +164,7 @@ function Home(props) {
         </div>
 
         {/* Item 2 */}
-        <div className="DestinationContainer w-64 mx-auto rounded-t-sm mt-20">
+        <div className="DestinationContainer w-64 rounded-t-sm mt-20">
           <img
             src="https://apicms.thestar.com.my/uploads/images/2022/11/04/1803987.jpg"
             alt="tailand"
