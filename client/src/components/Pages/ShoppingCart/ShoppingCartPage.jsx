@@ -19,7 +19,7 @@ function ShoppingCartPage(props) {
   const dispatch = useDispatch();
 
   const orderTotal = cartItems.reduce((acc, el) => {
-    return (acc += el?.price * el.quantity);
+    return (acc += el?.price * el.qty);
   }, 0);
 
   useEffect(() => {
@@ -42,9 +42,7 @@ function ShoppingCartPage(props) {
         <div className="prod-list md:col-span-3 bg-slate-100 p-4">
           <div className="flex justify-between border-b">
             <h1 className="font-semibold text-xl">Shopping Cart</h1>
-            <h2 className="font-semibold text-xl">
-              {cartItems.length} Items
-            </h2>
+            <h2 className="font-semibold text-xl">{cartItems.length} Items</h2>
           </div>
 
           <div className="grid grid-cols-5 mt-4 mb-5">
@@ -97,7 +95,7 @@ function ShoppingCartPage(props) {
                         >
                           remove
                         </p>
-                        <p className="mt-2 mx-2">{el.quantity}</p>
+                        <p className="mt-2 mx-2">{el.qty}</p>
                         <p
                           className="mt-1 text-blue-600 text-2xl cursor-pointer"
                           onClick={() => dispatch(incrementQty(el))}
@@ -106,9 +104,7 @@ function ShoppingCartPage(props) {
                         </p>
                       </div>
                       <p className="mt-2 text-right">${el?.price}</p>
-                      <p className="mt-2 text-right">
-                        ${el.quantity * el?.price}
-                      </p>
+                      <p className="mt-2 text-right">${el.qty * el?.price}</p>
                       {/* <p
                         className="mt-2 text-red-600 text-right cursor-pointer"
                         onClick={() => dispatch(removeItem(el))}
@@ -129,18 +125,14 @@ function ShoppingCartPage(props) {
           </div>
         </div>
         <div className="col-span-1 bg-slate-200 p-8 ">
-          <p className="font-semibold text-xl border-b pb-4">
-            Order Summary
-          </p>
+          <p className="font-semibold text-xl border-b pb-4">Order Summary</p>
           {cartItems.length !== 0 ? (
             <div>
               <div className="flex justify-between mt-10 mb-5">
                 <span className="font-semibold text-sm uppercase">
                   {cartItems.length} Items
                 </span>
-                <span className="font-semibold text-sm">
-                  ${orderTotal}
-                </span>
+                <span className="font-semibold text-sm">${orderTotal}</span>
               </div>
               <div className="flex justify-between mt-10 mb-5">
                 <span className="font-semibold text-sm uppercase">

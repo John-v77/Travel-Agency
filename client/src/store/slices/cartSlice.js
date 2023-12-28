@@ -28,10 +28,10 @@ const cartSlice = createSlice({
         (item) => item?._id === action.payload?._id
       );
       if (exitingCartProdIndex >= 0) {
-        state.cartItems[exitingCartProdIndex].quantity += 1;
+        state.cartItems[exitingCartProdIndex].qty += 1;
       } else {
-        //constructs a new object with quantity key
-        let cartItem = { ...action.payload, quantity: 1 };
+        //constructs a new object with qty key
+        let cartItem = { ...action.payload, qty: 1 };
         state.cartItems.push(cartItem);
         setWithExpiry("cartItems", state.cartItems, 900000);
       }
@@ -56,7 +56,7 @@ const cartSlice = createSlice({
 
       console.log(existingCartItemIndex, "add cartItem tty");
       if (existingCartItemIndex >= 0) {
-        state.cartItems[existingCartItemIndex].quantity += 1;
+        state.cartItems[existingCartItemIndex].qty += 1;
       }
       // state.cartItems = "updatedCartItems";
       setWithExpiry("cartItems", state.cartItems, 900000);
@@ -70,10 +70,10 @@ const cartSlice = createSlice({
       console.log(existingCartItemIndex, "minus cartItem tty");
 
       if (existingCartItemIndex >= 0) {
-        state.cartItems[existingCartItemIndex].quantity -= 1;
+        state.cartItems[existingCartItemIndex].qty -= 1;
       }
 
-      if (state.cartItems[existingCartItemIndex].quantity === 0) {
+      if (state.cartItems[existingCartItemIndex].qty === 0) {
         state.cartItems.splice(existingCartItemIndex, 1);
       }
 

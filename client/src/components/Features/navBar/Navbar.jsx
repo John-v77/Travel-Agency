@@ -5,7 +5,6 @@ import { BsPerson } from "react-icons/bs";
 import { BiSearch } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
-import { TiShoppingCart } from "react-icons/ti";
 
 import {
   FaFacebook,
@@ -15,6 +14,7 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import SearchBox from "../SearchBox/SearchBox";
+import ShoppingCartIcon from "../cartIcon/ShoppingCartIcon";
 
 function Navbar(props) {
   const [mobNav, setMobNav] = useState(false);
@@ -67,12 +67,12 @@ function Navbar(props) {
           <SearchBox handleSearchBar={handleSearchBar} />
         </div>
         <BiSearch
-          size={20}
+          size={18}
           onClick={handleSearchBar}
           className="cursor-pointer"
         />
-        <Link to="/cart">
-          <TiShoppingCart size={20} />
+        <Link to="/cart" className="mx-2">
+          <ShoppingCartIcon />
         </Link>
         <Link to="/account">
           <BsPerson size={20} />
