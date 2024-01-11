@@ -3,7 +3,7 @@ import { ameneties } from "../../../data/data";
 import AmenetiesCard from "./AmenetiesCard";
 function Ameneties(props) {
   return (
-    <div className="max-w-[1600px] mx-auto py-16 ">
+    <div className="max-w-[1600px] mx-auto py-16 mb-6 ">
       <div className="p-4">
         <h1>Amazing ameneties</h1>
         <p>have a great time</p>

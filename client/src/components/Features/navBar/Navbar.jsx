@@ -30,7 +30,7 @@ function Navbar(props) {
   return (
     <div className="navBarWidth">
       <Link to="/">
-        <h1 className="">Travel.</h1>
+        <h1 className="-mt-2">Travel.</h1>
       </Link>
       <ul className="hidden md:flex">
         <li>
