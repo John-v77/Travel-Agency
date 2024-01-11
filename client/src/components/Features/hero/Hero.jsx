@@ -3,7 +3,7 @@ import video1 from "../../../assets/video/beachVid.mp4";
 
 function Hero(props) {
   return (
-    <div className="w-full h-screen bg-slate-500 relative ">
+    <div className="w-full h-screen bg-slate-500 relative  rounded-b-sm header_clip_path ">
       <video
         className="w-full h-full object-cover"
         src={video1}
